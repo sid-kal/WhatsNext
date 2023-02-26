@@ -3,8 +3,9 @@ import { useState } from "react";
 
 const EventState = (props) => {
   const host = "http://localhost:5000"
-  const eventsInitial = new Array();
+  const eventsInitial = [];
   const [events, setEvents] = useState(eventsInitial);
+  // let events = [];
   console.log(Array.isArray(events));
   // Get all Notes
   const getEvents = async () => {
@@ -17,6 +18,7 @@ const EventState = (props) => {
       }
     });
     const json = await response.json() 
+    // events = json;
     setEvents(json)
   }
 
@@ -37,6 +39,7 @@ const EventState = (props) => {
     // const finalevents = events.concat(event);
     console.log(Array.isArray(events));
     setEvents(events.concat(event))
+    events.push(event);
   }
 
   // Delete a Event
@@ -52,6 +55,7 @@ const EventState = (props) => {
     const json = response.json(); 
     const newEvents = events.filter((event) => { return event._id !== id })
     setEvents(newEvents)
+    // events = newEvents;
   }
 
   // Edit a Event
@@ -79,6 +83,7 @@ const EventState = (props) => {
       }
     }  
     setEvents(newEvents);
+    // events = newEvents;
   }
 
   return (
