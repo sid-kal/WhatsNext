@@ -4,7 +4,7 @@ import { useState } from "react";
 const EventState = (props) => {
   const host = "http://localhost:5000"
   const eventsInitial = [];
-  const [events, setEvents] = useState(eventsInitial);
+  const [events, setEvents] = useState([]);
   // let events = [];
   console.log(Array.isArray(events));
   // Get all Notes

@@ -5,7 +5,6 @@ const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 var fetchuser = require('../middleware/fetchuser');
-
 const Otpverification = require("../models/OTPverification");
 
 const JWT_SECRET = 'JustRandomString';
@@ -18,6 +17,7 @@ const transporter = nodemailer.createTransport({
     pass: 'dummypass'
   }
 })
+
 
 // ROUTE 1: Create a User using: POST "/api/auth/createuser". No login required
 router.post('/createuser', [
@@ -34,15 +34,15 @@ router.post('/createuser', [
   }
   try {
     // Check whether the user with this email exists already
-    let user = await User.findOne({ email: req.body.email });
-    if (user) {
-      return res.status(400).json({ success, error: "Sorry a user with this email already exists" })
-    }
+    // let user = await User.findOne({ email: req.body.email });
+    // if (user) {
+    //   return res.status(400).json({ success, error: "Sorry a user with this email already exists" })
+    // }
     const salt = await bcrypt.genSalt(10);
     const secPass = await bcrypt.hash(req.body.password, salt);
 
     // Create a new user
-    user = await User.create({
+    var user = await User.create({
       name: req.body.name,
       password: secPass,
       email: req.body.email,
@@ -58,6 +58,7 @@ router.post('/createuser', [
     // res.json(user)
     success = true;
     res.json({ success, authtoken })
+
 
   } catch (error) {
     console.error(error.message);
