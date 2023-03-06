@@ -4,10 +4,10 @@ import { useState } from "react";
 const EventState = (props) => {
   const host = "http://localhost:5000"
   const eventsInitial = [];
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState([{id: "", etitle: "", edescription: "", etag: ""}]);
   // let events = [];
   console.log(Array.isArray(events));
-  // Get all Notes
+  // Get all events
   const getEvents = async () => {
     // API Call 
     const response = await fetch(`${host}/api/events/fetchallevents`, {

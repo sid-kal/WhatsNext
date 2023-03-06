@@ -18,7 +18,6 @@ function App() {
       <EventState>
         <Router>
           <Navbar />
-          {/* <Alert message="This is amazing React course" /> */}
           <div className="container">
             <Switch>
               <Route exact path="/">
