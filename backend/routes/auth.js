@@ -10,14 +10,6 @@ const Otpverification = require("../models/OTPverification");
 const JWT_SECRET = 'JustRandomString';
 
 const nodemailer = require("nodemailer");
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'cs253proj@gmail.com',
-    pass: 'dummypass'
-  }
-})
-
 
 // ROUTE 1: Create a User using: POST "/api/auth/createuser". No login required
 router.post('/createuser', [
@@ -33,15 +25,39 @@ router.post('/createuser', [
     return res.status(400).json({ errors: errors.array()});
   }
   try {
-    // Check whether the user with this email exists already
-    // let user = await User.findOne({ email: req.body.email });
+    //Check whether the user with this email exists already
+    //let user = await User.findOne({ email: req.body.email });
     // if (user) {
+      
     //   return res.status(400).json({ success, error: "Sorry a user with this email already exists" })
+    //   console.log("Sorry a user with this email already exists")
     // }
     const salt = await bcrypt.genSalt(10);
     const secPass = await bcrypt.hash(req.body.password, salt);
 
-    // Create a new user
+    //Create a new user
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'talingupta0@gmail.com',
+        pass: 'vlswzmjbmrsqksew'
+      }
+    })
+    transporter.sendMail({
+      from: 'talingupta0@gmail.com',
+      to: req.body.email,
+      subject: 'OTP Verification',
+      text: `Your OTP for account verification is ${otp}.`,
+      html: `<p>Your OTP for account verification is <strong>${otp}</strong>.</p>`,
+      function(error, info){
+        if (error) {
+           console.log(error);
+        }  else {
+           console.log('Email sent: ' + info.response);
+        }
+       }
+    });
     var user = await User.create({
       name: req.body.name,
       password: secPass,
@@ -65,6 +81,7 @@ router.post('/createuser', [
     res.status(500).send("Internal Server Error");
   }
 })
+
 
 
 // ROUTE 2: Authenticate a User using: POST "/api/auth/login". No login required
