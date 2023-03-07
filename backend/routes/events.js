@@ -40,8 +40,11 @@ router.post('/addevent', fetchuser, [
                 title, description, tag, date, user: req.user.id
             })
             const savedEvent = await event.save()
-            if(clash){
+            if(clash.length !== 0){
                     warning = `Event Clashes with the following events:\n`;
+            }
+            else{
+                success = true;
             }
             res.json({success, warning, clash, savedEvent});
 
