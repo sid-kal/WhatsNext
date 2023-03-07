@@ -34,7 +34,7 @@ router.post('/generateotp', [
     const secPass = await bcrypt.hash(req.body.password, salt);
 
     // Create a new user
-     user = await User.create({
+     //user = await User.create({
     //Check whether the user with this email exists already
     //let user = await User.findOne({ email: req.body.email });
     // if (user) {
