@@ -23,7 +23,7 @@ const EventState = (props) => {
   }
 
   // Add a Event
-  const addEvent = async (title, description, tag) => {
+  const addEvent = async (title, description, tag, date) => {
     // TODO: API Call
     // API Call 
     const response = await fetch(`${host}/api/events/addevent`, {
@@ -32,14 +32,22 @@ const EventState = (props) => {
         'Content-Type': 'application/json',
         "auth-token":localStorage.getItem("token")
       },
-      body: JSON.stringify({title, description, tag})
+      body: JSON.stringify({title, description, tag, date})
     });
 
-    const event = await response.json();
+    const json = await response.json();
     // const finalevents = events.concat(event);
-    console.log(Array.isArray(events));
-    setEvents(events.concat(event))
-    events.push(event);
+    if(!(json.success)){
+      var confirmed = window.confirm(`${json.warning} ${json.clash.map((cl) => cl.title)}`);
+      if(confirmed){
+        setEvents(events.concat(json.savedEvent));
+      }
+    }
+    // console.log(Array.isArray(events));
+    else{
+    setEvents(events.concat(json.savedEvent))
+    }
+    // events.push(event);
   }
 
   // Delete a Event

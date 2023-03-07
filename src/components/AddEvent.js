@@ -34,7 +34,7 @@ const AddEvent = () => {
                 </div>
                 <div className='mb-3'>
                 <label htmlFor="date" className="form-label">Date</label>
-                    <input type="date" className="form-control" id="date" name="date" value={event.date} onChange={onChange} />
+                    <input type="datetime-local" className="form-control" id="date" name="date" value={event.date} onChange={onChange} />
                 {/* <DateTimePicker onChange={onChange} value={event.date} /> */}
                 </div>
                
