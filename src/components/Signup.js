@@ -2,30 +2,60 @@ import React, {useState} from 'react'
 import { useHistory } from 'react-router-dom'
 
 const Signup = () => {
-    const [credentials, setCredentials] = useState({name:"", email: "", password: "", cpassword:""}); 
+    const [credentials, setCredentials] = useState({name:"", email: "", password: "", cpassword:"", otp : ""}); 
+    const [generatedOTP, setGeneratedOTP] = useState("");
     let history = useHistory();
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const {name, email, password, cpassword} = credentials;
-        const response = await fetch("http://localhost:5000/api/auth/createuser", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({name,email,password})
+        const {name, email, password} = credentials;
+        const response = await fetch("http://localhost:5000/api/auth/generateotp", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({name,email,password})
         });
         const json = await response.json()
-        console.log(json);
+        //console.log(json);
         if (json.success){
-            // Save the auth token and redirect
-            localStorage.setItem('token', json.authtoken); 
-            history.push("/");
-
+          setGeneratedOTP(json.otp);
+          alert("OTP generated successfully and sent to your email!");
+        } else {
+          alert("Invalid credentials");
         }
-        else{
-            alert("Invalid credentials");
+      }
+    
+      const handleVerify = (e) => {
+        //e.preventDefault();
+        const enteredOtp = credentials.otp; // doubt
+        if (parseInt(enteredOtp) === parseInt(generatedOTP)) {
+          // OTPs match, create user
+          const { name, email, password } = credentials;
+          fetch("http://localhost:5000/api/auth/createuser", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({name,email,password})
+          })
+          .then(response => response.json())
+          .then(json => {
+            console.log(json);
+            if (json.success){
+              // Save the auth token and redirect
+              localStorage.setItem('token', json.authtoken); 
+              history.push("/");
+            } else {
+              alert("Invalid credentials");
+            }
+          })
+          .catch(error => console.error(error));
+        } else {
+          // OTPs don't match
+          alert("Incorrect OTP, please try again.");
         }
-    }
+      }
+    
 
     const onchange = (e)=>{
         setCredentials({...credentials, [e.target.name]: e.target.value})
@@ -53,9 +83,11 @@ const Signup = () => {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="cPassword" className="form-label">OTP</label>
-                    <input type="password" className="form-control" id="cPassword" name="cpassword" onChange = {onchange} ></input>
+                    <input type="password" className="form-control" id="otp" name="otp" onChange = {onchange} ></input>
                 </div>
                 <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
+                <button type="button" className="btn btn-primary" onClick={() => handleVerify(generatedOTP, setGeneratedOTP)}>Verify</button>
+
             </form>
         </div>
     )

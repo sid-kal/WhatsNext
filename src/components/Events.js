@@ -72,9 +72,9 @@ const Events = () => {
                 <div className="container mx-2"> 
                 {events.length===0 && 'No notes to display'}
                 </div>
-                {events.map((event) => {
+                {/* {events.map((event) => {
                     return <Eventitem key={event._id} updateEvent={updateEvent} event={event} />
-                })}
+                })} */}
             </div>
         </>
     )
