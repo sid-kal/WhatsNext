@@ -22,7 +22,10 @@ const EventSchema = new Schema({
         type: Date,
         default: Date.now
     },
-   
+    like:{
+        type: Number,
+        default: 0,
+    },
   });
 
   module.exports = mongoose.model('events', EventSchema);
