@@ -18,9 +18,13 @@ const EventSchema = new Schema({
         type: String,
         default: "General"
     },
-    date:{
+    startTime:{
         type: Date,
         default: Date.now
+    },
+    endTime:{
+        type:Date,
+        default:Date.now
     },
     like:{
         type: Number,

@@ -3,6 +3,8 @@ const User = require('../models/User');
 const router = express.Router();
 const Event = require('../models/Event');
 const fetchuser = require('../middleware/fetchuser');
+const fetchevent = require('../middleware/fetchevent');
+
 //Get request for liked events
 router.get('/showlikedevents',fetchuser,async (req,res) => {
     try{

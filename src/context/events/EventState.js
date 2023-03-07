@@ -3,8 +3,8 @@ import { useState } from "react";
 
 const EventState = (props) => {
   const host = "http://localhost:5000"
-  const eventsInitial = [];
-  const [events, setEvents] = useState([{id: "", etitle: "", edescription: "", etag: ""}]);
+  // const eventsInitial = [];
+  const [events, setEvents] = useState([{id: "", etitle: "", edescription: "", etag: "", estartTime:Date.now, eendTime:Date.now, elike:0}]);
   // let events = [];
   console.log(Array.isArray(events));
   // Get all events
@@ -23,7 +23,7 @@ const EventState = (props) => {
   }
 
   // Add a Event
-  const addEvent = async (title, description, tag, date) => {
+  const addEvent = async (title, description, tag, startTime, endTime) => {
     // TODO: API Call
     // API Call 
     const response = await fetch(`${host}/api/events/addevent`, {
@@ -32,7 +32,7 @@ const EventState = (props) => {
         'Content-Type': 'application/json',
         "auth-token":localStorage.getItem("token")
       },
-      body: JSON.stringify({title, description, tag, date})
+      body: JSON.stringify({title, description, tag, startTime, endTime})
     });
 
     const json = await response.json();
@@ -67,7 +67,7 @@ const EventState = (props) => {
   }
 
   // Edit a Event
-  const editEvent = async (id, title, description, tag) => {
+  const editEvent = async (id, title, description, tag, startTime, endTime) => {
     // API Call 
     const response = await fetch(`${host}/api/events/updateevent/${id}`, {
       method: 'PUT',
@@ -75,7 +75,7 @@ const EventState = (props) => {
         'Content-Type': 'application/json',
         "auth-token": localStorage.getItem('token')
       },
-      body: JSON.stringify({title, description, tag})
+      body: JSON.stringify({title, description, tag, startTime, endTime})
     });
     const json = await response.json(); 
 
@@ -87,6 +87,9 @@ const EventState = (props) => {
         newEvents[index].title = title;
         newEvents[index].description = description;
         newEvents[index].tag = tag; 
+        newEvents[index].startTime = startTime;
+        newEvents[index].endTime = endTime;
+        newEvents[index].like = element.like;
         break; 
       }
     }  

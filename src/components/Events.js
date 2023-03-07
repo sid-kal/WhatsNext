@@ -13,15 +13,15 @@ const Events = () => {
     }, [])
     const ref = useRef(null)
     const refClose = useRef(null)
-    const [event, setEvent] = useState({id: "", etitle: "", edescription: "", etag: ""})
+    const [event, setEvent] = useState({id: "", etitle: "", edescription: "", etag: "",estartTime:Date.now, eendTime:Date.now,elike:0})
 
     const updateEvent = (currentEvent) => {
         ref.current.click();
-        setEvent({id: currentEvent._id, etitle: currentEvent.title, edescription: currentEvent.description, etag:currentEvent.tag})
+        setEvent({id: currentEvent._id, etitle: currentEvent.title, edescription: currentEvent.description, etag:currentEvent.tag, estartTime:currentEvent.startTime, eendTime:currentEvent.endTime, elike:currentEvent.like})
     }
 
     const handleClick = (e)=>{ 
-        editEvent(event.id, event.etitle, event.edescription, event.etag)
+        editEvent(event.id, event.etitle, event.edescription, event.etag, event.estartTime, event.eendTime)
         refClose.current.click();
     }
 
@@ -56,6 +56,14 @@ const Events = () => {
                                     <label htmlFor="tag" className="form-label">Tag</label>
                                     <input type="text" className="form-control" id="etag" name="etag" value={event.etag} onChange={onChange} />
                                 </div>
+                                <div className="mb-3">
+                                    <label htmlFor="startTime" className="form-label">Start Time</label>
+                                    <input type="datetime-local" className="form-control" id="estartTime" name="estartTime" value={event.estartTime} onChange={onChange} />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="endTime" className="form-label">End Time</label>
+                                    <input type="datetime-local" className="form-control" id="eendTime" name="eendTime" value={event.eendTime} onChange={onChange} />
+                                </div>
  
                             </form>
                         </div>
@@ -72,9 +80,9 @@ const Events = () => {
                 <div className="container mx-2"> 
                 {events.length===0 && 'No notes to display'}
                 </div>
-                {/* {events.map((event) => {
+                {events.map((event) => {
                     return <Eventitem key={event._id} updateEvent={updateEvent} event={event} />
-                })} */}
+                })}
             </div>
         </>
     )
