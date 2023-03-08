@@ -30,3 +30,10 @@ Also install the other dependencies listed here:
 
 To run the project, run the following command:
 ### `npm run both`
+
+
+
+[CS253_Software_requirement_specification_document.pdf](https://github.com/chitwang/WhatsNext/files/10923201/CS253_Software_requirement_specification_document.pdf)
+
+
+[Design_doc.pdf](https://github.com/chitwang/WhatsNext/files/10923213/Design_doc.pdf)

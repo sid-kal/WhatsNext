@@ -19,6 +19,14 @@ const UserSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    isAdmin:{
+        type: Boolean,
+        default: false
+    },
+    likedEvents:{
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'event',
+    },
   });
-  const User = mongoose.model('user', UserSchema);
+  const User = mongoose.model('users', UserSchema);
   module.exports = User;

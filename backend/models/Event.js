@@ -18,10 +18,27 @@ const EventSchema = new Schema({
         type: String,
         default: "General"
     },
-    date:{
+    startTime:{
         type: Date,
         default: Date.now
     },
+    endTime:{
+        type:Date,
+        default:Date.now
+    },
+    reqsp:{
+        type:Boolean,
+        default:false
+    },
+    like:{
+        type: Number,
+        default: 0,
+    },
+    isspecial:{
+        type: Boolean,
+        default: false
+    }
+
   });
 
   module.exports = mongoose.model('events', EventSchema);

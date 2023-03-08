@@ -3,11 +3,11 @@ import { useState } from "react";
 
 const EventState = (props) => {
   const host = "http://localhost:5000"
-  const eventsInitial = [];
-  const [events, setEvents] = useState(eventsInitial);
+  // const eventsInitial = [];
+  const [events, setEvents] = useState([{id: "", etitle: "", edescription: "", etag: "", estartTime:Date.now, eendTime:Date.now, ereqsp:false,elike:0}]);
   // let events = [];
   console.log(Array.isArray(events));
-  // Get all Notes
+  // Get all events
   const getEvents = async () => {
     // API Call 
     const response = await fetch(`${host}/api/events/fetchallevents`, {
@@ -23,7 +23,7 @@ const EventState = (props) => {
   }
 
   // Add a Event
-  const addEvent = async (title, description, tag) => {
+  const addEvent = async (title, description, tag, startTime, endTime,reqsp) => {
     // TODO: API Call
     // API Call 
     const response = await fetch(`${host}/api/events/addevent`, {
@@ -32,14 +32,22 @@ const EventState = (props) => {
         'Content-Type': 'application/json',
         "auth-token":localStorage.getItem("token")
       },
-      body: JSON.stringify({title, description, tag})
+      body: JSON.stringify({title, description, tag, startTime, endTime,reqsp})
     });
 
-    const event = await response.json();
+    const json = await response.json();
     // const finalevents = events.concat(event);
-    console.log(Array.isArray(events));
-    setEvents(events.concat(event))
-    events.push(event);
+    if(!(json.success)){
+      var confirmed = window.confirm(`${json.warning} ${json.clash.map((cl) => cl.title)}`);
+      if(confirmed){
+        setEvents(events.concat(json.savedEvent));
+      }
+    }
+    // console.log(Array.isArray(events));
+    else{
+    setEvents(events.concat(json.savedEvent))
+    }
+    // events.push(event);
   }
 
   // Delete a Event
@@ -59,7 +67,7 @@ const EventState = (props) => {
   }
 
   // Edit a Event
-  const editEvent = async (id, title, description, tag) => {
+  const editEvent = async (id, title, description, tag, startTime, endTime) => {
     // API Call 
     const response = await fetch(`${host}/api/events/updateevent/${id}`, {
       method: 'PUT',
@@ -67,7 +75,7 @@ const EventState = (props) => {
         'Content-Type': 'application/json',
         "auth-token": localStorage.getItem('token')
       },
-      body: JSON.stringify({title, description, tag})
+      body: JSON.stringify({title, description, tag, startTime, endTime})
     });
     const json = await response.json(); 
 
@@ -79,6 +87,9 @@ const EventState = (props) => {
         newEvents[index].title = title;
         newEvents[index].description = description;
         newEvents[index].tag = tag; 
+        newEvents[index].startTime = startTime;
+        newEvents[index].endTime = endTime;
+        newEvents[index].like = element.like;
         break; 
       }
     }  
