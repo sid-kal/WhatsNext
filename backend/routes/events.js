@@ -28,7 +28,7 @@ router.post('/addevent', fetchuser, [
     body('title', 'Enter a valid title').isLength({ min: 3 }),
     body('description', 'Description must be atleast 5 characters').isLength({ min: 5 }),], async (req, res) => {
         try {
-            const { title, description, tag, startTime, endTime} = req.body;
+            const { title, description, tag, startTime, endTime, reqsp} = req.body;
             const like = 0;
             let success = false;
             // If there are errors, return Bad request and the errors
@@ -47,7 +47,7 @@ router.post('/addevent', fetchuser, [
             let clash = clashtmp.filter((item, 
                 index) => clashtmp.indexOf(item) === index);
             const event = new Event({
-                title, description, tag, startTime,endTime,like, user: req.user.id
+                title, description, tag, startTime,endTime,reqsp,like, user: req.user.id
             })
             const savedEvent = await event.save()
             if(clash.length !== 0){
@@ -66,7 +66,7 @@ router.post('/addevent', fetchuser, [
 
 // ROUTE 3: Update an existing Event using: PUT "/api/events/updateevent". Login required
 router.put('/updateevent/:id', fetchuser, async (req, res) => {
-    const { title, description, tag, startTime, endTime } = req.body;
+    const { title, description, tag, startTime, endTime,reqsp } = req.body;
     try {
         // Create a newNote object
         const newEvent = {};
@@ -75,6 +75,7 @@ router.put('/updateevent/:id', fetchuser, async (req, res) => {
         if (tag) { newEvent.tag = tag };
         if (startTime) {newEvent.startTime = startTime};
         if(endTime) {newEvent.endTime = endTime};
+        if(reqsp) {newEvent.reqsp = reqsp};
         // Find the note to be updated and update it
         let event = await Event.findById(req.params.id);
         if (!event) { return res.status(404).send("Not Found") }

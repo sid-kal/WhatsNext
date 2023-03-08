@@ -4,7 +4,7 @@ import { useState } from "react";
 const EventState = (props) => {
   const host = "http://localhost:5000"
   // const eventsInitial = [];
-  const [events, setEvents] = useState([{id: "", etitle: "", edescription: "", etag: "", estartTime:Date.now, eendTime:Date.now, elike:0}]);
+  const [events, setEvents] = useState([{id: "", etitle: "", edescription: "", etag: "", estartTime:Date.now, eendTime:Date.now, ereqsp:false,elike:0}]);
   // let events = [];
   console.log(Array.isArray(events));
   // Get all events
@@ -23,7 +23,7 @@ const EventState = (props) => {
   }
 
   // Add a Event
-  const addEvent = async (title, description, tag, startTime, endTime) => {
+  const addEvent = async (title, description, tag, startTime, endTime,reqsp) => {
     // TODO: API Call
     // API Call 
     const response = await fetch(`${host}/api/events/addevent`, {
@@ -32,7 +32,7 @@ const EventState = (props) => {
         'Content-Type': 'application/json',
         "auth-token":localStorage.getItem("token")
       },
-      body: JSON.stringify({title, description, tag, startTime, endTime})
+      body: JSON.stringify({title, description, tag, startTime, endTime,reqsp})
     });
 
     const json = await response.json();

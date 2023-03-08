@@ -26,6 +26,10 @@ const EventSchema = new Schema({
         type:Date,
         default:Date.now
     },
+    reqsp:{
+        type:Boolean,
+        default:false
+    },
     like:{
         type: Number,
         default: 0,
