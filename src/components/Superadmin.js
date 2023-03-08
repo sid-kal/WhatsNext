@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Eventitem from './Eventitem';
+import Superadmin_eventitem from './Superadmin_eventitem';
 
 const Superadmin = () => {
     const host="http://localhost:5000"
@@ -19,7 +19,7 @@ const Superadmin = () => {
     <div>
      <button onClick={seereq}>requests</button> 
      {requ.map((event) => {
-                    return <Eventitem key={event._id} event={event} />
+                    return <Superadmin_eventitem key={event._id} event={event} />
                 })}
     </div>
   )
