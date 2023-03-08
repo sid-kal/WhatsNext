@@ -6,12 +6,7 @@ const UserSchema = new Schema({
     name:{
         type: String,
         required: true
-    },
-    requests : {
-        type : array,
-        of : events
-    },
-    
+    }
   });
   const superadmin = mongoose.model('superadmin', UserSchema);
   module.exports = superadmin;

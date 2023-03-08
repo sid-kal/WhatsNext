@@ -34,6 +34,11 @@ const EventSchema = new Schema({
         type: Number,
         default: 0,
     },
+    isspecial:{
+        type: Boolean,
+        default: false
+    }
+
   });
 
   module.exports = mongoose.model('events', EventSchema);

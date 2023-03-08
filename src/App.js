@@ -11,7 +11,7 @@ import EventState from "./context/events/EventState";
 // import { Alert } from './components/Alert';
 import Signup from './components/Signup';
 import Login from './components/Login';
-
+import Superadmin from './components/Superadmin';
 function App() {
   return (
     <>
@@ -31,6 +31,9 @@ function App() {
               </Route>
               <Route exact path="/signup">
                 <Signup />
+              </Route>
+              <Route exact path="/superadmin">
+                <Superadmin />
               </Route>
             </Switch>
           </div>

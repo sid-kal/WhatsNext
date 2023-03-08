@@ -14,7 +14,7 @@ app.use(express.json())
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/events', require('./routes/events'))
 app.use('/api/homepg', require('./routes/homepg'))
-
+app.use('/api/superadmin', require('./routes/superadmin'))
 
 app.listen(port, () => {
   console.log(`whatsNext backend listening at http://localhost:${port}`)
