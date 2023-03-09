@@ -34,12 +34,14 @@ const Superadmin_eventitem = (props) => {
                 newEvents[index].startTime = element.startTime;
                 newEvents[index].endTime = element.endTime;
                 newEvents[index].like = element.like;
-                newEvents[index].isSpecial = false;
+                newEvents[index].isspecial = false;
                 newEvents[index].reqsp = false;
                 break;
             }
         }
         setEvents(newEvents);
+        alert("Request has been rejected.")
+        window.location.reload();
     }
     const handleapprove = async(id) => {
         let response = await fetch(`${host}/api/superadmin/alltheevents`, {
@@ -69,12 +71,14 @@ const Superadmin_eventitem = (props) => {
                 newEvents[index].startTime = element.startTime;
                 newEvents[index].endTime = element.endTime;
                 newEvents[index].like = element.like;
-                newEvents[index].isSpecial = true;
+                newEvents[index].isspecial = true;
                 newEvents[index].reqsp = false;
                 break;
             }
         }
         setEvents(newEvents);
+        alert("Request has been accepted.")
+        window.location.reload();
     }
     return (
         <div className="col-md-3">
