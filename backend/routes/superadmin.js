@@ -15,23 +15,61 @@ router.get('/seerequests', async (req, res) => {
  }
 })
 
-router.post('/response', async (req, res) => {
-    const userResponse = req.body.response;
-  
-    try {
-      if (userResponse === 'yes') {
-       
-        await Event.performUpdate();
-        await superadmin.performDelete();
-        res.send('Request approved');
-      } else {
-        await superadmin.performDelete();
-        res.send('Request declined');
-      }
-    } catch (err) {
+router.get('/alltheevents', async (req, res) => { // fetchuser required ?
+  try {
+      const events = await Event.find().sort({ date: 1 });
+      res.json(events)
+  } catch (error) {
+      console.error(error.message);
+      res.status(500).send("Internal Server Error");
+  }
+})
+
+
+router.put('/approveevent/:id',  async (req, res) => {
     
-      console.error(err);
-      res.status(500).send('Error performing database operations');
+    try {
+        const newEvent = {};
+        let event = await Event.findById(req.params.id);
+        if (!event) { return res.status(404).send("Not Found") }
+     newEvent.title = event.title ;
+      newEvent.description = event.description ;
+    newEvent.tag = event.tag ;
+       newEvent.startTime = event.startTime;
+      newEvent.endTime = event.endTime;
+
+        newEvent.isSpecial = true;
+        newEvent.reqsp = false;
+        newEvent.like = event.like;
+        event = await Event.findByIdAndUpdate(req.params.id, { $set: newEvent }, { new: true })
+        res.json({ event });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Internal Server Error");
     }
-  }); 
+})
+
+router.put('/denyevent/:id',  async (req, res) => {
+    
+    try {
+        const newEvent = {};
+        let event = await Event.findById(req.params.id);
+        if (!event) { return res.status(404).send("Not Found") }
+     newEvent.title = event.title ;
+      newEvent.description = event.description ;
+    newEvent.tag = event.tag ;
+       newEvent.startTime = event.startTime;
+      newEvent.endTime = event.endTime;
+
+        newEvent.isSpecial = false;
+        newEvent.reqsp = false;
+        newEvent.like = event.like;
+        event = await Event.findByIdAndUpdate(req.params.id, { $set: newEvent }, { new: true })
+        res.json({ event });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Internal Server Error");
+    }
+})
+
 module.exports = router;

@@ -3,11 +3,7 @@ const router = express.Router();
 const fetchuser = require('../middleware/fetchuser');
 const Event = require('../models/Event');
 const { body, validationResult } = require('express-validator');
-const readline = require("readline");
-const interface = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+
 
 function checkClash ( date1s, date1e, date2s, date2e) {
     return (date1s <= date2e && date1s >= date2s) || (date1e <= date2e && date1e >= date2s) ||(date2s <= date1e && date2s >= date1s) || (date2e <= date1e && date2e >= date1s);
