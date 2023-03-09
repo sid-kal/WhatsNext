@@ -38,10 +38,11 @@ router.put('/approveevent/:id',  async (req, res) => {
        newEvent.startTime = event.startTime;
       newEvent.endTime = event.endTime;
 
-        newEvent.isSpecial = true;
+        newEvent.isspecial = true;
         newEvent.reqsp = false;
         newEvent.like = event.like;
         event = await Event.findByIdAndUpdate(req.params.id, { $set: newEvent }, { new: true })
+        
         res.json({ event });
     } catch (error) {
         console.error(error.message);
