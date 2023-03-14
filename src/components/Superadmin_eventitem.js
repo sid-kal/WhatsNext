@@ -81,18 +81,40 @@ const Superadmin_eventitem = (props) => {
         window.location.reload();
     }
     return (
-        <div className="col-md-3">
-            <div className="card my-3">
+        <div className="col-md-10">
+            <div className="card my-6">
                 <div className="card-body">
-                    <div className="d-flex align-items-center">
+
+                    {/* <div className="d-flex align-items-center">
                         <h5 className="card-title">{event.title}</h5>
 
-                        <span >{event.startTime}</span><br />
-                        <span>{event.endTime}</span>
+                        <span style={{marginLeft:'1em', marginRight: '1em' }}>{event.startTime}</span><br />
+                        <span style={{ marginRight: '1em' }}>{event.endTime}</span>
                         <h6> {event.tag}</h6>
-                    </div>
+                    </div> */}
+                    {/* <div className="d-flex align-items-center">
+    <div className="flex-grow-1">
+        <h5 className="card-title">{event.title}</h5>
+    </div>
+
+    <span style={{marginLeft:'1em', marginRight: '1em',paddingBottom:'0.5em' }}>{event.startTime}</span>
+    <span style={{ marginRight: '1em',paddingBottom:'0.5em'}}>{event.endTime}</span>
+
+    <h6>{event.tag}</h6>
+</div> */} <div className="d-flex align-items-center">
+                <div className="flex-grow-1">
+                    <h5 className="card-title">{event.title}</h5>
+                </div>
+
+                <span style={{ marginLeft: '1em', marginRight: '1em', paddingBottom: '0.5em' }}>{event.startTime}</span>
+                <span style={{ marginRight: '1em', paddingBottom: '0.5em' }}>{event.endTime}</span>
+
+                <h6>{event.tag}</h6>
+            </div>
+
+
                     <p className="card-text">{event.description}</p>
-                    <p className="card-text">Likes: {event.like}</p>
+                    <p className="card-text">Likes {event.like}</p>
                     <button onClick={()=>handleapprove(event._id)}>Approve</button>
                     <button onClick={()=>handledeny(event._id)}>Deny</button>
                 </div>
