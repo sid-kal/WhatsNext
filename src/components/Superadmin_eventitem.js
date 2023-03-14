@@ -115,8 +115,13 @@ const Superadmin_eventitem = (props) => {
 
                     <p className="card-text">{event.description}</p>
                     <p className="card-text">Likes {event.like}</p>
-                    <button onClick={()=>handleapprove(event._id)}>Approve</button>
-                    <button onClick={()=>handledeny(event._id)}>Deny</button>
+<<<<<<< Updated upstream
+                    <button style={{ marginRight: '1em'}} class="btn btn-primary" onClick={()=>handleapprove(event._id)}>Approve</button>
+=======
+                    <button class="btn btn-primary" style={{marginRight: '1em'}} onClick={()=>handleapprove(event._id)}>Approve</button>
+        
+>>>>>>> Stashed changes
+                    <button class="btn btn-primary" onClick={()=>handledeny(event._id)}>Deny</button>
                 </div>
             </div>
         </div>
