@@ -24,29 +24,21 @@ router.post('/generateotp', [
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array()});
   }
+  already_exists = false
   try {
     // Check whether the user with this email exists already
     let user = await User.findOne({ email: req.body.email });
     if (user) {
-      return res.status(400).json({ success, error: "Sorry a user with this email already exists" })
+      //console.log("User already exists")
+      //return res.status(400).json({ success, error: "Sorry a user with this email already exists" })
+      already_exists = true
+
     }
     const salt = await bcrypt.genSalt(10);
     const secPass = await bcrypt.hash(req.body.password, salt);
-
-    // Create a new user
-     //user = await User.create({
-    //Check whether the user with this email exists already
-    //let user = await User.findOne({ email: req.body.email });
-    // if (user) {
-      
-    //   return res.status(400).json({ success, error: "Sorry a user with this email already exists" })
-    //   console.log("Sorry a user with this email already exists")
-    // }
-    // const salt = await bcrypt.genSalt(10);
-    // const secPass = await bcrypt.hash(req.body.password, salt);
-
-    //Create a new user
+    
     const otp = Math.floor(100000 + Math.random() * 900000);
+    if(!already_exists){
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -68,6 +60,8 @@ router.post('/generateotp', [
         }
        }
     });
+  }
+  
     // var user = await User.create({
     //   name: req.body.name,
     //   password: secPass,
@@ -83,7 +77,7 @@ router.post('/generateotp', [
 
     // res.json(user)
     success = true;
-    res.json({otp,success})
+    res.json({otp,success,already_exists})
 
 
   } catch (error) {
@@ -104,39 +98,10 @@ router.post('/createuser', [
     return res.status(400).json({ errors: errors.array()});
   }
   try {
-    //Check whether the user with this email exists already
-    //let user = await User.findOne({ email: req.body.email });
-    // if (user) {
-      
-    //   return res.status(400).json({ success, error: "Sorry a user with this email already exists" })
-    //   console.log("Sorry a user with this email already exists")
-    // }
+   
     const salt = await bcrypt.genSalt(10);
     const secPass = await bcrypt.hash(req.body.password, salt);
 
-    //Create a new user
-    // const otp = Math.floor(100000 + Math.random() * 900000);
-    // const transporter = nodemailer.createTransport({
-    //   service: 'gmail',
-    //   auth: {
-    //     user: 'talingupta0@gmail.com',
-    //     pass: 'vlswzmjbmrsqksew'
-    //   }
-    // })
-    // transporter.sendMail({
-    //   from: 'talingupta0@gmail.com',
-    //   to: req.body.email,
-    //   subject: 'OTP Verification',
-    //   text: `Your OTP for account verification is ${otp}.`,
-    //   html: `<p>Your OTP for account verification is <strong>${otp}</strong>.</p>`,
-    //   function(error, info){
-    //     if (error) {
-    //        console.log(error);
-    //     }  else {
-    //        console.log('Email sent: ' + info.response);
-    //     }
-    //    }
-    // });
     var user = await User.create({
       name: req.body.name,
       password: secPass,

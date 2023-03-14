@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom'
 const Signup = () => {
     const [credentials, setCredentials] = useState({name:"", email: "", password: "", cpassword:"", otp : ""}); 
     const [generatedOTP, setGeneratedOTP] = useState("");
+    const [showOTP, setShowOTP] = useState(false);
+    const [disableGenerateOTP, setDisableGenerateOTP] = useState(false);
     let history = useHistory();
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -18,8 +20,18 @@ const Signup = () => {
         const json = await response.json()
         //console.log(json);
         if (json.success){
+          
+          if(json.already_exists)
+            alert("User already exists");
+          else {
           setGeneratedOTP(json.otp);
           alert("OTP generated successfully and sent to your email!");
+          setShowOTP(true);
+          setDisableGenerateOTP(true);
+          setTimeout(() => {
+            setDisableGenerateOTP(false);
+          }, 30000);
+        }
         } else {
           alert("Invalid credentials");
         }
@@ -81,15 +93,17 @@ const Signup = () => {
                     <label htmlFor="cPassword" className="form-label">Password</label>
                     <input type="password" className="form-control" id="cPassword" name="cpassword" onChange = {onchange} ></input>
                 </div>
-                <div className="mb-3">
+                <button type="submit" className="btn btn-primary" onClick={handleSubmit} disabled={disableGenerateOTP} >{disableGenerateOTP ? 'Wait for 30s before generating new otp' : 'Generate OTP for my email'}</button>
+                
+                {showOTP && (<div className="mb-3">
                     <label htmlFor="cPassword" className="form-label">OTP</label>
                     <input type="password" className="form-control" id="otp" name="otp" onChange = {onchange} ></input>
-                </div>
-                <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
-                <button type="button" className="btn btn-primary" onClick={() => handleVerify(generatedOTP, setGeneratedOTP)}>Verify</button>
+                </div>)}
+                {showOTP && (<button type="button" className="btn btn-primary" onClick={() => handleVerify(generatedOTP, setGeneratedOTP)}>Verify Otp</button>)}
 
             </form>
         </div>
+
     )
 }
 
