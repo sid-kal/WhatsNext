@@ -17,6 +17,7 @@ router.get('/showlikedevents',fetchuser,async (req,res) => {
         res.status(500).send("Internal Server Error");
     }
 })
+
 //Post request for liking an event
 router.post('/likeevent',fetchuser,fetchevent,async(req,res) => {
     try{

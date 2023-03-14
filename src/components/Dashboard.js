@@ -3,7 +3,29 @@ import eventContext from '../context/events/eventContext';
 import Eventitem from './Eventitem';
 import AddEvent from './AddEvent';
 
-const Events = () => {
+const Dashboard = () => {
+    const [user, setUser] = useState({name:"", email:""});
+    const [likedevents, setlikedevent] = useState([]);
+    const getuser = async() => {
+    const response = await fetch("http://localhost:5000/api/auth/getuser", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'auth-token':localStorage.getItem("token")
+        },
+    });
+       const loggedinuser = await response.json();
+       setUser(loggedinuser);
+
+       const res = await fetch("http://localhost:5000/api/generaluser/showlikedevents",{
+            headers:{'Content-Type': 'application/json',
+            'auth-token':localStorage.getItem("token")
+        },
+    });
+    const json = await res.json();
+    setlikedevent(json);
+    }
+    window.onload = getuser;
     const context = useContext(eventContext);
     const { events, getEvents, editEvent } = context;
     // console.log(typeof(events));
@@ -29,10 +51,10 @@ const Events = () => {
         setEvent({...event, [e.target.name]: e.target.value})
     }
 
-    return (
-        <>
-            <AddEvent />
-            <button ref={ref} type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  return (
+    <div>
+      <div className="row my-3">
+      <button ref={ref} type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Launch demo modal
             </button>
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -74,8 +96,9 @@ const Events = () => {
                     </div>
                 </div>
             </div>
-
-            <div className="row my-3">
+                {(user.isAdmin) && <AddEvent/>}
+                <h2>{user.name}</h2>
+                <h2>{user.email}</h2>
                 <h2>Your Events</h2>
                 <div className="container mx-2"> 
                 {events.length===0 && 'No notes to display'}
@@ -83,9 +106,12 @@ const Events = () => {
                 {events.length !== 0 && events.map((event) => {
                     return <Eventitem key={event._id} updateEvent={updateEvent} event={event} />
                 })}
+                {/* {likedevents.length !== 0 && likedevents.map((event) => {
+                    return <Eventitem key = {event._id} event = {event}/> 
+                })} */}
             </div>
-        </>
-    )
+    </div>
+  )
 }
 
-export default Events
+export default Dashboard

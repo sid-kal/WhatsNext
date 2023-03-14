@@ -12,6 +12,8 @@ import EventState from "./context/events/EventState";
 import Signup from './components/Signup';
 import Login from './components/Login';
 import Superadmin from './components/Superadmin';
+import Dashboard from './components/Dashboard';
+import Events from './components/Events';
 function App() {
   return (
     <>
@@ -28,6 +30,12 @@ function App() {
               </Route>
               <Route exact path="/login">
                 <Login />
+              </Route>
+              <Route exact path="/dashboard">
+                <Dashboard/>
+              </Route>
+              <Route exact path="/events">
+                <Events/>
               </Route>
               <Route exact path="/signup">
                 <Signup />
