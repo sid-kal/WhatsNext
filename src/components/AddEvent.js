@@ -5,12 +5,14 @@ const AddEvent = () => {
     const context = useContext(eventContext);
     const {addEvent} = context;
 
-    const [event, setEvent] = useState({title: "", description: "", tag: "", date:Date.now})
+    const [event, setEvent] = useState({title: "", description: "", tag: "", startTime:Date.now, endTime:Date.now,reqsp:false,like:0})
 
     const handleClick = (e)=>{
         e.preventDefault();
-        addEvent(event.title, event.description, event.tag,event.date);
-        setEvent({title: "", description: "", tag: "", date:Date.now})
+        let tmp = document.getElementById("reqsp");
+        let tmp2 = tmp.checked;
+        addEvent(event.title, event.description, event.tag,event.startTime, event.endTime,tmp2);
+        setEvent({title: "", description: "", tag: "", startTime:Date.now, endTime:Date.now,reqsp:false, like:0})
     }
 
     const onChange = (e)=>{
@@ -33,8 +35,18 @@ const AddEvent = () => {
                     <input type="text" className="form-control" id="tag" name="tag" value={event.tag} onChange={onChange} minLength={5} required />
                 </div>
                 <div className='mb-3'>
-                <label htmlFor="date" className="form-label">Date</label>
-                    <input type="date" className="form-control" id="date" name="date" value={event.date} onChange={onChange} />
+                <label htmlFor="startTime" className="form-label">Start Time</label>
+                    <input type="datetime-local" className="form-control" id="startTime" name="startTime" value={event.startTime} onChange={onChange} />
+                {/* <DateTimePicker onChange={onChange} value={event.date} /> */}
+                </div>
+                <div className='mb-3'>
+                <label htmlFor="endTime" className="form-label">End Time</label>
+                    <input type="datetime-local" className="form-control" id="endTime" name="endTime" value={event.endTime} onChange={onChange} />
+                {/* <DateTimePicker onChange={onChange} value={event.date} /> */}
+                </div>
+                <div className='mb-3'>
+                <label htmlFor="reqsp" className="form-label">Special Event
+                    <input type="checkbox"  id="reqsp" name="reqsp" value={event.reqsp} onChange={onChange} /></label>
                 {/* <DateTimePicker onChange={onChange} value={event.date} /> */}
                 </div>
                

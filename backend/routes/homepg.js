@@ -5,7 +5,7 @@ const Event = require('../models/Event');
 const { body, validationResult } = require('express-validator');
 
 // ROUTE 1: Get All the Notes using: GET "/api/events/getuser". Login required
-router.get('/allevents', fetchuser, async (req, res) => {
+router.get('/allevents', async (req, res) => { // fetchuser required ?
     try {
         const events = await Event.find().sort({ date: 1 });
         res.json(events)
@@ -14,7 +14,7 @@ router.get('/allevents', fetchuser, async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 })
-router.get('/searchevents/:title', fetchuser, async (req, res) => {
+router.get('/searchevents/:title', async (req, res) => {
     try {
         const events = await Event.find({ title: req.params.title }).sort({ date: 1 });
         res.json(events)
@@ -48,3 +48,4 @@ router.get('/filteredevents', fetchuser, async (req, res) => {   // req should h
         res.status(500).send("Internal Server Error");
     }
 })
+module.exports = router

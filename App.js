@@ -11,13 +11,17 @@ import EventState from "./context/events/EventState";
 // import { Alert } from './components/Alert';
 import Signup from './components/Signup';
 import Login from './components/Login';
-import Superadmin from './components/Superadmin';
+import MyEvents from "./components/myEvents";
+import Events from "./components/Events";
+import EditEvents from "./components/editEvent";
+
 function App() {
   return (
     <>
       <EventState>
         <Router>
           <Navbar />
+          {/* <Alert message="This is amazing React course" /> */}
           <div className="container">
             <Switch>
               <Route exact path="/">
@@ -31,9 +35,15 @@ function App() {
               </Route>
               <Route exact path="/signup">
                 <Signup />
+                </Route>
+              <Route exact path="/Events">
+                <Events />
               </Route>
-              <Route exact path="/superadmin">
-                <Superadmin />
+              <Route exact path="/myEvents">
+                <MyEvents />
+                </Route>
+                <Route exact path="/editEvents">
+                <EditEvents />
               </Route>
             </Switch>
           </div>

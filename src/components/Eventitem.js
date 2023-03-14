@@ -13,9 +13,17 @@ const Eventitem = (props) => {
                         <h5 className="card-title">{event.title}</h5>
                         <i className="far fa-trash-alt mx-2" onClick={()=>{deleteEvent(event._id)}}></i>
                         <i className="far fa-edit mx-2" onClick={()=>{updateEvent(event)}}></i>
-                        <h5 >{event.date}</h5>
+                        <span >{event.startTime}</span><br/>
+                       <span>{event.endTime}</span>
+                        <h6> {event.tag}</h6>
                     </div>
                     <p className="card-text">{event.description}</p>
+                    <p className="card-text">Likes: {event.like}</p>
+                    <p className="card-text">{event.reqsp && <p>requested</p>}</p>
+                    <p className="card-text">{!(event.reqsp) && <p>not requested</p>}</p>
+                    <p className="card-text">{(event.isspecial) && <p>approved</p>}</p>
+                    <p className="card-text">{!(event.isspecial) && <p>denied</p>}</p>
+                    
                     
                 </div>
             </div>
