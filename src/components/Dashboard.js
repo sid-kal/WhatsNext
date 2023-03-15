@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import eventContext from '../context/events/eventContext';
 import Eventitem from './Eventitem';
 import AddEvent from './AddEvent';
-
+import Myeventitem from './Myeventitem';
 const Dashboard = () => {
     const [user, setUser] = useState({name:"", email:""});
     const [likedevents, setlikedevent] = useState([]);
@@ -104,7 +104,7 @@ const Dashboard = () => {
                 {events.length===0 && 'No notes to display'}
                 </div>
                 {events.length !== 0 && events.map((event) => {
-                    return <Eventitem key={event._id} updateEvent={updateEvent} event={event} />
+                    return <Myeventitem key={event._id} updateEvent={updateEvent} event={event} />
                 })}
                 {/* {likedevents.length !== 0 && likedevents.map((event) => {
                     return <Eventitem key = {event._id} event = {event}/> 
