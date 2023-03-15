@@ -5,6 +5,8 @@ export const Home = () => {
     return (
         <div> 
             <Events/>
+
+            
         </div>
     )
 }

@@ -18,7 +18,7 @@ const Eventitem = (props) => {
                         <h6> {event.tag}</h6>
                     </div>
                     <p className="card-text">{event.description}</p>
-                    <p className="card-text">Likes: {event.like}</p>
+                    <p className="card-text">Like: {event.like}</p>
                     <p className="card-text">{event.reqsp && <p>requested</p>}</p>
                     <p className="card-text">{!(event.reqsp) && <p>not requested</p>}</p>
                     <p className="card-text">{(event.isspecial) && <p>approved</p>}</p>

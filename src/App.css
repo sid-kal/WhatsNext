@@ -36,3 +36,35 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+
+
+
+
+.likes-container p {
+    margin-right: 10px;
+  }
+  
+  .likes-container p:last-child {
+    margin-right: 0;
+  }
+  
+  .likes-container p:not(:last-child)::after {
+    content: "|";
+    margin-left: 10px;
+  }
+  
+  .likes-container p.requested {
+    color: orange;
+  }
+  
+  .likes-container p.approved {
+    color: green;
+  }
+  
+  .likes-container p.denied {
+    color: red;
+  }
+  
