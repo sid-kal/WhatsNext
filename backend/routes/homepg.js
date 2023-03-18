@@ -8,7 +8,7 @@ const { body, validationResult } = require('express-validator');
 router.get('/allevents', async (req, res) => { // fetchuser required ?
     try {
         const events = await Event.find().sort({ date: 1 });
-        res.json(events)
+        res.json({len:events.length,events:events})
     } catch (error) {
         console.error(error.message);
         res.status(500).send("Internal Server Error");

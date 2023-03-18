@@ -2,16 +2,15 @@ import React, {useContext} from 'react'
 import eventContext from '../context/events/eventContext';
 
 const Eventitem = (props) => {
-    const context = useContext(eventContext);
-    const { deleteEvent } = context;
+    // const { deleteEvent } = context;
     const {event} = props;
     return (
-        <div className="col-md-3">
-            <div className="card my-3">
+        
+            <div className="card my-3" style = {{width:"100%", height: "100%"}}>
                 <div className="card-body">
                     <div className="d-flex align-items-center">
                         <h5 className="card-title">{event.title}</h5>
-                        <i className="far fa-trash-alt mx-2" onClick={()=>{deleteEvent(event._id)}}></i>
+                        {/* <i className="far fa-trash-alt mx-2" onClick={()=>{deleteEvent(event._id)}}></i> */}
                         {/* <i className="far fa-edit mx-2" onClick={()=>{updateEvent(event)}}></i> */}
                         <span >{event.startTime}</span><br/>
                        <span>{event.endTime}</span>
@@ -27,7 +26,7 @@ const Eventitem = (props) => {
                     
                 </div>
             </div>
-        </div>
+        
     )
 }
 

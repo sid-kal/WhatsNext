@@ -5,7 +5,7 @@ import {
   Route
 } from "react-router-dom";
 import Navbar from './components/Navbar';
-import { Home } from './components/Home';
+import  Home  from './components/Home';
 import About from './components/About';
 import EventState from "./context/events/EventState";
 // import { Alert } from './components/Alert';
