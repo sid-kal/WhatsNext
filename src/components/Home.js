@@ -3,12 +3,20 @@ import { Link } from 'react-router-dom'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import Pagination from '@mui/material/Pagination';
 import {
-    gridPageCountSelector,
-    gridPageSelector,
-    useGridApiContext,
-    useGridSelector,
-  } from '@mui/x-data-grid';
+  gridPageCountSelector,
+  gridPageSelector,
+  useGridApiContext,
+  useGridSelector,
+} from '@mui/x-data-grid';
 import Description from "./Description"
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from '@mui/material';
 
 function CustomPagination() {
   const apiRef = useGridApiContext();
@@ -25,8 +33,11 @@ function CustomPagination() {
     />
   );
 }
+
 const Home = () => {
   const [events, setEvents] = useState([{title:"", description:""}]);
+  const [open, setOpen] = useState(false);
+  const [popupData, setPopupData] = useState({});
   const autorun = async () => {
     const res = await fetch("http://localhost:5000/api/homepg/allevents", {
       method: 'GET',
@@ -48,16 +59,32 @@ const Home = () => {
         retVal += charset.charAt(Math.floor(Math.random() * n));
     }
     return retVal;
-}
+  }
   const columns = [
     { field: 'title', headerName: 'Title' , width:170},
     { field: 'description', headerName: 'Description' , width:260},
-    {},
-    {},
-    {},
-    {},
-  ]
-    
+    {field:'startTime', headerName:'Start Time', width:160},
+    {field:'endTime', headerName:'End Time', width:160},
+    //{field:'organiser', headerName:'Organiser', width:160},
+    {
+      field: 'actions',
+      headerName: 'Actions',
+      width: 150,
+      renderCell: (params) => (
+        <Button variant="contained" color="primary" onClick={() => {
+          setPopupData(params.row);
+          setOpen(true);
+        }}>
+          View Details
+        </Button>
+      ),
+    },
+  ];
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <div>
       <h2>Home</h2>
@@ -65,22 +92,64 @@ const Home = () => {
         Profile
       </Link>
       <div className="row my-3">
-                <h2>Your Events</h2>
-                <div className="container mx-2"> 
-                {events.length===0 && 'No notes to display'}
-                </div>
-                {/* {events.length !== 0 && events.map((event) => {
-                    return <Description key={event._id} event={event} />
-                })} */}
-            </div>
-            <div  style={{ display: 'flex', height: '80vh' }}>
-            <DataGrid getRowHeight={() => 'auto'} rows={events} columns={columns} pageSize={100} getRowId={(row) =>  generateRandom()} components={{ Toolbar: GridToolbar,Pagination: CustomPagination, }}  />
+        <h2>All Events</h2>
+        <div className="container mx-2"> 
+          {events.length===0 && 'No notes to display'}
+        </div>
+      </div>
+      <div style={{ display: 'flex', height: '80vh' }}>
+        <DataGrid
+          getRowHeight={() => 'auto'}
+          rows={events}
+          columns={columns}
+          pageSize={100}
+          getRowId={(row) => generateRandom()}
+          components={{
+            Toolbar: GridToolbar,
+            Pagination: CustomPagination,
+          }}
+        />
+      </div>
+      <Dialog
+  open={open}
+  onClose={handleClose}
+  maxWidth="lg"
+  PaperProps={{
+    style: { width: "60%", maxHeight: "90%" }
+  }}
+>
+  <DialogTitle>{popupData.title}</DialogTitle>
+  <DialogContent>
+    <DialogContentText>
+      <div><strong>Description:</strong> {popupData.description}</div>
+      <div><strong>Start Time:</strong> {popupData.startTime}</div>
+      <div><strong>End Time:</strong> {popupData.endTime}</div>
+      {/* <div><strong>Organiser:</strong> {popupData.organiser}</div> */}
+    </DialogContentText>
+  </DialogContent>
+  <DialogActions>
+    <Button onClick={handleClose}>Close</Button>
+  </DialogActions>
+</Dialog>
 
-            </div>
+
+
+
 
     </div>
   )
 }
 
 export default Home
+
+
+
+
+
+
+
+
+
+
+
 
