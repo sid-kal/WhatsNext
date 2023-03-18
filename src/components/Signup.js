@@ -86,17 +86,17 @@ const Signup = () => {
                     <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="Password" className="form-label">Password</label>
+                    <label htmlFor="Password" className="form-label">Enter Password</label>
                     <input type="password" className="form-control" id="Password" name="password" onChange = {onchange} ></input>
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="cPassword" className="form-label">Password</label>
+                    <label htmlFor="cPassword" className="form-label">Confirm Password</label>
                     <input type="password" className="form-control" id="cPassword" name="cpassword" onChange = {onchange} ></input>
                 </div>
                 <button type="submit" className="btn btn-primary" onClick={handleSubmit} disabled={disableGenerateOTP} >{disableGenerateOTP ? 'Wait for 30s before generating new otp' : 'Generate OTP for my email'}</button>
                 
                 {showOTP && (<div className="mb-3">
-                    <label htmlFor="cPassword" className="form-label">OTP</label>
+                    <label htmlFor="cPassword" className="form-label">OTP (Check your spam if you do not see the email)</label>
                     <input type="password" className="form-control" id="otp" name="otp" onChange = {onchange} ></input>
                 </div>)}
                 {showOTP && (<button type="button" className="btn btn-primary" onClick={() => handleVerify(generatedOTP, setGeneratedOTP)}>Verify Otp</button>)}
