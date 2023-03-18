@@ -1,9 +1,12 @@
+
+
 import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
+
 import Navbar from './components/Navbar';
 import  Home  from './components/Home';
 import About from './components/About';
@@ -14,6 +17,9 @@ import Login from './components/Login';
 import Superadmin from './components/Superadmin';
 import Dashboard from './components/Dashboard';
 import Events from './components/Events';
+
+
+
 
 function App() {
   return (
@@ -41,7 +47,7 @@ function App() {
               <Route exact path="/signup">
                 <Signup />
               </Route>
-              <Route exact path="/superadmin">
+              <Route exact path={process.env.REACT_APP_SUPERADMIN_URL}>
                 <Superadmin />
               </Route>
             </Switch>
