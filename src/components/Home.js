@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import {makeStyles} from '@material-ui/styles'
 import Pagination from '@mui/material/Pagination';
 import {
   gridPageCountSelector,
@@ -33,8 +34,19 @@ function CustomPagination() {
     />
   );
 }
-
+const useStyles = makeStyles({
+  root: {
+    '& .MuiDataGrid-columnHeader': {
+      backgroundColor: 'blue',
+      color: 'white',
+    },
+    '& .MuiDataGrid-cell': {
+      fontWeight: 'bold',
+    },
+  },
+});
 const Home = () => {
+  const classes = useStyles();
   const [events, setEvents] = useState([{title:"", description:"",startTime:Date(0),endTime:Date(0),id:"",like:0}]);
   const [open, setOpen] = useState(false);
   const [popupData, setPopupData] = useState({});
@@ -102,6 +114,7 @@ const Home = () => {
         });
         const json = await res.json();
         console.log(json.id);
+        window.location.reload();
       }}>
         Like
       </Button>
@@ -131,6 +144,7 @@ const Home = () => {
       </div>
       <div style={{ display: 'flex', height: '80vh' }}>
         <DataGrid
+        className={classes.root}
           getRowHeight={() => 'auto'}
           rows={events}
           columns={columns}
