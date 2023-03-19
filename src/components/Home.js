@@ -35,7 +35,7 @@ function CustomPagination() {
 }
 
 const Home = () => {
-  const [events, setEvents] = useState([{title:"", description:""}]);
+  const [events, setEvents] = useState([{title:"", description:"",startTime:Date(0),endTime:Date(0),id:"",like:0}]);
   const [open, setOpen] = useState(false);
   const [popupData, setPopupData] = useState({});
   const autorun = async () => {
@@ -78,6 +78,33 @@ const Home = () => {
           View Details
         </Button>
       ),
+    },
+    {
+      field: 'likeevent',
+      headerName: 'Like',
+      width: 100,
+      renderCell: (params) => (
+      <Button variant="contained" color="secondary" onClick={ async() => {
+        console.log(params.row._id);
+        const res = await fetch('http://localhost:5000/api/generaluser/likeevent', {
+          method: 'POST',
+         // credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+            'auth-token': localStorage.getItem('token'),
+          },
+          body: JSON.stringify({ eventID: params.row._id }) // replace '123' with the actual event ID
+        });
+        const json = await res.json();
+        console.log(json.id);
+      }}>
+        Like
+      </Button>
+    ),},
+    {
+      field: 'like',
+      headerName: 'LikeCount',
+      width: 100,
     },
   ];
 

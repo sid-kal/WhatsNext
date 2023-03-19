@@ -19,18 +19,21 @@ router.get('/showlikedevents',fetchuser,async (req,res) => {
 })
 
 //Post request for liking an event
-router.post('/likeevent',fetchuser,fetchevent,async(req,res) => {
+router.post('/likeevent',fetchuser,async(req,res) => {
+    // console.log("API Called");
     try{
-       const likeexists = await User.find({_id: req.user.id,likedEvents: {$elemMatch: req.event.id}});
-       if (likeexists)
+       const likeexists = await User.find({_id: req.user.id,likedEvents: {$elemMatch: {$eq : req.body.eventID}}});
+       if (likeexists.length > 0)
        {
-            await Event.findByIdAndUpdate(req.event.id, { $inc: { likes: -1 } });
-            await User.findByIdAndUpdate(req.user.id,{$pull: {likedEvents: req.event.id}});
+            await User.findByIdAndUpdate(req.user.id,{$pull: {likedEvents: req.body.eventID}});
+            await Event.findByIdAndUpdate(req.body.eventID, { $inc: { like: -1 } });
+            res.json({id:"wave"});
        }
        else
        {
-            await User.findByIdAndUpdate(req.user.id,{$push: {likedEvents: req.event.id}});
-            await Event.findByIdAndUpdate(req.event.id, { $inc: { like: 1 } });
+            await User.findByIdAndUpdate(req.user.id,{$push: {likedEvents: req.body.eventID}});
+            await Event.findByIdAndUpdate(req.body.eventID, { $inc: { like: 1 } });
+            res.json({id:"gtkwave"});
        }
     }
     catch (error)

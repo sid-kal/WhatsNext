@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const Event = require('../models/Event');
 const fetchevent = (req,res,next) => {
-    const eventID = req.body.event;
+    const eventID = req.body.eventID;
     if(!eventID){
-        res.status(401).send({error: "Please enter a valid event"});
+        res.status(401).send({error: eventID});
     }
     try 
     {

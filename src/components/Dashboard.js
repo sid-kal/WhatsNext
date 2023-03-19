@@ -96,7 +96,7 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
-                {(user.isAdmin) && <AddEvent/>}
+                {!(user.isAdmin) && <AddEvent/>}
                 <h2>{user.name}</h2>
                 <h2>{user.email}</h2>
                 <h2>Your Events</h2>
