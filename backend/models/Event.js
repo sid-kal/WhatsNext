@@ -41,6 +41,10 @@ const EventSchema = new Schema({
     organiser:{
         type:String,
         default:"Unknown user"
+    },
+    image:{
+        type: String,
+        default: ""
     }
   });
 

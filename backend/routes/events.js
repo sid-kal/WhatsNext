@@ -21,7 +21,7 @@ router.post('/addevent', fetchuser, [
     body('title', 'Enter a valid title').isLength({ min: 3 }),
     body('description', 'Description must be atleast 5 characters').isLength({ min: 5 }),], async (req, res) => {
         try {
-            const { title, description, tag, startTime, endTime, reqsp} = req.body;
+            const { title, description, tag, startTime, endTime, reqsp,image} = req.body;
             const like = 0;
             let success = false;
             // If there are errors, return Bad request and the errors
@@ -40,7 +40,7 @@ router.post('/addevent', fetchuser, [
                 index) => clashtmp.indexOf(item) === index);
             const userfound = await User.findById(req.user.id);
             const event = new Event({
-                title, description, tag, startTime,endTime,reqsp,like, user: req.user.id,organiser:userfound.name
+                title, description, tag, startTime,endTime,reqsp,like,image:image, user: req.user.id,organiser:userfound.name
             })
             const savedEvent = await event.save()
             if(clash.length !== 0){

@@ -13,15 +13,15 @@ const Events = () => {
     }, [])
     const ref = useRef(null)
     const refClose = useRef(null)
-    const [event, setEvent] = useState({id: "", etitle: "", edescription: "", etag: "",estartTime:Date.now, eendTime:Date.now,elike:0})
+    const [event, setEvent] = useState({id: "", etitle: "", edescription: "", etag: "",estartTime:Date.now, eendTime:Date.now,elike:0,img:""})
 
     const updateEvent = (currentEvent) => {
         ref.current.click();
-        setEvent({id: currentEvent._id, etitle: currentEvent.title, edescription: currentEvent.description, etag:currentEvent.tag, estartTime:currentEvent.startTime, eendTime:currentEvent.endTime, elike:currentEvent.like})
+        setEvent({id: currentEvent._id, etitle: currentEvent.title, edescription: currentEvent.description, etag:currentEvent.tag, estartTime:currentEvent.startTime, eendTime:currentEvent.endTime, elike:currentEvent.like,eimage:currentEvent.image})
     }
 
     const handleClick = (e)=>{ 
-        editEvent(event.id, event.etitle, event.edescription, event.etag, event.estartTime, event.eendTime)
+        editEvent(event.id, event.etitle, event.edescription, event.etag, event.estartTime, event.eendTime);
         refClose.current.click();
     }
 

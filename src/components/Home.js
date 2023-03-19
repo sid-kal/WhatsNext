@@ -77,7 +77,14 @@ const Home = () => {
     { field: 'description', headerName: 'Description' , width:260},
     {field:'startTime', headerName:'Start Time', width:160},
     {field:'endTime', headerName:'End Time', width:160},
-    //{field:'organiser', headerName:'Organiser', width:160},
+    {field:'Likeevent', headerName:'Like', width:160,
+    renderCell: (params) => (
+      <Button variant="contained" color="primary" onClick={() => { 
+      }}>
+        Like
+     </Button>
+    ),
+  },
     {
       field: 'actions',
       headerName: 'Actions',
@@ -85,6 +92,7 @@ const Home = () => {
       renderCell: (params) => (
         <Button variant="contained" color="primary" onClick={() => {
           setPopupData(params.row);
+          console.log(params.row);
           setOpen(true);
         }}>
           View Details
@@ -170,6 +178,7 @@ const Home = () => {
       <div><strong>Description:</strong> {popupData.description}</div>
       <div><strong>Start Time:</strong> {popupData.startTime}</div>
       <div><strong>End Time:</strong> {popupData.endTime}</div>
+      <div><strong>Image URL:</strong>{popupData.image}</div>
       {/* <div><strong>Organiser:</strong> {popupData.organiser}</div> */}
     </DialogContentText>
   </DialogContent>

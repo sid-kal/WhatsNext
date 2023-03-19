@@ -3,7 +3,7 @@ const User = require('../models/User');
 const router = express.Router();
 const Event = require('../models/Event');
 const fetchuser = require('../middleware/fetchuser');
-const fetchevent = require('../middleware/fetchevent');
+//const fetchevent = require('../middleware/fetchevent');
 
 //Get request for liked events
 router.get('/showlikedevents',fetchuser,async (req,res) => {
@@ -20,7 +20,6 @@ router.get('/showlikedevents',fetchuser,async (req,res) => {
 
 //Post request for liking an event
 router.post('/likeevent',fetchuser,async(req,res) => {
-    // console.log("API Called");
     try{
        const likeexists = await User.find({_id: req.user.id,likedEvents: {$elemMatch: {$eq : req.body.eventID}}});
        if (likeexists.length > 0)
