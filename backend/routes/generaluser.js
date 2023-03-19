@@ -9,8 +9,9 @@ const fetchuser = require('../middleware/fetchuser');
 router.get('/showlikedevents',fetchuser,async (req,res) => {
     try{
         const user = await User.findById(req.user.id);
-        const likedEvents = await Event.findById({ $in: user.likedEvents });
-        res.json(likedEvents);
+        // const likedEvents = await Event.findById({ $in: user.likedEvents });
+        const likedEvents = await Event.find({ _id: { $in: user.likedEvents }});
+        res.json({id: likedEvents});
     }
     catch(error){
         console.error(error.message);
@@ -26,13 +27,13 @@ router.post('/likeevent',fetchuser,async(req,res) => {
        {
             await User.findByIdAndUpdate(req.user.id,{$pull: {likedEvents: req.body.eventID}});
             await Event.findByIdAndUpdate(req.body.eventID, { $inc: { like: -1 } });
-            res.json({id:"wave"});
+            res.json({id:"LIKE"});
        }
        else
        {
             await User.findByIdAndUpdate(req.user.id,{$push: {likedEvents: req.body.eventID}});
             await Event.findByIdAndUpdate(req.body.eventID, { $inc: { like: 1 } });
-            res.json({id:"gtkwave"});
+            res.json({id:"DISLIKE"});
        }
     }
     catch (error)

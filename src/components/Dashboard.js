@@ -23,7 +23,8 @@ const Dashboard = () => {
         },
     });
     const json = await res.json();
-    setlikedevent(json);
+    console.log(json.id);
+    setlikedevent(json.id);
     console.log(likedevents);
     }
     window.onload = getuser;
@@ -107,9 +108,10 @@ const Dashboard = () => {
                 {events.length !== 0 && events.map((event) => {
                     return <Myeventitem key={event._id} updateEvent={updateEvent} event={event} />
                 })}
-                {/* {likedevents.length !== 0 && likedevents.map((event) => {
+                <h2>Liked Events</h2>
+                {likedevents.length !== 0 && likedevents.map((event) => {
                     return <Eventitem key = {event._id} event = {event}/> 
-                })} */}
+                })}
             </div>
     </div>
   )
