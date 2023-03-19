@@ -29,13 +29,16 @@ router.post('/addevent', fetchuser, [
             if (!errors.isEmpty()) {
                 return res.status(400).json({ errors: errors.array()});
             }
-            let clash1 = await Event.find({ startTime:{$gte : req.body.startTime , $lte : req.body.endTime}});
-            let clash2 = await Event.find({ endTime:{$gte : req.body.startTime , $lte : req.body.endTime}});
-            let clash3 = await Event.find({ endTime:{$gte : req.body.startTime}, startTime:{$lte: req.body.startTime}});
-            let clash4 = await Event.find({ endTime:{$gte : req.body.endTime}, startTime:{$lte: req.body.endTime}});
+            let clash1 = await Event.find({ startTime:{$gt : req.body.startTime} , endTime:{$lt : req.body.endTime}});
+            let clash2 = await Event.find({ startTime:{$gt : req.body.startTime} , endTime:{$gt : req.body.endTime}});
+            let clash3 = await Event.find({ endTime:{$gt : req.body.endTime}, startTime:{$lt: req.body.startTime}});
+            let clash4 = await Event.find({ endTime:{$lt : req.body.endTime}, startTime:{$lt: req.body.startTime}});
+            let clash5 = await Event.find({ startTime:{$eq : req.body.startTime}, endTime:{$ne: req.body.endTime}});
+            let clash6 = await Event.find({ startTime:{$ne : req.body.startTime}, endTime:{$eq: req.body.endTime}});
+            let clash7 = await Event.find({ startTime:{$eq : req.body.startTime}, endTime:{$eq: req.body.endTime}});
             // console.log(clash);
             // let clash = [...new Set([...clash1, ...clash2, ...clash3, ...clash4])];
-            let clashtmp = clash1.concat(clash2.concat(clash3.concat(clash4)));
+            let clashtmp = clash1.concat(clash2.concat(clash3.concat(clash4.concat(clash5.concat(clash6.concat(clash7))))));
             let clash = clashtmp.filter((item, 
                 index) => clashtmp.indexOf(item) === index);
             const userfound = await User.findById(req.user.id);
