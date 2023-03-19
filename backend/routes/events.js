@@ -3,11 +3,8 @@ const router = express.Router();
 const fetchuser = require('../middleware/fetchuser');
 const Event = require('../models/Event');
 const { body, validationResult } = require('express-validator');
+const User = require('../models/User');
 
-
-function checkClash ( date1s, date1e, date2s, date2e) {
-    return (date1s <= date2e && date1s >= date2s) || (date1e <= date2e && date1e >= date2s) ||(date2s <= date1e && date2s >= date1s) || (date2e <= date1e && date2e >= date1s);
-}
 // ROUTE 1: Get All the Notes using: GET "/api/events/getuser". Login required
 router.get('/fetchallevents', fetchuser, async (req, res) => {
     try {
@@ -30,9 +27,8 @@ router.post('/addevent', fetchuser, [
             // If there are errors, return Bad request and the errors
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
-                return res.status(400).json({ errors: errors.array() });
+                return res.status(400).json({ errors: errors.array()});
             }
-            
             let clash1 = await Event.find({ startTime:{$gte : req.body.startTime , $lte : req.body.endTime}});
             let clash2 = await Event.find({ endTime:{$gte : req.body.startTime , $lte : req.body.endTime}});
             let clash3 = await Event.find({ endTime:{$gte : req.body.startTime}, startTime:{$lte: req.body.startTime}});
@@ -42,8 +38,9 @@ router.post('/addevent', fetchuser, [
             let clashtmp = clash1.concat(clash2.concat(clash3.concat(clash4)));
             let clash = clashtmp.filter((item, 
                 index) => clashtmp.indexOf(item) === index);
+            const userfound = await User.findById(req.user.id);
             const event = new Event({
-                title, description, tag, startTime,endTime,reqsp,like, user: req.user.id
+                title, description, tag, startTime,endTime,reqsp,like, user: req.user.id,organiser:userfound.name
             })
             const savedEvent = await event.save()
             if(clash.length !== 0){

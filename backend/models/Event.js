@@ -37,6 +37,10 @@ const EventSchema = new Schema({
     isspecial:{
         type: Boolean,
         default: false
+    },
+    organiser:{
+        type:String,
+        default:"Unknown user"
     }
   });
 

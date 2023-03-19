@@ -80,6 +80,11 @@ const Home = () => {
       ),
     },
     {
+      field:'organiser',
+      headerName:'Organiser',
+      width:150
+    },
+    {
       field: 'likeevent',
       headerName: 'Like',
       width: 100,

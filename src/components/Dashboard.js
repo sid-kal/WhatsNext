@@ -24,6 +24,7 @@ const Dashboard = () => {
     });
     const json = await res.json();
     setlikedevent(json);
+    console.log(likedevents);
     }
     window.onload = getuser;
     const context = useContext(eventContext);

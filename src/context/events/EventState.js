@@ -23,7 +23,7 @@ const EventState = (props) => {
   }
 
   // Add a Event
-  const addEvent = async (title, description, tag, startTime, endTime,reqsp) => {
+  const addEvent = async (title, description, tag, startTime, endTime, reqsp) => {
     // TODO: API Call
     // API Call 
     const response = await fetch(`${host}/api/events/addevent`, {
@@ -36,6 +36,7 @@ const EventState = (props) => {
     });
 
     const json = await response.json();
+    // console.log(json.savedEvent);
     // const finalevents = events.concat(event);
     if(!(json.success)){
       var confirmed = window.confirm(`${json.warning} ${json.clash.map((cl) => cl.title)}`);

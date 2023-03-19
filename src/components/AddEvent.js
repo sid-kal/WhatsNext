@@ -8,12 +8,16 @@ const AddEvent = () => {
 
     const [event, setEvent] = useState({title: "", description: "", tag: "", startTime:Date.now, endTime:Date.now,reqsp:false,like:0})
 
-    const handleClick = (e)=>{
+    const handleClick =  (e)=>{
         e.preventDefault();
         let tmp = document.getElementById("reqsp");
         let tmp2 = tmp.checked;
+        if(event.startTime >= event.endTime){
+            alert("Please enter valid start time and end time.")
+        }
+        else{
         addEvent(event.title, event.description, event.tag,event.startTime, event.endTime,tmp2);
-        setEvent({title: "", description: "", tag: "", startTime:Date.now, endTime:Date.now,reqsp:false, like:0})
+        setEvent({title: "", description: "", tag: "", startTime:Date.now, endTime:Date.now,reqsp:false, like:0})}
     }
 
     const onChange = (e)=>{
@@ -33,7 +37,7 @@ const AddEvent = () => {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="tag" className="form-label">Tag</label>
-                    <input type="text" className="form-control" id="tag" name="tag" value={event.tag} onChange={onChange} minLength={5} required />
+                    <input type="text" className="form-control" id="tag" name="tag" value={event.tag} onChange={onChange} required />
                 </div>
                 <div className='mb-3'>
                 <label htmlFor="startTime" className="form-label">Start Time</label>
