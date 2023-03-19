@@ -50,6 +50,7 @@ const Home = () => {
   const [events, setEvents] = useState([{title:"", description:"",startTime:Date(0),endTime:Date(0),id:"",like:0}]);
   const [open, setOpen] = useState(false);
   const [popupData, setPopupData] = useState({});
+  const [jsonText, setJsonText] = useState("like");
   const autorun = async () => {
     const res = await fetch("http://localhost:5000/api/homepg/allevents", {
       method: 'GET',
@@ -114,9 +115,10 @@ const Home = () => {
         });
         const json = await res.json();
         console.log(json.id);
+        setJsonText(json.id);
         window.location.reload();
       }}>
-        Like
+        {jsonText}
       </Button>
     ),},
     {

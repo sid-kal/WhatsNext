@@ -6,9 +6,9 @@ const Eventitem = (props) => {
     const { deleteEvent } = context;
     const {event} = props;
     return (
-        <div className="col-md-3">
-            <div className="card my-3">
-                <div className="card-body">
+        <div className="col-md-5">
+            <div className="card my-3" style={{width:'100%'}}>
+                <div className="card-body" style={{width:'100%'}}>
                     <div className="d-flex align-items-center">
                         <h5 className="card-title">{event.title}</h5>
                         <i className="far fa-trash-alt mx-2" onClick={()=>{deleteEvent(event._id)}}></i>

@@ -16,7 +16,7 @@ const Myeventitem = (props) => {
     const { event, updateEvent } = props;
 
     return (
-        <div className="col-md-4 mb-4">
+        <div className="col-md-5 mb-5">
             <div className="card h-100 shadow">
                 <div className="card-body d-flex flex-column">
                     <h5 className="card-title mb-3">{event.title}</h5>
