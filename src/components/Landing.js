@@ -1,5 +1,5 @@
 import React from "react";
-import "./Landing.css";
+import "./landing.css";
 import logo from "./logo1.png";
 import Typewriter from "typewriter-effect";
 
@@ -7,7 +7,7 @@ export default function Landing() {
     return (
         <>
             <div>
-                <div class="container">
+                <div class="container" >
                     <div class="wrapper">
                         <center>
                             {" "}
