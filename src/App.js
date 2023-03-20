@@ -43,9 +43,6 @@ function App() {
               <Route exact path="/dashboard">
                 <Dashboard/>
               </Route>
-              {/* <Route exact path="/events">
-                <Events/>
-              </Route> */}
               <Route exact path="/signup">
                 <Signup />
               </Route>

@@ -136,7 +136,7 @@ const Home = () => {
 
   return (
     <div>
-    {!(localStorage.getItem('token')) ? <div>You are not authorised</div> : 
+    {!(localStorage.getItem('token')) ? <div>You are not authorised to access the page. Login/Signup and then try again.</div> : 
     <div>
       {/* <h2>Home</h2> */}
       <h1 style={{textAlign:'center',color:'#0047AB'}}><Link style={{color:'#0047AB', textDecoration:"none"}} to="/dashboard">
