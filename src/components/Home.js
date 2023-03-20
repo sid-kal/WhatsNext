@@ -38,7 +38,7 @@ function CustomPagination() {
 const useStyles = makeStyles({
   root: {
     '& .MuiDataGrid-columnHeader': {
-      backgroundColor: 'blue',
+      backgroundColor: '#0047AB',
       color: 'white',
     },
     '& .MuiDataGrid-cell': {
@@ -136,14 +136,18 @@ const Home = () => {
 
   return (
     <div>
+<<<<<<< Updated upstream
     {!(localStorage.getItem('token')) ? <div>You are not authorised</div> : 
     <div>
       <h2>Home</h2>
       <Link to="/dashboard">
+=======
+      <h1 style={{textAlign:'center',color:'#0047AB'}}><Link style={{color:'#0047AB'}} to="/dashboard">
+>>>>>>> Stashed changes
         Profile
-      </Link>
+      </Link></h1>
       <div className="row my-3">
-        <h2>All Events</h2>
+        <h2 style={{textAlign:'center'}}>All Events</h2>
         <div className="container mx-2"> 
           {events.length===0 && 'No notes to display'}
         </div>
