@@ -27,7 +27,7 @@ Also install the other dependencies listed here:
 ### `npm i nodemailer`
 ### `npm i otp-generator`
 ### `npm i react-datetime-picker`
-
+### `npm i typewriter-effect`
 To run the project, run the following command:
 ### `npm run both`
 
