@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import {makeStyles} from '@material-ui/styles'
 import Pagination from '@mui/material/Pagination';
+import moment from "moment";
 import {
   gridPageCountSelector,
   gridPageSelector,
@@ -75,17 +76,10 @@ const Home = () => {
   }
   const columns = [
     { field: 'title', headerName: 'Title' , width:170},
-    { field: 'description', headerName: 'Description' , width:260},
+    // { field: 'description', headerName: 'Description' , width:260},
+    
     {field:'startTime', headerName:'Start Time', width:160},
     {field:'endTime', headerName:'End Time', width:160},
-    {field:'Likeevent', headerName:'Like', width:160,
-    renderCell: (params) => (
-      <Button variant="contained" color="primary" onClick={() => { 
-      }}>
-        Like
-     </Button>
-    ),
-  },
     {
       field: 'actions',
       headerName: 'Actions',
@@ -174,12 +168,14 @@ const Home = () => {
     style: { width: "60%", maxHeight: "90%" }
   }}
 >
-  <DialogTitle>{popupData.title}</DialogTitle>
+ <DialogTitle>{popupData.title}</DialogTitle>
   <DialogContent>
     <DialogContentText>
       <div><strong>Description:</strong> {popupData.description}</div>
-      <div><strong>Start Time:</strong> {popupData.startTime}</div>
-      <div><strong>End Time:</strong> {popupData.endTime}</div>
+      <span className="text-muted">
+      <div><strong>Start Time:</strong> {moment(popupData.startTime).format("MMM Do YYYY, h:mm a")}</div> 
+      <div><strong>End Time:</strong> {moment(popupData.endTime).format("MMM Do YYYY, h:mm a")}</div>
+      </span>
       <div><strong>Image URL:</strong>{popupData.image}</div>
       {/* <div><strong>Organiser:</strong> {popupData.organiser}</div> */}
     </DialogContentText>

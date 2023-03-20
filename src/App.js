@@ -16,14 +16,16 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import Superadmin from './components/Superadmin';
 import Dashboard from './components/Dashboard';
-import Events from './components/Events';
+// import Events from './components/Events';
 
-
-
+// const path = require('path')
+// require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
 function App() {
+  
   return (
     <>
+    
       <EventState>
         <Router>
           <Navbar />
@@ -41,9 +43,9 @@ function App() {
               <Route exact path="/dashboard">
                 <Dashboard/>
               </Route>
-              <Route exact path="/events">
+              {/* <Route exact path="/events">
                 <Events/>
-              </Route>
+              </Route> */}
               <Route exact path="/signup">
                 <Signup />
               </Route>

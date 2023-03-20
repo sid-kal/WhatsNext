@@ -5,7 +5,7 @@ const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 var fetchuser = require('../middleware/fetchuser');
-const Otpverification = require("../models/OTPverification");
+// const Otpverification = require("../models/OTPverification");
 
 const JWT_SECRET = 'JustRandomString';
 

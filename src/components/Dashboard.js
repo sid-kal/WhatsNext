@@ -52,7 +52,6 @@ const Dashboard = () => {
     const onChange = (e)=>{
         setEvent({...event, [e.target.name]: e.target.value})
     }
-
   return (
     <div>
       <div className="row my-3">

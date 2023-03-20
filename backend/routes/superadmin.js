@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const fetchuser = require('../middleware/fetchuser');
 const Event = require('../models/Event');
-const superadmin = require('../models/superadmin');
+// const superadmin = require('../models/superadmin');
 
 router.get('/seerequests', async (req, res) => {
     try {
