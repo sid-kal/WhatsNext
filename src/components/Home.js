@@ -136,6 +136,8 @@ const Home = () => {
 
   return (
     <div>
+    {!(localStorage.getItem('token')) ? <div>You are not authorised</div> : 
+    <div>
       <h2>Home</h2>
       <Link to="/dashboard">
         Profile
@@ -184,11 +186,8 @@ const Home = () => {
     <Button onClick={handleClose}>Close</Button>
   </DialogActions>
 </Dialog>
-
-
-
-
-
+</div>
+    }
     </div>
   )
 }

@@ -16,23 +16,23 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import Superadmin from './components/Superadmin';
 import Dashboard from './components/Dashboard';
-// import Events from './components/Events';
+import Landing from './components/Landing';
 
-// const path = require('path')
-// require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
+
+
 
 function App() {
   
   return (
     <>
-    
       <EventState>
         <Router>
           <Navbar />
           <div className="container">
             <Switch>
-              <Route exact path="/">
-                <Home />
+    <Route exact path="/"><Landing/></Route>
+              <Route exact path="/home">
+                <Home/>
               </Route>
               <Route exact path="/about">
                 <About />

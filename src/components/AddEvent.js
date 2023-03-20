@@ -57,8 +57,8 @@ const AddEvent = () => {
                 {/* <DateTimePicker onChange={onChange} value={event.date} /> */}
                 </div>
                 <div className='mb-3'>
-                    <label htmlFor="image" className='form-label'>Upload Image</label>
-                    <input type="text" id="image" name ="image" value={event.image} onChange={onChange} />
+                    <label htmlFor="image" className='form-label'>Link for poster/image</label>
+                    <input type="text" id="image" className='form-control' name ="image" value={event.image} onChange={onChange} />
                 </div>
                
                 <button disabled={event.title.length<5 || event.description.length<5} type="submit" className="btn btn-primary" onClick={handleClick}>Add Event</button>

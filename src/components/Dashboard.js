@@ -54,6 +54,7 @@ const Dashboard = () => {
     }
   return (
     <div>
+        {!(localStorage.getItem('token')) ? <div>You are not authorised to access the page. Login/Signup and then try again.</div> : <div>
       <div className="row my-3">
       <button ref={ref} type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Launch demo modal
@@ -112,6 +113,7 @@ const Dashboard = () => {
                     return <Eventitem key = {event._id} event = {event}/> 
                 })}
             </div>
+    </div>}
     </div>
   )
 }

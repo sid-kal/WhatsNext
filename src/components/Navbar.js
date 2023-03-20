@@ -1,14 +1,12 @@
 import React from 'react'
-import { Link, useLocation, useHistory} from "react-router-dom";
-
-  
+import { Link, useLocation, useHistory} from "react-router-dom";  
 
 const Navbar = () => {
     let location = useLocation();
     let history = useHistory();
     const handleLogout = () =>{
         localStorage.removeItem('token');
-        history.push('/login');
+        history.push('/');
     }
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -20,7 +18,7 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <Link className={`nav-link ${location.pathname==="/"? "active": ""}`} aria-current="page" to="/">Home</Link>
+                            <Link className={`nav-link ${location.pathname==="/home"? "active": ""}`} aria-current="page" to="/home">Home</Link>
                         </li>
                         <li className="nav-item">
                             <Link className={`nav-link ${location.pathname==="/about"? "active": ""}`} to="/about">About</Link>

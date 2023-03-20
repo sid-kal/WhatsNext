@@ -47,14 +47,15 @@ const Myeventitem = (props) => {
                                 {event.reqsp && <p>Requested</p>}
                             </div>
                             <div className="card-text">
-                                {!event.reqsp && <p>not requested</p>}
+                                {!event.reqsp && !event.isspecial && <p>Not Requested</p>}
                             </div>
                             <div className="card-text">
-                                {event.isspecial && <p>approved</p>}
+                                {event.isspecial && <p>
+                                    Approved as special event</p>}
                             </div>
-                            <div className="card-text">
+                            {/* <div className="card-text">
                                 {!event.isspecial && <p>denied</p>}
-                            </div>
+                            </div> */}
                         </div>
                         <div className="d-flex align-items-center">
                             <button
@@ -73,18 +74,6 @@ const Myeventitem = (props) => {
                             >
                                 <FontAwesomeIcon icon={faEdit} />
                             </button>
-                            {event.reqsp && (
-                                <FontAwesomeIcon
-                                    icon={faCheck}
-                                    className="text-success ms-2"
-                                />
-                            )}
-                            {!event.reqsp && (
-                                <FontAwesomeIcon
-                                    icon={faTimes}
-                                    className="text-danger ms-2"
-                                />
-                            )}
                         </div>
                     </div>
                 </div>
