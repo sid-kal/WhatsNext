@@ -62,20 +62,6 @@ router.post('/generateotp', [
     });
   }
   
-    // var user = await User.create({
-    //   name: req.body.name,
-    //   password: secPass,
-    //   email: req.body.email,
-    // });
-    // const data = {
-    //   user: {
-    //     id: user.id
-    //   }
-    // }
-    // const authtoken = jwt.sign(data, JWT_SECRET);
-
-
-    // res.json(user)
     success = true;
     res.json({otp,success,already_exists})
 

@@ -16,10 +16,10 @@ const AddEvent = () => {
             alert("Please enter valid start time and end time.")
         }
         else{
-        addEvent(event.title, event.description, event.tag,event.startTime, event.endTime,tmp2);
-        setEvent({title: "", description: "", tag: "", startTime:Date.now, endTime:Date.now,reqsp:false, like:0})}
+        
         addEvent(event.title, event.description, event.tag,event.startTime, event.endTime,tmp2,event.image);
         setEvent({title: "", description: "", tag: "", startTime:Date.now, endTime:Date.now,reqsp:false, like:0,image:""})
+        }
     }
 
     const onChange = (e)=>{

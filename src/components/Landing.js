@@ -1,5 +1,5 @@
 import React from "react";
-import "./landing.css";
+import "./Landing.css";
 import logo from "./logo1.png";
 import Typewriter from "typewriter-effect";
 
