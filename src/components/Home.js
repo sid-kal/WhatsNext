@@ -136,14 +136,10 @@ const Home = () => {
 
   return (
     <div>
-<<<<<<< Updated upstream
     {!(localStorage.getItem('token')) ? <div>You are not authorised</div> : 
     <div>
-      <h2>Home</h2>
-      <Link to="/dashboard">
-=======
-      <h1 style={{textAlign:'center',color:'#0047AB'}}><Link style={{color:'#0047AB'}} to="/dashboard">
->>>>>>> Stashed changes
+      {/* <h2>Home</h2> */}
+      <h1 style={{textAlign:'center',color:'#0047AB'}}><Link style={{color:'#0047AB', textDecoration:"none"}} to="/dashboard">
         Profile
       </Link></h1>
       <div className="row my-3">
