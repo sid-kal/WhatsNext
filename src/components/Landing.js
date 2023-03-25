@@ -7,7 +7,7 @@ export default function Landing() {
     return (
         <>
             <div>
-                <div class="container">
+                <div class="container" >
                     <div class="wrapper">
                         <center>
                             {" "}

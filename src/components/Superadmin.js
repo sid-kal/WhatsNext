@@ -19,7 +19,10 @@ const Superadmin = () => {
   
   return (
     <div>
-    <button style={{marginBottom: '1em'}} class="btn btn-primary" id="reqSuper" onClick={seereq}>requests</button>
+    <div style={{textAlign: 'center'}}>
+    <button style={{marginBottom: '1em',marginTop:'1em'}} class="btn btn-primary" id="reqSuper" onClick={seereq}>Requests</button>
+    </div>
+   
       {requ.map((event) => {
         return <Superadmin_eventitem key={event._id} event={event} />
       })}

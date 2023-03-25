@@ -1,4 +1,5 @@
 import React , {useState} from 'react'
+import moment from "moment";
 
 
 const Superadmin_eventitem = (props) => {
@@ -106,8 +107,9 @@ const Superadmin_eventitem = (props) => {
                     <h5 className="card-title">{event.title}</h5>
                 </div>
 
-                <span style={{ marginLeft: '1em', marginRight: '1em', paddingBottom: '0.5em' }}>{event.startTime}</span>
-                <span style={{ marginRight: '1em', paddingBottom: '0.5em' }}>{event.endTime}</span>
+                <span style={{ marginLeft: '1em', marginRight: '1em', paddingBottom: '0.5em' }}>{moment(event.startTime).format("MMM Do YYYY, h:mm a")}</span>
+                <span style={{ marginRight: '1em', paddingBottom: '0.5em' }}>{moment(event.endTime).format("MMM Do YYYY, h:mm a")}
+</span>
 
                 <h6>{event.tag}</h6>
             </div>

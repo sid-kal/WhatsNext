@@ -16,7 +16,7 @@ const AddEvent = () => {
             alert("Please enter valid start time and end time.")
         }
         else{
-
+        
         addEvent(event.title, event.description, event.tag,event.startTime, event.endTime,tmp2,event.image);
         setEvent({title: "", description: "", tag: "", startTime:Date.now, endTime:Date.now,reqsp:false, like:0,image:""})
         }
@@ -27,7 +27,7 @@ const AddEvent = () => {
     }
     return (
         <div className="container my-3">
-            <h2>Add a Event</h2>
+            <h2>Add an Event</h2>
             <form className="my-3">
                 <div className="mb-3">
                     <label htmlFor="title" className="form-label">Title</label>

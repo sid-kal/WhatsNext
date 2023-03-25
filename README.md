@@ -28,8 +28,16 @@ Also install the other dependencies listed here:
 ### `npm i otp-generator`
 ### `npm i react-datetime-picker`
 ### `npm i typewriter-effect`
+### `npm i @material-ui/styles`
+
 To run the project, run the following command:
 ### `npm run both`
+
+To run project in Mac and Linux, run the following commands:
+
+### `sudo npm install -g nodemon`
+### `nodemon backend/index.js`
+### `npm run start`
 
 
 

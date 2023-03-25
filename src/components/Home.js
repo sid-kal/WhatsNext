@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import {makeStyles} from '@material-ui/styles'
@@ -38,7 +38,7 @@ function CustomPagination() {
 const useStyles = makeStyles({
   root: {
     '& .MuiDataGrid-columnHeader': {
-      backgroundColor: 'blue',
+      backgroundColor: '#0047AB',
       color: 'white',
     },
     '& .MuiDataGrid-cell': {
@@ -52,19 +52,22 @@ const Home = () => {
   const [open, setOpen] = useState(false);
   const [popupData, setPopupData] = useState({});
   const [jsonText, setJsonText] = useState("like");
-  const autorun = async () => {
-    const res = await fetch("http://localhost:5000/api/homepg/allevents", {
-      method: 'GET',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-    });
-    const json = await res.json();
-    setEvents(json.events);
-    console.log(json.len);
-    console.log(json.events);
-  }
-  window.onload = autorun;
+  useEffect(()=>{
+    const autorun = async () => {
+      const res = await fetch("http://localhost:5000/api/homepg/allevents", {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+      });
+      const json = await res.json();
+      setEvents(json.events);
+      console.log(json.len);
+      console.log(json.events);
+    }
+    autorun();
+  }, []);
+  // window.onload = autorun;
   function generateRandom() {
     var length = 8,
         charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
@@ -78,8 +81,8 @@ const Home = () => {
     { field: 'title', headerName: 'Title' , width:170},
     // { field: 'description', headerName: 'Description' , width:260},
     
-    {field:'startTime', headerName:'Start Time', width:160},
-    {field:'endTime', headerName:'End Time', width:160},
+    {field:'startTime', headerName:'Start Time', width:160, valueFormatter: (params) => moment(params.value).format("h:mm a, Do MMMM, YYYY")},
+    {field:'endTime', headerName:'End Time', width:160, valueFormatter: (params) => moment(params.value).format("h:mm a, Do MMMM, YYYY")},
     {
       field: 'actions',
       headerName: 'Actions',
@@ -130,20 +133,29 @@ const Home = () => {
     },
   ];
 
+
   const handleClose = () => {
     setOpen(false);
   };
 
+// window.onload=()=>{
+
+// }
+
+
+
+
+
   return (
     <div>
-    {!(localStorage.getItem('token')) ? <div>You are not authorised to access the page. Login/Signup and try again.</div> : 
+    {!(localStorage.getItem('token')) ? <div>You are not authorised to access the page. Login/Signup and then try again.</div> : 
     <div>
-      <h2>Home</h2>
-      <Link to="/dashboard">
+      {/* <h2>Home</h2> */}
+      <h1 style={{textAlign:'center',color:'#0047AB'}}><Link style={{color:'#0047AB', textDecoration:"none"}} to="/dashboard">
         Profile
-      </Link>
+      </Link></h1>
       <div className="row my-3">
-        <h2>All Events</h2>
+        <h2 style={{textAlign:'center'}}>All Events</h2>
         <div className="container mx-2"> 
           {events.length===0 && 'No notes to display'}
         </div>
