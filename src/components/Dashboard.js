@@ -98,12 +98,12 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
-                {!(user.isAdmin) && <AddEvent/>}
                 <h2>{user.name}</h2>
                 <h2>{user.email}</h2>
+                {!(user.isAdmin) && <AddEvent/>}
                 <h2>Your Events</h2>
                 <div className="container mx-2"> 
-                {events.length===0 && 'No notes to display'}
+                {events.length===0 && 'No events to display'}
                 </div>
                 {events.length !== 0 && events.map((event) => {
                     return <Myeventitem key={event._id} updateEvent={updateEvent} event={event} />

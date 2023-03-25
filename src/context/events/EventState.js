@@ -40,11 +40,6 @@ const EventState = (props) => {
     const json = await response.json();
     // console.log(json.savedEvent);
     // const finalevents = events.concat(event);
-    if(!(json.success2))
-    {
-      alert(json.warning2);
-    
-    }
     if(!(json.success)){
       var confirmed = window.confirm(`${json.warning} ${json.clash.map((cl) => cl.title)}`);
       if(confirmed){
