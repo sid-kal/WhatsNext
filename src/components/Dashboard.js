@@ -6,28 +6,32 @@ import Myeventitem from './Myeventitem';
 const Dashboard = () => {
     const [user, setUser] = useState({name:"", email:""});
     const [likedevents, setlikedevent] = useState([]);
-    const getuser = async() => {
-    const response = await fetch("http://localhost:5000/api/auth/getuser", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'auth-token':localStorage.getItem("token")
-        },
-    });
-       const loggedinuser = await response.json();
-       setUser(loggedinuser);
-
-       const res = await fetch("http://localhost:5000/api/generaluser/showlikedevents",{
-            headers:{'Content-Type': 'application/json',
-            'auth-token':localStorage.getItem("token")
-        },
-    });
-    const json = await res.json();
-    console.log(json.id);
-    setlikedevent(json.id);
-    console.log(likedevents);
-    }
-    window.onload = getuser;
+    useEffect(() => {
+        const getuser = async() => {
+            const response = await fetch("http://localhost:5000/api/auth/getuser", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth-token':localStorage.getItem("token")
+                },
+            });
+               const loggedinuser = await response.json();
+               setUser(loggedinuser);
+        
+               const res = await fetch("http://localhost:5000/api/generaluser/showlikedevents",{
+                    headers:{'Content-Type': 'application/json',
+                    'auth-token':localStorage.getItem("token")
+                },
+            });
+        
+            const json = await res.json();
+            console.log(json.id);
+            setlikedevent(json.id);
+            console.log(likedevents);
+            }
+            getuser();
+    }, [])
+    
     const context = useContext(eventContext);
     const { events, getEvents, editEvent } = context;
     // console.log(typeof(events));
@@ -98,9 +102,9 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
-                {(user.isAdmin) && <AddEvent/>}
                 <h2>{user.name}</h2>
                 <h2>{user.email}</h2>
+                {(user.isAdmin) && <AddEvent/>}
                 <h2>Your Events</h2>
                 <div className="container mx-2"> 
                 {events.length===0 && 'No notes to display'}

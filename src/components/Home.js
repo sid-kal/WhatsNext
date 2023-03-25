@@ -52,19 +52,22 @@ const Home = () => {
   const [open, setOpen] = useState(false);
   const [popupData, setPopupData] = useState({});
   const [jsonText, setJsonText] = useState("like");
-  const autorun = async () => {
-    const res = await fetch("http://localhost:5000/api/homepg/allevents", {
-      method: 'GET',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-    });
-    const json = await res.json();
-    setEvents(json.events);
-    console.log(json.len);
-    console.log(json.events);
-  }
-  window.onload = autorun;
+  useEffect(()=>{
+    const autorun = async () => {
+      const res = await fetch("http://localhost:5000/api/homepg/allevents", {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+      });
+      const json = await res.json();
+      setEvents(json.events);
+      console.log(json.len);
+      console.log(json.events);
+    }
+    autorun();
+  }, []);
+  // window.onload = autorun;
   function generateRandom() {
     var length = 8,
         charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
