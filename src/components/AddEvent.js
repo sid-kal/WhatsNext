@@ -27,7 +27,7 @@ const AddEvent = () => {
     }
     return (
         <div className="container my-3">
-            <h2>Add a Event</h2>
+            <h2>Add an Event</h2>
             <form className="my-3">
                 <div className="mb-3">
                     <label htmlFor="title" className="form-label">Title</label>
