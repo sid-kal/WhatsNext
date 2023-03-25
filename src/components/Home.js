@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import {makeStyles} from '@material-ui/styles'
@@ -78,8 +78,8 @@ const Home = () => {
     { field: 'title', headerName: 'Title' , width:170},
     // { field: 'description', headerName: 'Description' , width:260},
     
-    {field:'startTime', headerName:'Start Time', width:160},
-    {field:'endTime', headerName:'End Time', width:160},
+    {field:'startTime', headerName:'Start Time', width:160, valueFormatter: (params) => moment(params.value).format("h:mm a, Do MMMM, YYYY")},
+    {field:'endTime', headerName:'End Time', width:160, valueFormatter: (params) => moment(params.value).format("h:mm a, Do MMMM, YYYY")},
     {
       field: 'actions',
       headerName: 'Actions',
@@ -130,9 +130,18 @@ const Home = () => {
     },
   ];
 
+
   const handleClose = () => {
     setOpen(false);
   };
+
+// window.onload=()=>{
+
+// }
+
+
+
+
 
   return (
     <div>
