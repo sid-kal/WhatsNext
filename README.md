@@ -36,7 +36,7 @@ To run the project, run the following command:
 To run project in Mac and Linux, run the following commands:
 
 ### `sudo npm install -g nodemon`
-### `nodeman backend/index.js`
+### `nodemon backend/index.js`
 ### `npm run start`
 
 
