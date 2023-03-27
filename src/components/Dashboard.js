@@ -3,6 +3,7 @@ import eventContext from "../context/events/eventContext";
 import Eventitem from "./Eventitem";
 import AddEvent from "./AddEvent";
 import Myeventitem from "./Myeventitem";
+
 const Dashboard = () => {
     const [user, setUser] = useState({ name: "", email: "" });
     const [likedevents, setlikedevent] = useState([]);
@@ -118,6 +119,7 @@ const Dashboard = () => {
                                         <h5
                                             className="modal-title"
                                             id="exampleModalLabel"
+                                            style={{ fontWeight: "bold" }}
                                         >
                                             Edit Event
                                         </h5>
@@ -134,6 +136,9 @@ const Dashboard = () => {
                                                 <label
                                                     htmlFor="title"
                                                     className="form-label"
+                                                    style={{
+                                                        fontWeight: "bold",
+                                                    }}
                                                 >
                                                     Title
                                                 </label>
@@ -153,6 +158,9 @@ const Dashboard = () => {
                                                 <label
                                                     htmlFor="description"
                                                     className="form-label"
+                                                    style={{
+                                                        fontWeight: "bold",
+                                                    }}
                                                 >
                                                     Description
                                                 </label>
@@ -171,6 +179,9 @@ const Dashboard = () => {
                                                 <label
                                                     htmlFor="tag"
                                                     className="form-label"
+                                                    style={{
+                                                        fontWeight: "bold",
+                                                    }}
                                                 >
                                                     Tag
                                                 </label>
@@ -187,6 +198,9 @@ const Dashboard = () => {
                                                 <label
                                                     htmlFor="startTime"
                                                     className="form-label"
+                                                    style={{
+                                                        fontWeight: "bold",
+                                                    }}
                                                 >
                                                     Start Time
                                                 </label>
@@ -203,6 +217,9 @@ const Dashboard = () => {
                                                 <label
                                                     htmlFor="endTime"
                                                     className="form-label"
+                                                    style={{
+                                                        fontWeight: "bold",
+                                                    }}
                                                 >
                                                     End Time
                                                 </label>
@@ -241,10 +258,17 @@ const Dashboard = () => {
                                 </div>
                             </div>
                         </div>
-                        <h2>{user.name}</h2>
-                        <h2>{user.email}</h2>
+                        <h2>
+                            <b>Name: </b> {user.name}
+                        </h2>
+                        <h2>
+                            <b>Email: </b>
+                            {user.email}
+                        </h2>
+                        <hr style={{ height: "2px", marginTop: "2vh" }} />
                         {user.isAdmin && <AddEvent />}
-                        <h2>Your Events</h2>
+                        <hr style={{ height: "2px" }} />
+                        <h2 style={{ fontWeight: "bold" }}>Your Events</h2>
                         <div className="container mx-2">
                             {events.length === 0 && "No events to display"}
                         </div>
@@ -258,7 +282,8 @@ const Dashboard = () => {
                                     />
                                 );
                             })}
-                        <h2>Liked Events</h2>
+                        <hr style={{ height: "2px" }} />
+                        <h2 style={{ fontWeight: "bold" }}>Liked Events</h2>
                         {likedevents.length !== 0 &&
                             likedevents.map((event) => {
                                 return (

@@ -8,6 +8,8 @@ import {
     faEdit,
     faCheck,
     faTimes,
+    faHeart,
+    faCircleInfo
 } from "@fortawesome/free-solid-svg-icons";
 
 const Myeventitem = (props) => {
@@ -19,24 +21,30 @@ const Myeventitem = (props) => {
         <div className="col-md-5 mb-5 container">
             <div className="card h-100 shadow">
                 <div className="card-body d-flex flex-column">
-                    <h5 className="card-title mb-3">{event.title}</h5>
-                    <p className="card-text mb-4">{event.description}</p>
-                    <div className="d-flex justify-content-between align-items-center">
-                        {/* <span className="text-muted">
-              {event.startTime} - {event.endTime}
-            </span> */}
-                        <span className="text-muted">
-                            {moment(event.startTime).format(
-                                "MMM Do YYYY, h:mm a"
-                            )}{" "}
-                            -{" "}
-                            {moment(event.endTime).format(
-                                "MMM Do YYYY, h:mm a"
-                            )}
-                        </span>
-
-                        <h6 className="text-capitalize mb-0">{event.tag}</h6>
+                    <div
+                        style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                        }}
+                    >
+                        <div
+                            className="card-title mb-3"
+                            style={{ fontWeight: "bold", fontSize: 40 }}
+                        >
+                            {event.title}
+                        </div>
+                        <div className="text-capitalize mb-0">{event.tag}</div>
                     </div>
+                    <hr />
+
+                     <p className="card-text mb-4">{event.description}</p>
+                    
+                    <span className="text-muted">
+                        {moment(event.startTime).format("MMM Do YYYY, h:mm a")}{" "}
+                        - {moment(event.endTime).format("MMM Do YYYY, h:mm a")}
+                    </span>
+
                     <div
                         className="d-flex align-items-center mt-auto"
                         style={{
@@ -52,19 +60,19 @@ const Myeventitem = (props) => {
                             }}
                         >
                             <div className="card-text me-auto">
-                                Likes: {event.like}
+                                Likes : {event.like}
                             </div>
-                            <div className="card-text">
+                            {/* <div className="card-text">
                                 {event.reqsp && <p>Requested</p>}
-                            </div>
+                            </div> */}
                             <div className="card-text">
-                                {!event.reqsp && !event.isspecial && (
-                                    <p>Not Requested</p>
+                                {!event.reqsp  && (
+                                    <p>Not requested as special</p>
                                 )}
                             </div>
                             <div className="card-text">
-                                {event.isspecial && (
-                                    <p>Approved as special event</p>
+                                {event.reqsp && event.isspecial && (
+                                    <p>Requested and approved.</p>
                                 )}
                             </div>
                             {/* <div className="card-text">
@@ -78,7 +86,7 @@ const Myeventitem = (props) => {
                                     deleteEvent(event._id);
                                 }}
                             >
-                                <FontAwesomeIcon icon={faTrashAlt} />
+                                Delete <FontAwesomeIcon icon={faTrashAlt} />
                             </button>
                             <button
                                 className="btn btn-sm btn-outline-primary"
@@ -86,7 +94,7 @@ const Myeventitem = (props) => {
                                     updateEvent(event);
                                 }}
                             >
-                                <FontAwesomeIcon icon={faEdit} />
+                                Edit <FontAwesomeIcon icon={faEdit} />
                             </button>
                         </div>
                     </div>

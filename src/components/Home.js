@@ -91,29 +91,30 @@ const Home = () => {
         return retVal;
     }
     const columns = [
-        { field: "title", headerName: "Title", width: 170 },
+        { field: "title", headerName: "Title", width: "200" },
         // { field: 'description', headerName: 'Description' , width:260},
 
         {
             field: "startTime",
             headerName: "Start Time",
-            width: 160,
+            width: 225,
             valueFormatter: (params) =>
                 moment(params.value).format("h:mm a, Do MMMM, YYYY"),
         },
         {
             field: "endTime",
             headerName: "End Time",
-            width: 160,
+            width: 225,
             valueFormatter: (params) =>
                 moment(params.value).format("h:mm a, Do MMMM, YYYY"),
         },
         {
             field: "actions",
             headerName: "Actions",
-            width: 150,
+            width: 200,
             renderCell: (params) => (
-                <Button
+                <div
+                    className="btn btn-sm btn-primary"
                     variant="contained"
                     color="primary"
                     onClick={() => {
@@ -123,21 +124,22 @@ const Home = () => {
                     }}
                 >
                     View Details
-                </Button>
+                </div>
             ),
         },
         {
             field: "organiser",
             headerName: "Organiser",
-            width: 150,
+            width: 230,
         },
         {
             field: "likeevent",
             headerName: "Like",
             width: 100,
             renderCell: (params) => (
-                <Button
+                <div
                     variant="contained"
+                    class="btn btn-sm btn-success"
                     color="secondary"
                     onClick={async () => {
                         console.log(params.row._id);
@@ -162,7 +164,7 @@ const Home = () => {
                     }}
                 >
                     {jsonText}
-                </Button>
+                </div>
             ),
         },
         {
@@ -179,6 +181,7 @@ const Home = () => {
     // window.onload=()=>{
 
     // }
+
 
     return (
         <div class="container">
@@ -204,10 +207,10 @@ const Home = () => {
                             {events.length === 0 && "No notes to display"}
                         </div>
                     </div>
-                    <div style={{ display: "flex", height: "80vh" }}>
+                    <div style={{ width: "100%"}}>
                         <DataGrid
                             className={classes.root}
-                            getRowHeight={() => "auto"}
+                            getRowHeight={() => 60}
                             rows={events}
                             columns={columns}
                             pageSize={100}
@@ -216,6 +219,42 @@ const Home = () => {
                                 Toolbar: GridToolbar,
                                 Pagination: CustomPagination,
                             }}
+                            autoHeight={true}
+                            autoWidth={true}
+                            showCellRightBorder={true}
+                            sx={{
+                                fontSize: 16,
+                                borderRadius: 2,
+                                border: 1,
+                                borderTop: 1,
+                                borderBottom: 1,
+                                color: "black",
+                                borderColor: 'black',
+                                "& .MuiDataGrid-row": {
+                                  border: 1
+                                },
+                                "& .MuiDataGrid-columnHeaders": {
+                                  border: 1,
+                                  borderTop: 2,
+                                  borderBottom: 1,
+                                  borderRadius: 0
+                                },
+                                "& .MuiDataGrid-footerContainer": {
+                                  border: 0
+                                },
+                                "& .MuiTablePagination-selectLabel": {
+                                  color: "black"
+                                },
+                                "& .MuiSelect-select": {
+                                  color: "black"
+                                },
+                                "& .MuiTablePagination-displayedRows": {
+                                  color: "black"
+                                },
+                                "& .MuiSvgIcon-root": {
+                                  color: "black"
+                                }
+                              }}
                         />
                     </div>
                     <Dialog

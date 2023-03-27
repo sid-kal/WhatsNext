@@ -50,8 +50,8 @@ const AddEvent = () => {
         setEvent({ ...event, [e.target.name]: e.target.value });
     };
     return (
-        <div className="container my-3">
-            <h2>Add an Event</h2>
+        <div className="container my-3" style={{width: "50vw"}}>
+            <h2 style={{ fontWeight: "bold" }}>Add Event</h2>
             <form className="my-3">
                 <div className="mb-3">
                     <label htmlFor="title" className="form-label">
@@ -64,21 +64,6 @@ const AddEvent = () => {
                         name="title"
                         aria-describedby="emailHelp"
                         value={event.title}
-                        onChange={onChange}
-                        minLength={5}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="description" className="form-label">
-                        Description
-                    </label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="description"
-                        name="description"
-                        value={event.description}
                         onChange={onChange}
                         minLength={5}
                         required
@@ -98,6 +83,22 @@ const AddEvent = () => {
                         required
                     />
                 </div>
+                <div className="mb-3">
+                    <label htmlFor="description" className="form-label">
+                        Description
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="description"
+                        name="description"
+                        value={event.description}
+                        onChange={onChange}
+                        minLength={5}
+                        required
+                    />
+                </div>
+
                 <div className="mb-3">
                     <label htmlFor="startTime" className="form-label">
                         Start Time
@@ -127,8 +128,12 @@ const AddEvent = () => {
                     {/* <DateTimePicker onChange={onChange} value={event.date} /> */}
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="reqsp" className="form-label">
-                        Special Event
+                    <label
+                        htmlFor="reqsp"
+                        className="form-label"
+                        style={{ display: "flex" }}
+                    >
+                        <div style={{ marginRight: "1vw" }}>Special Event</div>
                         <input
                             type="checkbox"
                             id="reqsp"

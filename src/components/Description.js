@@ -27,6 +27,7 @@ const Eventitem = (props) => {
                 </p>
                 <p className="card-text">{!event.isspecial && <p>denied</p>}</p>
             </div>
+            
         </div>
     );
 };
