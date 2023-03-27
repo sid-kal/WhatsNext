@@ -2,6 +2,9 @@ body{
   background: linear-gradient(90deg, #C7C5F4, #776BCC );
 }
 
+*{
+    font-family: Raleway, sans-serif;
+}
 .App {
   text-align: center;
 }
@@ -71,4 +74,22 @@ body{
   .likes-container p.denied {
     color: red;
   }
+  
+
+  .navbarcolour{
+    background: linear-gradient(90deg, #353537, #090909);
+  }
+
+
+  .loginnew{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: red; */
+    min-height: 80vh;
+  }
+
+
+
+
   

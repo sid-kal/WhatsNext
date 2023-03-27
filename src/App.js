@@ -27,8 +27,9 @@ function App() {
     <>
       <EventState>
         <Router>
+            <div style={{position: "sticky", top:0, zIndex: "5"}}>
           <Navbar />
-          <div className="container">
+            </div>
             <Switch>
     <Route exact path="/"><Landing/></Route>
               <Route exact path="/home">
@@ -50,7 +51,6 @@ function App() {
                 <Superadmin />
               </Route>
             </Switch>
-          </div>
         </Router>
       </EventState>
     </>

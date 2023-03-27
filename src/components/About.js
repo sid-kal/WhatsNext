@@ -1,5 +1,5 @@
-import React from 'react'
-var style = document.createElement('style');
+import React from "react";
+var style = document.createElement("style");
 style.innerHTML = `
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -96,164 +96,154 @@ body {
 // 211152
 // 210699
 
-
-// chitwang21@iitk.ac.in 
+// chitwang21@iitk.ac.in
 //  geetika21@iitk.ac.in
-//  krish21@iitk.ac.in 
-// adityakum21@iitk.ac.in 
-// aarya21@iitk.ac.in 
-// siddharthk21@iitk.ac.in 
-// taling21@iitk.ac.in 
+//  krish21@iitk.ac.in
+// adityakum21@iitk.ac.in
+// aarya21@iitk.ac.in
+// siddharthk21@iitk.ac.in
+// taling21@iitk.ac.in
 //     varuntokas21@iitk.ac.in
 // sparas21@iitk.ac.in
 
-
-
-
 document.head.appendChild(style);
-const About = () => { 
+const About = () => {
     return (
         <>
-        <div class="about-section">
-  <h1>Team What's Next</h1>
-</div>
+            <div class="container">
+                <div class="about-section">
+                    <h1>Team What's Next</h1>
+                </div>
 
+                <div class="row">
+                    <div class="column">
+                        <div class="card">
+                            <div class="container">
+                                <h2>Geetika</h2>
+                                {/* <p class="title">CEO & Founder</p> */}
+                                {/* <p>Some text that describes me lorem ipsum ipsum lorem.</p> */}
+                                <p>geetika21@iitk.ac.in</p>
+                            </div>
+                        </div>
+                    </div>
 
-
-<div class="row">
-
-
-  <div class="column">
-    <div class="card">
-      <div class="container">
-        <h2>Geetika</h2>
-        {/* <p class="title">CEO & Founder</p> */}
-        {/* <p>Some text that describes me lorem ipsum ipsum lorem.</p> */}
-        <p>geetika21@iitk.ac.in</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="column">
-    <div class="card">
-      <div class="container">
-        <h2>Chitwan Goel</h2>
-        {/* <p class="title">Art Director</p>
+                    <div class="column">
+                        <div class="card">
+                            <div class="container">
+                                <h2>Chitwan Goel</h2>
+                                {/* <p class="title">Art Director</p>
         <p>Some text that describes me lorem ipsum ipsum lorem.</p> */}
-        <p>chitwang21@iitk.ac.in</p>
-      </div>
-    </div>
-  </div>
+                                <p>chitwang21@iitk.ac.in</p>
+                            </div>
+                        </div>
+                    </div>
 
-  <div class="column">
-    <div class="card">
-      <div class="container">
-        <h2>Talin Gupta</h2>
-        <p>taling21@iitk.ac.in</p>
-      </div>
-    </div>
-  </div>
-  </div>
-<div>
-<div class="row">
-  <div class="column">
-    <div class="card">
-      <div class="container">
-        <h2>Aditya Kumar</h2>
-        {/* <p class="title">CEO & Founder</p> */}
-        {/* <p>Some text that describes me lorem ipsum ipsum lorem.</p> */}
-        <p>adityakum21@iitk.ac.in</p>
-      </div>
-    </div>
-  </div>
+                    <div class="column">
+                        <div class="card">
+                            <div class="container">
+                                <h2>Talin Gupta</h2>
+                                <p>taling21@iitk.ac.in</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="row">
+                        <div class="column">
+                            <div class="card">
+                                <div class="container">
+                                    <h2>Aditya Kumar</h2>
+                                    {/* <p class="title">CEO & Founder</p> */}
+                                    {/* <p>Some text that describes me lorem ipsum ipsum lorem.</p> */}
+                                    <p>adityakum21@iitk.ac.in</p>
+                                </div>
+                            </div>
+                        </div>
 
-  <div class="column">
-    <div class="card">
-      <div class="container">
-        <h2>Siddharth Kalra</h2>
-        {/* <p class="title">Art Director</p>
+                        <div class="column">
+                            <div class="card">
+                                <div class="container">
+                                    <h2>Siddharth Kalra</h2>
+                                    {/* <p class="title">Art Director</p>
         <p>Some text that describes me lorem ipsum ipsum lorem.</p> */}
-        <p>siddharthk21@iitk.ac.in</p>
-      </div>
-    </div>
-  </div>
+                                    <p>siddharthk21@iitk.ac.in</p>
+                                </div>
+                            </div>
+                        </div>
 
-  <div class="column">
-    <div class="card">
-      <div class="container">
-        <h2>Paras Sikarwar</h2>
-        <p>sparas21@iitk.ac.in</p>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
+                        <div class="column">
+                            <div class="card">
+                                <div class="container">
+                                    <h2>Paras Sikarwar</h2>
+                                    <p>sparas21@iitk.ac.in</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<div>
-<div class="row">
-  <div class="column">
-    <div class="card">
-      <div class="container">
-        <h2>Apoorva Gupta</h2>
-        {/* <p class="title">CEO & Founder</p> */}
-        {/* <p>Some text that describes me lorem ipsum ipsum lorem.</p> */}
-        <p>apoorvag21@iitk.ac.in</p>
-      </div>
-    </div>
-  </div>
+                <div>
+                    <div class="row">
+                        <div class="column">
+                            <div class="card">
+                                <div class="container">
+                                    <h2>Apoorva Gupta</h2>
+                                    {/* <p class="title">CEO & Founder</p> */}
+                                    {/* <p>Some text that describes me lorem ipsum ipsum lorem.</p> */}
+                                    <p>apoorvag21@iitk.ac.in</p>
+                                </div>
+                            </div>
+                        </div>
 
-  <div class="column">
-    <div class="card">
-      <div class="container">
-        <h2>Varun Tokas</h2>
-        {/* <p class="title">Art Director</p>
+                        <div class="column">
+                            <div class="card">
+                                <div class="container">
+                                    <h2>Varun Tokas</h2>
+                                    {/* <p class="title">Art Director</p>
         <p>Some text that describes me lorem ipsum ipsum lorem.</p> */}
-        <p>varuntokas21@iitk.ac.in</p>
-      </div>
-    </div>
-  </div>
+                                    <p>varuntokas21@iitk.ac.in</p>
+                                </div>
+                            </div>
+                        </div>
 
-  <div class="column">
-    <div class="card">
-      <div class="container">
-        <h2>Krish Sharma</h2>
-        <p>krish21@iitk.ac.in</p>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-<div>
-<div class="row">
-  <div class="column">
-    <div class="card">
-      <div class="container">
-        <h2>Aman Arya</h2>
-        {/* <p class="title">CEO & Founder</p> */}
-        {/* <p>Some text that describes me lorem ipsum ipsum lorem.</p> */}
-        <p>aarya21@iitk.ac.in</p>
-      </div>
-    </div>
-  </div>
+                        <div class="column">
+                            <div class="card">
+                                <div class="container">
+                                    <h2>Krish Sharma</h2>
+                                    <p>krish21@iitk.ac.in</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="row">
+                        <div class="column">
+                            <div class="card">
+                                <div class="container">
+                                    <h2>Aman Arya</h2>
+                                    {/* <p class="title">CEO & Founder</p> */}
+                                    {/* <p>Some text that describes me lorem ipsum ipsum lorem.</p> */}
+                                    <p>aarya21@iitk.ac.in</p>
+                                </div>
+                            </div>
+                        </div>
 
-  <div class="column">
-    <div class="card">
-      <div class="container">
-        <h2>Kruthi Akkinepally</h2>
-        {/* <p class="title">Art Director</p>
+                        <div class="column">
+                            <div class="card">
+                                <div class="container">
+                                    <h2>Kruthi Akkinepally</h2>
+                                    {/* <p class="title">Art Director</p>
         <p>Some text that describes me lorem ipsum ipsum lorem.</p> */}
-        <p>akruthi21@iitk.ac.in</p>
-      </div>
-    </div>
-  </div>
+                                    <p>akruthi21@iitk.ac.in</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+};
 
-</div>
-</div>
-
-
-
-</>
-    )
-}
-
-export default About
+export default About;
