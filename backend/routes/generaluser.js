@@ -42,4 +42,30 @@ router.post('/likeevent',fetchuser,async(req,res) => {
         res.status(500).send("Internal Server Error");
     }
 })
+
+
+router.post('/checkforlikeevent',fetchuser,async(req,res) => {
+    try{
+       const likeexists = await User.find({_id: req.user.id,likedEvents: {$elemMatch: {$eq : req.body.eventID}}}); // check if this event is already present in liked list of user
+       if (likeexists.length > 0)
+       {
+            // await User.findByIdAndUpdate(req.user.id,{$pull: {likedEvents: req.body.eventID}}); // remove from list of liked events when clicked on like second time
+            // await Event.findByIdAndUpdate(req.body.eventID, { $inc: { like: -1 } });  // decrement likes
+            res.json({found:true});
+       }
+       else
+       {
+    //         await User.findByIdAndUpdate(req.user.id,{$push: {likedEvents: req.body.eventID}}); // add event in list of liked events
+    //         await Event.findByIdAndUpdate(req.body.eventID, { $inc: { like: 1 } });   // increment likes
+            res.json({found:false});
+       }
+    }
+    catch (error)
+    {
+        console.error(error.message);
+        res.status(500).send("Internal Server Error");
+    }
+})
+
+
 module.exports = router

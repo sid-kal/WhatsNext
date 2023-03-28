@@ -24,7 +24,6 @@ router.post('/addevent', fetchuser, [
             const { title, description, tag, startTime, endTime, reqsp,image} = req.body;
             const like = 0;
             let success = false;
-            let success2=false;
             // If there are errors, return Bad request and the errors
             const errors = validationResult(req);
             if (!errors.isEmpty()) {

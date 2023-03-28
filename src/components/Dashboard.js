@@ -33,13 +33,13 @@ const Dashboard = () => {
             );
 
             const json = await res.json();
-            console.log(json.id);
+            // console.log(json.id);
             setlikedevent(json.id);
-            console.log(likedevents);
-        };
-        getuser();
+            // console.log(likedevents);
+            }
+            getuser();
     }, []);
-
+    
     const context = useContext(eventContext);
     const { events, getEvents, editEvent } = context;
     // console.log(typeof(events));

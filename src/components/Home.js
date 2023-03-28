@@ -5,12 +5,11 @@ import { makeStyles } from "@material-ui/styles";
 import Pagination from "@mui/material/Pagination";
 import moment from "moment";
 import {
-    gridPageCountSelector,
-    gridPageSelector,
-    useGridApiContext,
-    useGridSelector,
-} from "@mui/x-data-grid";
-import Description from "./Description";
+  gridPageCountSelector,
+  gridPageSelector,
+  useGridApiContext,
+  useGridSelector,
+} from '@mui/x-data-grid';
 import {
     Button,
     Dialog,
@@ -68,7 +67,7 @@ const Home = () => {
     ]);
     const [open, setOpen] = useState(false);
     const [popupData, setPopupData] = useState({});
-    const [jsonText, setJsonText] = useState("like");
+    const [gridkey, setGridkey]= useState(Date.now());
     useEffect(() => {
         const autorun = async () => {
             const res = await fetch(
@@ -98,10 +97,63 @@ const Home = () => {
         }
         return retVal;
     }
+
+    const RenderAbstractConfirmButton = ({ eventID }) => {
+        const [likeData, setLikeData] = useState(null);
+      
+        useEffect(() => {
+          const fetchData = async () => {
+            const res = await fetch(
+              "http://localhost:5000/api/generaluser/checkforlikeevent",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  "auth-token": localStorage.getItem("token"),
+                },
+                body: JSON.stringify({
+                  eventID: eventID,
+                }),
+              }
+            );
+            const json = await res.json();
+            setLikeData(json);
+          };
+          fetchData();
+        }, [eventID]);
+      
+        const handleLike = async () => {
+          await fetch("http://localhost:5000/api/generaluser/likeevent", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "auth-token": localStorage.getItem("token"),
+            },
+            body: JSON.stringify({
+              eventID: eventID,
+            }),
+          });
+          setGridkey(Date.now());
+        };
+      
+        if (!likeData) {
+          return <div>Loading...</div>;
+        }
+      
+        const { found } = likeData;
+        return (
+          <Button onClick={handleLike}>
+            {found ? (
+              <span style={{ backgroundColor: "green", color: "#fff" }}>Dislike</span>
+            ) : (
+              <span style={{ backgroundColor: "green", color: "#fff" }}>Like</span>
+            )}
+          </Button>
+        );
+      };
+
     const columns = [
         { field: "title", headerName: "Title", width: "200" },
-        // { field: 'description', headerName: 'Description' , width:260},
-
         {
             field: "startTime",
             headerName: "Start Time",
@@ -145,35 +197,8 @@ const Home = () => {
             headerName: "Like",
             width: 100,
             renderCell: (params) => (
-                <div
-                    variant="contained"
-                    class="btn btn-sm btn-success"
-                    color="secondary"
-                    onClick={async () => {
-                        console.log(params.row._id);
-                        const res = await fetch(
-                            "http://localhost:5000/api/generaluser/likeevent",
-                            {
-                                method: "POST",
-                                // credentials: 'include',
-                                headers: {
-                                    "Content-Type": "application/json",
-                                    "auth-token": localStorage.getItem("token"),
-                                },
-                                body: JSON.stringify({
-                                    eventID: params.row._id,
-                                }), // replace '123' with the actual event ID
-                            }
-                        );
-                        const json = await res.json();
-                        console.log(json.id);
-                        setJsonText(json.id);
-                        window.location.reload();
-                    }}
-                >
-                    {jsonText}
-                </div>
-            ),
+                <RenderAbstractConfirmButton eventID={params.row._id} />
+              ),
         },
         {
             field: "like",
@@ -186,20 +211,9 @@ const Home = () => {
         setOpen(false);
     };
 
-    // for(let i=0;i<events.length;i++)
-    // {
-    //     return (
-    //         <EventCard data={events[i]}/>
-    //     )
-    // }
-
-    // const helloWorldArray = Array.from({ length: 100 }, () => "hello world");
 
     return (
         <div class="container">
-            {/* {helloWorldArray.map((item, index) => (
-                <p key={index}>{item}</p>
-            ))} */}
 
             {!localStorage.getItem("token") ? (
                 <div>
@@ -214,7 +228,7 @@ const Home = () => {
                             style={{ color: "#0047AB", textDecoration: "none" }}
                             to="/dashboard"
                         >
-                            Profile
+                            View your Dashboard
                         </Link>
                     </h1>
                     <div className="row my-3">
@@ -225,6 +239,7 @@ const Home = () => {
                     </div>
                     <div style={{ width: "100%" }}>
                         <DataGrid
+                        key = {gridkey}
                             className={classes.root}
                             getRowHeight={() => 60}
                             rows={events}
@@ -285,28 +300,28 @@ const Home = () => {
                         <DialogContent>
                             <DialogContentText>
                                 <div>
-                                    <strong>Description:</strong>{" "}
+                                    <strong>Description: </strong>{" "}
                                     {popupData.description}
                                 </div>
                                 <span className="text-muted">
                                     <div>
-                                        <strong>Start Time:</strong>{" "}
+                                        <strong>Start Time: </strong>{" "}
                                         {moment(popupData.startTime).format(
                                             "MMM Do YYYY, h:mm a"
                                         )}
                                     </div>
                                     <div>
-                                        <strong>End Time:</strong>{" "}
+                                        <strong>End Time: </strong>{" "}
                                         {moment(popupData.endTime).format(
                                             "MMM Do YYYY, h:mm a"
                                         )}
                                     </div>
                                 </span>
                                 <div>
-                                    <strong>Image URL:</strong>
-                                    {popupData.image}
+                                    <strong>Image URL: </strong>
+                                    <a href={popupData.image}>{popupData.image}</a>
                                 </div>
-                                {/* <div><strong>Organiser:</strong> {popupData.organiser}</div> */}
+                                <div><strong>Organiser: </strong> {popupData.organiser}</div>
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>

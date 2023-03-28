@@ -4,10 +4,10 @@ import { Link, useLocation, useHistory } from "react-router-dom";
 const Navbar = () => {
     let location = useLocation();
     let history = useHistory();
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        history.push("/");
-    };
+    const handleLogout = () =>{
+        localStorage.removeItem('token');
+        history.replace('/');
+    }
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark navbarcolour">
             <div className="container-fluid">

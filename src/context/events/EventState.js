@@ -26,8 +26,6 @@ const EventState = (props) => {
   const addEvent = async (title, description, tag, startTime, endTime,reqsp,image) => {
     // TODO: API Call
     // API Call 
-    console.log(image);
-    console.log("MEiin jaha aaya tha");
     const response = await fetch(`${host}/api/events/addevent`, {
       method: 'POST',
       headers: {
