@@ -67,7 +67,7 @@ const Home = () => {
     ]);
     const [open, setOpen] = useState(false);
     const [popupData, setPopupData] = useState({});
-    const [gridkey, setGridkey]= useState(Date.now());
+    const [gridkey, setGridkey]= useState(false);
     useEffect(() => {
         const autorun = async () => {
             const res = await fetch(
@@ -81,11 +81,11 @@ const Home = () => {
             );
             const json = await res.json();
             setEvents(json.events);
-            console.log(json.len);
-            console.log(json.events);
+            // console.log(json.len);
+            // console.log(json.events);
         };
         autorun();
-    }, []);
+    }, [gridkey]);
     // window.onload = autorun;
     function generateRandom() {
         var length = 8,
@@ -118,23 +118,23 @@ const Home = () => {
             );
             const json = await res.json();
             setLikeData(json);
-          };
-          fetchData();
-        }, [eventID]);
-      
-        const handleLike = async () => {
-          await fetch("http://localhost:5000/api/generaluser/likeevent", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "auth-token": localStorage.getItem("token"),
-            },
-            body: JSON.stringify({
-              eventID: eventID,
-            }),
-          });
-          setGridkey(Date.now());
         };
+        fetchData();
+    }, [eventID]);
+          
+          const handleLike = async () => {
+              await fetch("http://localhost:5000/api/generaluser/likeevent", {
+                  method: "POST",
+                  headers: {
+                      "Content-Type": "application/json",
+                      "auth-token": localStorage.getItem("token"),
+                    },
+                    body: JSON.stringify({
+                        eventID: eventID,
+                    }),
+                });
+                setGridkey(!(gridkey));
+            };
       
         if (!likeData) {
           return <div>Loading...</div>;
@@ -239,7 +239,7 @@ const Home = () => {
                     </div>
                     <div style={{ width: "100%" }}>
                         <DataGrid
-                        key = {gridkey}
+                            key = {gridkey}
                             className={classes.root}
                             getRowHeight={() => 60}
                             rows={events}
