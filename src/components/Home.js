@@ -46,6 +46,14 @@ const useStyles = makeStyles({
         },
     },
 });
+
+const EventCard = (data) => {
+    return (
+        <>
+            <div>{data.title}</div>
+        </>
+    );
+};
 const Home = () => {
     const classes = useStyles();
     const [events, setEvents] = useState([
@@ -178,13 +186,21 @@ const Home = () => {
         setOpen(false);
     };
 
-    // window.onload=()=>{
-
+    // for(let i=0;i<events.length;i++)
+    // {
+    //     return (
+    //         <EventCard data={events[i]}/>
+    //     )
     // }
 
+    // const helloWorldArray = Array.from({ length: 100 }, () => "hello world");
 
     return (
         <div class="container">
+            {/* {helloWorldArray.map((item, index) => (
+                <p key={index}>{item}</p>
+            ))} */}
+
             {!localStorage.getItem("token") ? (
                 <div>
                     You are not authorised to access the page. Login/Signup and
@@ -207,7 +223,7 @@ const Home = () => {
                             {events.length === 0 && "No notes to display"}
                         </div>
                     </div>
-                    <div style={{ width: "100%"}}>
+                    <div style={{ width: "100%" }}>
                         <DataGrid
                             className={classes.root}
                             getRowHeight={() => 60}
@@ -229,32 +245,32 @@ const Home = () => {
                                 borderTop: 1,
                                 borderBottom: 1,
                                 color: "black",
-                                borderColor: 'black',
+                                borderColor: "black",
                                 "& .MuiDataGrid-row": {
-                                  border: 1
+                                    border: 1,
                                 },
                                 "& .MuiDataGrid-columnHeaders": {
-                                  border: 1,
-                                  borderTop: 2,
-                                  borderBottom: 1,
-                                  borderRadius: 0
+                                    border: 1,
+                                    borderTop: 2,
+                                    borderBottom: 1,
+                                    borderRadius: 0,
                                 },
                                 "& .MuiDataGrid-footerContainer": {
-                                  border: 0
+                                    border: 0,
                                 },
                                 "& .MuiTablePagination-selectLabel": {
-                                  color: "black"
+                                    color: "black",
                                 },
                                 "& .MuiSelect-select": {
-                                  color: "black"
+                                    color: "black",
                                 },
                                 "& .MuiTablePagination-displayedRows": {
-                                  color: "black"
+                                    color: "black",
                                 },
                                 "& .MuiSvgIcon-root": {
-                                  color: "black"
-                                }
-                              }}
+                                    color: "black",
+                                },
+                            }}
                         />
                     </div>
                     <Dialog
