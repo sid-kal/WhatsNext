@@ -40,8 +40,6 @@ To run project in Mac and Linux, run the following commands:
 ### `npm run start`
 
 
-
-[CS253_Software_requirement_specification_document.pdf](https://github.com/chitwang/WhatsNext/files/10923201/CS253_Software_requirement_specification_document.pdf)
-
+[SRS.pdf](https://github.com/chitwang/WhatsNext/files/11103783/SRS.pdf)
 
 [Design_doc.pdf](https://github.com/chitwang/WhatsNext/files/10923213/Design_doc.pdf)
