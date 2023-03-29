@@ -270,10 +270,10 @@ const Dashboard = () => {
                         <hr style={{ height: "2px" }} />
                         <h2 style={{ fontWeight: "bold" }}>Your Events</h2>
                         <div className="container mx-2">
-                            {events.length === 0 && "No events to display"}
+                            {events?.length === 0 && "No events to display"}
                         </div>
-                        {events.length !== 0 &&
-                            events.map((event) => {
+                        {events?.length !== 0 &&
+                            events?.map((event) => {
                                 return (
                                     <Myeventitem
                                         key={event._id}
@@ -285,7 +285,7 @@ const Dashboard = () => {
                         <hr style={{ height: "2px" }} />
                         <h2 style={{ fontWeight: "bold" }}>Liked Events</h2>
                         {likedevents.length !== 0 &&
-                            likedevents.map((event) => {
+                            likedevents?.map((event) => {
                                 return (
                                     <Eventitem key={event._id} event={event} />
                                 );

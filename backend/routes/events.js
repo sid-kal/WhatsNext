@@ -29,16 +29,52 @@ router.post('/addevent', fetchuser, [
             if (!errors.isEmpty()) {
                 return res.status(400).json({ errors: errors.array()});
             }
-            let clash1 = await Event.find({ startTime:{$gt : req.body.startTime} , endTime:{$lt : req.body.endTime}});
-            let clash2 = await Event.find({ startTime:{$gt : req.body.startTime} , endTime:{$gt : req.body.endTime}});
-            let clash3 = await Event.find({ endTime:{$gt : req.body.endTime}, startTime:{$lt: req.body.startTime}});
-            let clash4 = await Event.find({ endTime:{$lt : req.body.endTime}, startTime:{$lt: req.body.startTime}});
+            // let temp = await Event.find();
+            // let clashtmp=[];
+            // clashtmp.push(req.body.startTime);
+            // for(let i=0;i<temp.length;i++)
+            // {   
+            //     if(temp[i].startTime>=req.body.startTime || temp[i].startTime<=req.body.startTime)
+            //     {
+            //         res.json("No clash");
+            //     }
+            //     else
+            //     {
+            //         res.json("Clash");
+            //     }
+            //     if(temp[i].startTime>=req.body.startTime && temp[i].startTime<=req.body.endTime)
+            //     {
+            //         clashtmp.push(temp[i]);
+            //     }
+            //     else if(temp[i].startTime<=req.body.startTime && temp[i].endTime>=req.body.startTime )
+            //     {
+            //         clashtmp.push(temp[i]);
+            //     }
+            //     else if (temp[i].startTime>=req.body.startTime && temp[i].startTime<=req.endTime)
+            //     {
+            //         clashtmp.push(temp[i]);
+            //     }
+            //     else if (temp[i].startTime<=req.body.startTime && temp[i].endTime>=req.body.startTime)
+            //     {
+            //         clashtmp.push(temp[i]);
+            //     }
+                
+            // }
+            // res.json(clashtmp);
+            //let clash1 = await Event.find({ startTime:{$gt : req.body.startTime} , endTime:{$lt : req.body.endTime}});
+            let clash2 = await Event.find({ startTime:{$lt : req.body.endTime, $ne: req.body.startTime} , endTime:{$gt : req.body.endTime}});
+             //let clash3 = await Event.find({ endTime:{$gt : req.body.endTime}, startTime:{$lt: req.body.startTime}});
+            let clash4 = await Event.find({ endTime:{$lt : req.body.endTime,$gt: req.body.startTime},startTime:{$ne: req.body.startTime}});
             let clash5 = await Event.find({ startTime:{$eq : req.body.startTime}, endTime:{$ne: req.body.endTime}});
             let clash6 = await Event.find({ startTime:{$ne : req.body.startTime}, endTime:{$eq: req.body.endTime}});
             let clash7 = await Event.find({ startTime:{$eq : req.body.startTime}, endTime:{$eq: req.body.endTime}});
             // console.log(clash);
             // let clash = [...new Set([...clash1, ...clash2, ...clash3, ...clash4])];
-            let clashtmp = clash1.concat(clash2.concat(clash3.concat(clash4.concat(clash5.concat(clash6.concat(clash7))))));
+            //let clashtmp = clash1.concat(clash2.concat(clash3.concat(clash4.concat(clash5.concat(clash6.concat(clash7))))));
+            
+            let clashtmp = clash2.concat(clash4.concat(clash5.concat(clash6.concat(clash7))));
+            
+            // let clashtmp = clash5.concat(clash6.concat(clash7.concat(clash4)));
             let clash = clashtmp.filter((item, 
                 index) => clashtmp.indexOf(item) === index);
             const userfound = await User.findById(req.user.id);
@@ -56,7 +92,7 @@ router.post('/addevent', fetchuser, [
 
         } catch (error) {
             console.error(error.message);
-            res.status(500).send("Internal Server Error");
+            res.status(500).send(error);
         }
     })
 
@@ -93,7 +129,7 @@ router.delete('/deleteevent/:id', fetchuser, async (req, res) => {
     try {
         // Find the note to be delete and delete it
         let event = await Event.findById(req.params.id);
-        if (!event) { return res.status(404).send("Not Found") }
+        if (event==null) { return res.status(404).send("Not Found") }
 
         // Allow deletion only if user owns this Note
         if (event.user.toString() !== req.user.id) {
