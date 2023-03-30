@@ -3,14 +3,14 @@ import { useHistory } from "react-router-dom";
 import logo from "./logo1.png";
 import svg from "./logo2.png";
 import Typewriter from "typewriter-effect";
-
+import "./login.css";
 const Login = (props) => {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
     let history = useHistory();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch("http://localhost:5000/api/auth/login", {
+        const response = await fetch("http://localhost:8000/api/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -30,15 +30,7 @@ const Login = (props) => {
             alert("Invalid credentials");
         }
     };
-    function click() {
-        // toggle the type attribute
-        const togglePassword = document.querySelector("#togglePassword");
-        const passwordV = document.querySelector("#password");
-        const type = passwordV.getAttribute("type") === "password" ? "text" : "password";
-        togglePassword.className === 'fa fa-eye viewpass mr-4 text-muted' ? document.getElementById("togglePassword").className = 'fa fa-eye-slash viewpass mr-4 text-muted' : document.getElementById("togglePassword").className = 'fa fa-eye viewpass mr-4 text-muted';
-        passwordV.setAttribute("type", type);
 
-    }
     const onChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
     };
@@ -71,55 +63,49 @@ const Login = (props) => {
                     </div>
                 </div>
                 <div class="hero-img" >
-                    <form onSubmit={handleSubmit}>
-                        <div className="mb-3">
-                            <label htmlFor="email" className="form-label">
-                                Email address
-                            </label>
-                            <input
-                                type="email"
-                                className="form-control"
-                                value={credentials.email}
-                                onChange={onChange}
-                                id="email"
-                                name="email"
-                                aria-describedby="emailHelp"
-                            />
-                            <div id="emailHelp" className="form-text">
-                                We'll never share your email with anyone else.
-                            </div>
-                        </div>
-                        <div className="mb-3" style={{ position: "relative" }}>
-                                <label htmlFor="Password" className="form-label">
-                                    Enter Password
-                                </label>
-                                <input
-                                    type="password"
-                                    className="form-control"
-                                    id="password"
-                                    name="password"
-                                    onChange={onChange}
-                                    style={{ paddingRight: "40px" }} // add padding to make space for the icon
-                                />
-                                <span
-                                    className="fa fa-eye viewpass mr-4 text-muted"
-                                    onClick={click}
-                                    id="togglePassword"
-                                    style={{
-                                        position: "absolute",
-                                        top: "73%",
-                                        right: "10px",
-                                        transform: "translateY(-50%)",
-                                        cursor: "pointer",
-                                    }}
-                                ></span>
-                            </div>
+                <div className="container">
+        <div className="screen">
+        <div className="screen__content">
+            <form className='login' onSubmit={handleSubmit}>
+                
+                
+                <div className="login__field">
+                        <i className="login__icon fas fa-user"></i>
+                    
+                    <input type="email" className="login-input" value={credentials.email} onChange={onChange} id="email" name="email" aria-describedby="emailHelp" placeholder="Email" />
+                    </div>
+                    <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+               
+               
+                <div className="login__field">
+                        <i className="login__icon fas fa-lock"></i>
+                    
+                    <input type="password" className="login-input" value={credentials.password} onChange={onChange} name="password" id="password" placeholder="Password" />
+                    </div>
+                
 
-
-                        <button type="submit" className="btn btn-primary">
-                            Submit
-                        </button>
-                    </form>
+                <button className="button login__submit">
+                        <span className="button__text">Log In Now</span>
+                        <i className="button__icon fas fa-chevron-right"></i>
+                    </button>	
+            </form>
+            <div className="social-login">
+                    
+                    <div className="social-icons">
+                        <a href="#" className="social-login__icon fab fa-instagram"></a>
+                        <a href="#" className="social-login__icon fab fa-facebook"></a>
+                        <a href="#" className="social-login__icon fab fa-twitter"></a>
+                    </div>
+                </div>
+            </div>
+            <div className="screen__background">
+                <span className="screen__background__shape screen__background__shape4"></span>
+                <span className="screen__background__shape screen__background__shape3"></span>		
+                <span className="screen__background__shape screen__background__shape2"></span>
+                <span className="screen__background__shape screen__background__shape1"></span>
+            </div>	
+            </div>
+            </div>
                 </div>
             </div>
             <div class="social">
