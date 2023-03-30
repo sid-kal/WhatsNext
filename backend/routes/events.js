@@ -129,15 +129,18 @@ router.delete('/deleteevent/:id', fetchuser, async (req, res) => {
     try {
         // Find the note to be delete and delete it
         let event = await Event.findById(req.params.id);
-        if (event==null) { return res.status(404).send("Not Found") }
-
-        // Allow deletion only if user owns this Note
-        if (event.user.toString() !== req.user.id) {
-            return res.status(401).send("Not Allowed");
+        if (event) {  
+            if (event.user.toString() !== req.user.id) {
+                return res.status(401).send("Not Allowed");
+            }
+    
+            event = await Event.findByIdAndDelete(req.params.id)
+            res.json({ "Success": "Event has been deleted", event:event });
         }
 
-        event = await Event.findByIdAndDelete(req.params.id)
-        res.json({ "Success": "Event has been deleted", event:event });
+        // Allow deletion only if user owns this Note
+        
+        return res.status(404).send("Not Found")
     } catch (error) {
         console.error(error.message);
         res.status(500).send("Internal Server Error");
