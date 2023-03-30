@@ -81,7 +81,15 @@ const Signup = () => {
     const onchange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
     };
+    function click() {
+        // toggle the type attribute
+        const togglePassword = document.querySelector("#togglePassword");
+        const passwordV = document.querySelector("#Password");
+        const type = passwordV.getAttribute("type") === "password" ? "text" : "password";
+        togglePassword.className === 'fa fa-eye viewpass mr-4 text-muted' ? document.getElementById("togglePassword").className = 'fa fa-eye-slash viewpass mr-4 text-muted' : document.getElementById("togglePassword").className = 'fa fa-eye viewpass mr-4 text-muted';
+        passwordV.setAttribute("type", type);
 
+    }
     return (
         <>
             <div class="everything">
@@ -142,7 +150,7 @@ const Signup = () => {
                                     else.
                                 </div>
                             </div>
-                            <div className="mb-3">
+                            {/* <div className="mb-3">
                                 <label
                                     htmlFor="Password"
                                     className="form-label"
@@ -155,9 +163,11 @@ const Signup = () => {
                                     id="Password"
                                     name="password"
                                     onChange={onchange}
-                                ></input>
-                            </div>
-                            <div className="mb-3">
+                                    >
+                                </input>
+                                <span className="fa fa-eye viewpass mr-4 text-muted" onClick={click} id="togglePassword"></span>
+                            </div> */}
+                            {/* <div className="mb-3">
                                 <label
                                     htmlFor="cPassword"
                                     className="form-label"
@@ -171,7 +181,33 @@ const Signup = () => {
                                     name="cpassword"
                                     onChange={onchange}
                                 ></input>
+                            </div> */}
+                            <div className="mb-3" style={{ position: "relative" }}>
+                                <label htmlFor="Password" className="form-label">
+                                    Enter Password
+                                </label>
+                                <input
+                                    type="password"
+                                    className="form-control"
+                                    id="Password"
+                                    name="password"
+                                    onChange={onchange}
+                                    style={{ paddingRight: "40px" }} // add padding to make space for the icon
+                                />
+                                <span
+                                    className="fa fa-eye viewpass mr-4 text-muted"
+                                    onClick={click}
+                                    id="togglePassword"
+                                    style={{
+                                        position: "absolute",
+                                        top: "73%",
+                                        right: "10px",
+                                        transform: "translateY(-50%)",
+                                        cursor: "pointer",
+                                    }}
+                                ></span>
                             </div>
+
                             <button
                                 type="submit"
                                 className="btn btn-primary"

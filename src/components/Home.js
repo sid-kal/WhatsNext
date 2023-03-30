@@ -17,7 +17,10 @@ import {
     DialogContent,
     DialogContentText,
     DialogTitle,
+    
 } from "@mui/material";
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 
 function CustomPagination() {
     const apiRef = useGridApiContext();
@@ -46,13 +49,6 @@ const useStyles = makeStyles({
     },
 });
 
-const EventCard = (data) => {
-    return (
-        <>
-            <div>{data.title}</div>
-        </>
-    );
-};
 const Home = () => {
     const classes = useStyles();
     const [events, setEvents] = useState([
@@ -144,9 +140,9 @@ const Home = () => {
         return (
           <Button onClick={handleLike}>
             {found ? (
-              <span style={{ backgroundColor: "green", color: "#fff" }}>Dislike</span>
+              <ThumbUpAltIcon color="blue" />
             ) : (
-              <span style={{ backgroundColor: "green", color: "#fff" }}>Like</span>
+              <ThumbUpOffAltIcon/>
             )}
           </Button>
         );

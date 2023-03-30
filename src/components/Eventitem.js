@@ -4,7 +4,6 @@ import moment from "moment";
 
 const Eventitem = (props) => {
     const context = useContext(eventContext);
-    const { deleteEvent } = context;
     const { event } = props;
     return (
         <div className="container col-md-5 ">
@@ -41,22 +40,10 @@ const Eventitem = (props) => {
                                 {/* <i className="far fa-edit mx-2" onClick={()=>{updateEvent(event)}}></i> */}
                                 {/* <p className="card-text">{event.reqsp && <p>requested</p>}</p> */}
                                 <div className="card-text">
-                                    {!event.reqsp && <div>Not requested as special.</div>}
-                                </div>
-                                <div className="card-text">
-                                    {event.reqsp && event.isspecial && <div>Requested and Approved</div>}
-                                </div>
-                                <div className="card-text">
-                                    {event.reqsp && !event.isspecial && <div>Requested and Denied</div>}
-                                </div>
+                                    { event.isspecial && <div>Special Event</div>}
+                                </div>  
                             </div>
                         </div>
-                        <i
-                            className="far fa-trash-alt mx-2"
-                            onClick={() => {
-                                deleteEvent(event._id);
-                            }}
-                        ></i>
                     </div>
                 </div>
             </div>

@@ -30,7 +30,15 @@ const Login = (props) => {
             alert("Invalid credentials");
         }
     };
+    function click() {
+        // toggle the type attribute
+        const togglePassword = document.querySelector("#togglePassword");
+        const passwordV = document.querySelector("#password");
+        const type = passwordV.getAttribute("type") === "password" ? "text" : "password";
+        togglePassword.className === 'fa fa-eye viewpass mr-4 text-muted' ? document.getElementById("togglePassword").className = 'fa fa-eye-slash viewpass mr-4 text-muted' : document.getElementById("togglePassword").className = 'fa fa-eye viewpass mr-4 text-muted';
+        passwordV.setAttribute("type", type);
 
+    }
     const onChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
     };
@@ -81,19 +89,32 @@ const Login = (props) => {
                                 We'll never share your email with anyone else.
                             </div>
                         </div>
-                        <div className="mb-3">
-                            <label htmlFor="password" className="form-label">
-                                Password
-                            </label>
-                            <input
-                                type="password"
-                                className="form-control"
-                                value={credentials.password}
-                                onChange={onChange}
-                                name="password"
-                                id="password"
-                            />
-                        </div>
+                        <div className="mb-3" style={{ position: "relative" }}>
+                                <label htmlFor="Password" className="form-label">
+                                    Enter Password
+                                </label>
+                                <input
+                                    type="password"
+                                    className="form-control"
+                                    id="password"
+                                    name="password"
+                                    onChange={onChange}
+                                    style={{ paddingRight: "40px" }} // add padding to make space for the icon
+                                />
+                                <span
+                                    className="fa fa-eye viewpass mr-4 text-muted"
+                                    onClick={click}
+                                    id="togglePassword"
+                                    style={{
+                                        position: "absolute",
+                                        top: "73%",
+                                        right: "10px",
+                                        transform: "translateY(-50%)",
+                                        cursor: "pointer",
+                                    }}
+                                ></span>
+                            </div>
+
 
                         <button type="submit" className="btn btn-primary">
                             Submit
