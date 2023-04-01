@@ -1,3 +1,5 @@
+# User Manual
+[User_Manual.pdf](https://github.com/chitwang/WhatsNext/files/11130056/User_Manual.pdf)
 # Setting up 
 
 Install NodeJs from this link [Node JS Download](https://nodejs.org/en/download/)
@@ -38,8 +40,7 @@ To run project in Mac and Linux, run the following commands:
 ### `sudo npm install -g nodemon`
 ### `nodemon backend/index.js`
 ### `npm run start`
-
-
+# SRS Document
 [SRS.pdf](https://github.com/chitwang/WhatsNext/files/11103783/SRS.pdf)
-
+# Design Document
 [Design_doc.pdf](https://github.com/chitwang/WhatsNext/files/10923213/Design_doc.pdf)
