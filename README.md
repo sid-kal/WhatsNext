@@ -44,3 +44,6 @@ To run project in Mac and Linux, run the following commands:
 [SRS.pdf](https://github.com/chitwang/WhatsNext/files/11103783/SRS.pdf)
 # Design Document
 [Design_doc.pdf](https://github.com/chitwang/WhatsNext/files/10923213/Design_doc.pdf)
+# Test Document
+[Test_Document.pdf](https://github.com/chitwang/WhatsNext/files/11140303/Test_Document.pdf)
+
