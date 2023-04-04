@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Superadmin_eventitem from "./Superadmin_eventitem";
 
-const Superadmin = () => {
+const Superadmin = ({theme}) => {
     const host = "http://localhost:5000";
     const [requ, setreq] = useState([]);
     const seereq = async () => {
@@ -30,7 +30,7 @@ const Superadmin = () => {
             </div>
 
             {requ.map((event) => {
-                return <Superadmin_eventitem key={event._id} event={event} />;
+                return <Superadmin_eventitem theme={theme} key={event._id} event={event} />;
             })}
         </div>
     );

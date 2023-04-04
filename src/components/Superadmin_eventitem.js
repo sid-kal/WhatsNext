@@ -90,71 +90,73 @@ const Superadmin_eventitem = (props) => {
         window.location.reload();
     };
     return (
-        <div className="container col-md-10">
-            <div className="card my-6">
-                <div className="card-body">
-                    {/* <div className="d-flex align-items-center">
+        <div >
+            <div className="container col-md-10">
+                <div className="card my-6" style={{background: props.theme?"#001e3c":"", color: props.theme?"white":""}}>
+                    <div className="card-body">
+                        {/* <div className="d-flex align-items-center">
                         <h5 className="card-title">{event.title}</h5>
 
                         <span style={{marginLeft:'1em', marginRight: '1em' }}>{event.startTime}</span><br />
                         <span style={{ marginRight: '1em' }}>{event.endTime}</span>
                         <h6> {event.tag}</h6>
                     </div> */}
-                    {/* <div className="d-flex align-items-center">
+                        {/* <div className="d-flex align-items-center">
     <div className="flex-grow-1">
         <h5 className="card-title">{event.title}</h5>
-    </div>
+        </div>
 
     <span style={{marginLeft:'1em', marginRight: '1em',paddingBottom:'0.5em' }}>{event.startTime}</span>
     <span style={{ marginRight: '1em',paddingBottom:'0.5em'}}>{event.endTime}</span>
 
     <h6>{event.tag}</h6>
 </div> */}{" "}
-                    <div className="d-flex align-items-center">
-                        <div className="flex-grow-1">
-                            <h5 className="card-title">{event.title}</h5>
+                        <div className="d-flex align-items-center">
+                            <div className="flex-grow-1">
+                                <h5 className="card-title">{event.title}</h5>
+                            </div>
+
+                            <span
+                                style={{
+                                    marginLeft: "1em",
+                                    marginRight: "1em",
+                                    paddingBottom: "0.5em",
+                                }}
+                            >
+                                {moment(event.startTime).format(
+                                    "MMM Do YYYY, h:mm a"
+                                )}
+                            </span>
+                            <span
+                                style={{
+                                    marginRight: "1em",
+                                    paddingBottom: "0.5em",
+                                }}
+                            >
+                                {moment(event.endTime).format(
+                                    "MMM Do YYYY, h:mm a"
+                                )}
+                            </span>
+
+                            <h6>{event.tag}</h6>
                         </div>
-
-                        <span
-                            style={{
-                                marginLeft: "1em",
-                                marginRight: "1em",
-                                paddingBottom: "0.5em",
-                            }}
+                        <p className="card-text">{event.description}</p>
+                        <p className="card-text">Likes: {event.like}</p>
+                        <button
+                            style={{ marginRight: "1em" }}
+                            class="btn btn-primary"
+                            onClick={() => handleapprove(event._id)}
                         >
-                            {moment(event.startTime).format(
-                                "MMM Do YYYY, h:mm a"
-                            )}
-                        </span>
-                        <span
-                            style={{
-                                marginRight: "1em",
-                                paddingBottom: "0.5em",
-                            }}
+                            Approve
+                        </button>
+                        <button
+                            class="btn btn-primary"
+                            style={{ marginRight: "1em" }}
+                            onClick={() => handledeny(event._id)}
                         >
-                            {moment(event.endTime).format(
-                                "MMM Do YYYY, h:mm a"
-                            )}
-                        </span>
-
-                        <h6>{event.tag}</h6>
+                            Deny
+                        </button>
                     </div>
-                    <p className="card-text">{event.description}</p>
-                    <p className="card-text">Likes: {event.like}</p>
-                    <button
-                        style={{ marginRight: "1em" }}
-                        class="btn btn-primary"
-                        onClick={() => handleapprove(event._id)}
-                    >
-                        Approve
-                    </button>
-                    <button
-                        class="btn btn-primary"
-                        style={{ marginRight: "1em" }}
-                        onClick={() => handledeny(event._id)}
-                    >
-                        Deny
-                    </button>
                 </div>
             </div>
         </div>

@@ -109,12 +109,19 @@ const Navbar = ({ theme, action }) => {
                             >
                                 Logout
                             </button>
-                            <button
-                                className="btn btn-primary"
-                                onClick={action}
-                            >
-                                Dark mode
-                            </button>
+                            <div  onClick={action} style={{display:"flex", alignItems: "center" ,background: "#0a1929", padding: "4px", borderRadius: "7px", width:"30px", margin: "3px"}}>
+                            {theme ? (
+                                <DarkModeIcon
+                                color="action"
+                                sx={{ color: "white" }}
+                                />
+                                ) : (
+                                    <LightModeIcon
+                                    color="action"
+                                    sx={{ color: "white" }}
+                                    />
+                                    )}
+                            </div>
                         </>
                     )}
                 </div>
