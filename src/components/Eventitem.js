@@ -2,12 +2,16 @@ import React, { useContext } from "react";
 import eventContext from "../context/events/eventContext";
 import moment from "moment";
 
+
+
 const Eventitem = (props) => {
     const context = useContext(eventContext);
     const { event } = props;
+
+    const style={backgroundColor: ((props.theme==1)?"#001e3c":""), width: "100%"};
     return (
-        <div className="container col-md-5 ">
-            <div className="card my-3" style={{ width: "100%" }}>
+        <div className="container col-md-5 " >
+            <div className="card my-3" style={style}>
                 <div className="card-body" style={{ width: "100%" }}>
                     <div
                         style={{

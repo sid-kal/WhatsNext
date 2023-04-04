@@ -1,13 +1,14 @@
 import React from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
-
-const Navbar = () => {
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from '@mui/icons-material/LightMode';
+const Navbar = ({ theme, action }) => {
     let location = useLocation();
     let history = useHistory();
-    const handleLogout = () =>{
-        localStorage.removeItem('token');
-        history.replace('/');
-    }
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        history.replace("/");
+    };
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark navbarcolour">
             <div className="container-fluid">
@@ -70,7 +71,7 @@ const Navbar = () => {
                         </li>
                     </ul>
                     {!localStorage.getItem("token") ? (
-                        <form className="d-flex">
+                        <div className="d-flex">
                             <Link
                                 className="btn btn-primary mx-1"
                                 to="/login"
@@ -86,14 +87,35 @@ const Navbar = () => {
                             >
                                 Signup
                             </Link>
-                        </form>
+                            <div  onClick={action} style={{display:"flex", alignItems: "center" ,background: "#0a1929", padding: "4px", borderRadius: "7px"}}>
+                            {theme ? (
+                                <DarkModeIcon
+                                color="action"
+                                sx={{ color: "white" }}
+                                />
+                                ) : (
+                                    <LightModeIcon
+                                    color="action"
+                                    sx={{ color: "white" }}
+                                    />
+                                    )}
+                            </div>
+                        </div>
                     ) : (
-                        <button
-                            className="btn btn-primary mx-1"
-                            onClick={handleLogout}
-                        >
-                            Logout
-                        </button>
+                        <>
+                            <button
+                                className="btn btn-primary mx-1"
+                                onClick={handleLogout}
+                            >
+                                Logout
+                            </button>
+                            <button
+                                className="btn btn-primary"
+                                onClick={action}
+                            >
+                                Dark mode
+                            </button>
+                        </>
                     )}
                 </div>
             </div>

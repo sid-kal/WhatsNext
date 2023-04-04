@@ -39,7 +39,7 @@ router.put('/approveevent/:id',  async (req, res) => {
       newEvent.endTime = event.endTime;
 
         newEvent.isspecial = true;
-        newEvent.reqsp = false;
+        newEvent.reqsp = true;
         newEvent.like = event.like;
         event = await Event.findByIdAndUpdate(req.params.id, { $set: newEvent }, { new: true })
         
@@ -63,7 +63,7 @@ router.put('/denyevent/:id',  async (req, res) => {
       newEvent.endTime = event.endTime;
 
         newEvent.isSpecial = false;
-        newEvent.reqsp = false;
+        newEvent.reqsp = true;
         newEvent.like = event.like;
         event = await Event.findByIdAndUpdate(req.params.id, { $set: newEvent }, { new: true })
         res.json({ event });

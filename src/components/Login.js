@@ -3,8 +3,9 @@ import { useHistory } from "react-router-dom";
 import logo from "./logo1.png";
 import svg from "./logo2.png";
 import Typewriter from "typewriter-effect";
+import logo1 from "./light.png";
 import "./login.css";
-const Login = (props) => {
+const Login = ({props, theme}) => {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
     let history = useHistory();
 
@@ -35,8 +36,14 @@ const Login = (props) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
     };
 
+    const style = {
+        color: theme == 1 ? "white" : "black",
+    };
     return (
         <>
+        <div style={style}>
+
+        
             <div class="everything">
                 <div class="logoandtext">
                     <img
@@ -44,7 +51,7 @@ const Login = (props) => {
                             borderRadius: "15vw",
                             width: "60%",
                         }}
-                        src={logo}
+                        src={theme?logo:logo1}
                         alt="APP LOGO"
                         srcset=""
                     />
@@ -62,50 +69,76 @@ const Login = (props) => {
                         />
                     </div>
                 </div>
-                <div class="hero-img" >
-                <div className="container">
-        <div className="screen">
-        <div className="screen__content">
-            <form className='login' onSubmit={handleSubmit}>
-                
-                
-                <div className="login__field">
-                        <i className="login__icon fas fa-user"></i>
-                    
-                    <input type="email" className="login-input" value={credentials.email} onChange={onChange} id="email" name="email" aria-describedby="emailHelp" placeholder="Email" />
-                    </div>
-                    <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
-               
-               
-                <div className="login__field">
-                        <i className="login__icon fas fa-lock"></i>
-                    
-                    <input type="password" className="login-input" value={credentials.password} onChange={onChange} name="password" id="password" placeholder="Password" />
-                    </div>
-                
+                <div class="hero-img">
+                    <div className="container">
+                        <div className="screen">
+                            <div className="screen__content">
+                                <form className="login" onSubmit={handleSubmit}>
+                                    <div className="login__field">
+                                        <i className="login__icon fas fa-user"></i>
 
-                <button className="button login__submit">
-                        <span className="button__text">Log In Now</span>
-                        <i className="button__icon fas fa-chevron-right"></i>
-                    </button>	
-            </form>
-            <div className="social-login">
-                    
-                    <div className="social-icons">
-                        <a href="#" className="social-login__icon fab fa-instagram"></a>
-                        <a href="#" className="social-login__icon fab fa-facebook"></a>
-                        <a href="#" className="social-login__icon fab fa-twitter"></a>
+                                        <input
+                                            type="email"
+                                            className="login-input"
+                                            value={credentials.email}
+                                            onChange={onChange}
+                                            id="email"
+                                            name="email"
+                                            aria-describedby="emailHelp"
+                                            placeholder="Email"
+                                        />
+                                    </div>
+                                    <div id="emailHelp" className="form-text">
+                                        We'll never share your email with anyone
+                                        else.
+                                    </div>
+
+                                    <div className="login__field">
+                                        <i className="login__icon fas fa-lock"></i>
+
+                                        <input
+                                            type="password"
+                                            className="login-input"
+                                            value={credentials.password}
+                                            onChange={onChange}
+                                            name="password"
+                                            id="password"
+                                            placeholder="Password"
+                                        />
+                                    </div>
+
+                                    <button className="button login__submit">
+                                        <span className="button__text">
+                                            Log In Now
+                                        </span>
+                                        <i className="button__icon fas fa-chevron-right"></i>
+                                    </button>
+                                </form>
+                                <div className="social-login">
+                                    <div className="social-icons">
+                                        <a
+                                            href="#"
+                                            className="social-login__icon fab fa-instagram"
+                                        ></a>
+                                        <a
+                                            href="#"
+                                            className="social-login__icon fab fa-facebook"
+                                        ></a>
+                                        <a
+                                            href="#"
+                                            className="social-login__icon fab fa-twitter"
+                                        ></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="screen__background">
+                                <span className="screen__background__shape screen__background__shape4"></span>
+                                <span className="screen__background__shape screen__background__shape3"></span>
+                                <span className="screen__background__shape screen__background__shape2"></span>
+                                <span className="screen__background__shape screen__background__shape1"></span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div className="screen__background">
-                <span className="screen__background__shape screen__background__shape4"></span>
-                <span className="screen__background__shape screen__background__shape3"></span>		
-                <span className="screen__background__shape screen__background__shape2"></span>
-                <span className="screen__background__shape screen__background__shape1"></span>
-            </div>	
-            </div>
-            </div>
                 </div>
             </div>
             <div class="social">
@@ -130,6 +163,7 @@ const Login = (props) => {
                 </a>
             </div>
             <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+            </div>
         </>
     );
 };

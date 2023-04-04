@@ -43,13 +43,10 @@ const useStyles = makeStyles({
             backgroundColor: "#0047AB",
             color: "white",
         },
-        "& .MuiDataGrid-cell": {
-            fontWeight: "bold",
-        },
     },
 });
 
-const Home = () => {
+const Home = ({theme}) => {
     const classes = useStyles();
     const [events, setEvents] = useState([
         {
@@ -78,7 +75,7 @@ const Home = () => {
             const json = await res.json();
             setEvents(json.events);
             // console.log(json.len);
-            // console.log(json.events);
+            console.log(json.events);
         };
         autorun();
     }, [gridkey]);
@@ -191,7 +188,7 @@ const Home = () => {
         {
             field: "likeevent",
             headerName: "Like",
-            width: 100,
+            width: 108,
             renderCell: (params) => (
                 <RenderAbstractConfirmButton eventID={params.row._id} />
               ),
@@ -208,7 +205,19 @@ const Home = () => {
     };
 
 
+    const getRowSpacing = React.useCallback(() => {
+        return {
+          top:20,
+          bottom: 20,
+        };
+      }, []);
+      
+      const style={};
+
     return (
+        <div style={style}>
+
+        
         <div class="container">
 
             {!localStorage.getItem("token") ? (
@@ -228,16 +237,19 @@ const Home = () => {
                         </Link>
                     </h1>
                     <div className="row my-3">
-                        <h2 style={{ textAlign: "center" }}>All Events</h2>
+                        <h2 style={{ textAlign: "center", color: "white" }}>All Events</h2>
                         <div className="container mx-2">
                             {events.length === 0 && "No notes to display"}
                         </div>
                     </div>
                     <div style={{ width: "100%" }}>
                         <DataGrid
+                            style={{marginBottom: "10vh"}}
                             key = {gridkey}
                             className={classes.root}
                             getRowHeight={() => 60}
+                            disableSelectionOnClick
+                            // disableColumnFilter
                             rows={events}
                             columns={columns}
                             pageSize={100}
@@ -248,26 +260,39 @@ const Home = () => {
                             }}
                             autoHeight={true}
                             autoWidth={true}
-                            showCellRightBorder={true}
+                            getRowClassName={() => theme?'data-grid-row':'data-grid-row2'}
+
                             sx={{
                                 fontSize: 16,
-                                borderRadius: 2,
-                                border: 1,
-                                borderTop: 1,
-                                borderBottom: 1,
-                                color: "black",
+                                borderRadius: 0,
+                                border: 0,
+                                borderTop: 0,
+                                borderBottom: 0,
+                                color: (theme?"white":"black"),
                                 borderColor: "black",
                                 "& .MuiDataGrid-row": {
-                                    border: 1,
+                                    backgroundColor: (theme==0?"#75C8FF":"#001e3c"),
+                                    borderRadius: "2vh",
+                                    borderBottom: "none"
+                                },
+                                "& .MuiDataGrid-row:hover": {
+                                    background: (theme==0?"#75C8FF":"#001e3c"),
+                                    borderRadius: "2vh",
+                                },
+                                "& .MuiDataGrid-root": {
+                                    borderBottom: "none"
+
                                 },
                                 "& .MuiDataGrid-columnHeaders": {
-                                    border: 1,
-                                    borderTop: 2,
-                                    borderBottom: 1,
-                                    borderRadius: 0,
+                                    border: 0,
+                                    borderTop: 0,
+                                    borderBottom: 0,
+                                    borderRadius: "10vh",
                                 },
                                 "& .MuiDataGrid-footerContainer": {
                                     border: 0,
+                                    display: "none"
+                                    
                                 },
                                 "& .MuiTablePagination-selectLabel": {
                                     color: "black",
@@ -275,13 +300,11 @@ const Home = () => {
                                 "& .MuiSelect-select": {
                                     color: "black",
                                 },
-                                "& .MuiTablePagination-displayedRows": {
-                                    color: "black",
-                                },
-                                "& .MuiSvgIcon-root": {
-                                    color: "black",
-                                },
                             }}
+
+                            getRowSpacing={getRowSpacing}
+                            // rowSpacingType="border"
+                          
                         />
                     </div>
                     <Dialog
@@ -289,13 +312,15 @@ const Home = () => {
                         onClose={handleClose}
                         maxWidth="lg"
                         PaperProps={{
-                            style: { width: "60%", maxHeight: "90%" },
+                            style: { width: "60%", maxHeight: "90%", background: theme?"#001e3c":"" , color: theme? "white": ""},
                         }}
+
                     >
                         <DialogTitle>{popupData.title}</DialogTitle>
                         <DialogContent>
-                            <DialogContentText>
-                                <div>
+                            <DialogContentText style={{color: theme? "white": ""}}>
+                                
+                            <div>
                                     <strong>Description: </strong>{" "}
                                     {popupData.description}
                                 </div>
@@ -326,6 +351,7 @@ const Home = () => {
                     </Dialog>
                 </div>
             )}
+        </div>
         </div>
     );
 };

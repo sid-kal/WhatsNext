@@ -17,9 +17,12 @@ const Myeventitem = (props) => {
     const { deleteEvent } = context;
     const { event, updateEvent } = props;
 
+    const style={backgroundColor: ((props.theme==1)?"#001e3c":"")};
+
     return (
-        <div className="col-md-5 mb-5 container">
-            <div className="card h-100 shadow">
+
+        <div className="col-md-5 mb-5 container" >
+            <div className="card h-100 shadow" style={style}>
                 <div className="card-body d-flex flex-column">
                     <div
                         style={{
@@ -67,12 +70,12 @@ const Myeventitem = (props) => {
                             </div> */}
                             <div className="card-text">
                                 {!event.reqsp  && (
-                                    <p>Not requested as special</p>
+                                    <p>Not requested </p>
                                 )}
                             </div>
                             <div className="card-text">
                                 {event.reqsp && event.isspecial && (
-                                    <p>Requested and approved.</p>
+                                    <p>Approved as special.</p>
                                 )}
                             </div>
                             {/* <div className="card-text">

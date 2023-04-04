@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import logo from "./logo1.png";
+import logo1 from "./light.png";
 import svg from "./logo2.png";
 import Typewriter from "typewriter-effect";
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 
-const Signup = () => {
+const Signup = ({theme}) => {
     const [credentials, setCredentials] = useState({
         name: "",
         email: "",
@@ -90,8 +92,15 @@ const Signup = () => {
         passwordV.setAttribute("type", type);
 
     }
+
+    const style = {
+        backgroundColor: theme == 1 ? "#0a1929" : "",
+        color: theme == 1 ? "white" : "black",
+    };
+
     return (
         <>
+        <div style={style}>
             <div class="everything">
                 <div class="logoandtext">
                     <img
@@ -99,7 +108,7 @@ const Signup = () => {
                             borderRadius: "15vw",
                             width: "60%",
                         }}
-                        src={logo}
+                        src={theme?logo:logo1}
                         alt="APP LOGO"
                         srcset=""
                     />
@@ -277,6 +286,7 @@ const Signup = () => {
                 </a>
             </div>
             <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+            </div>
         </>
     );
 };

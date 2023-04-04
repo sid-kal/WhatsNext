@@ -107,18 +107,25 @@ body {
 // sparas21@iitk.ac.in
 
 document.head.appendChild(style);
-const About = () => {
+const About = ({theme}) => {
+
+
+    const style={backgroundColor: ((theme==1)?"#001e3c":"")};
+
+
     return (
         <>
-            <div class="container">
+        <div style={{color: theme?"white":""}}>
+
+            <div class="container" >
                 <div class="about-section">
                     <h1>Team What's Next</h1>
                 </div>
 
                 <div class="row">
                     <div class="column">
-                        <div class="card">
-                            <div class="container">
+                        <div class="card" style={style}>
+                            <div class="container" >
                                 <h2>Geetika</h2>
                                 {/* <p class="title">CEO & Founder</p> */}
                                 {/* <p>Some text that describes me lorem ipsum ipsum lorem.</p> */}
@@ -128,7 +135,7 @@ const About = () => {
                     </div>
 
                     <div class="column">
-                        <div class="card">
+                        <div class="card" style={style}>
                             <div class="container">
                                 <h2>Chitwan Goel</h2>
                                 {/* <p class="title">Art Director</p>
@@ -139,7 +146,7 @@ const About = () => {
                     </div>
 
                     <div class="column">
-                        <div class="card">
+                        <div class="card"  style={style}>
                             <div class="container">
                                 <h2>Talin Gupta</h2>
                                 <p>taling21@iitk.ac.in</p>
@@ -150,7 +157,7 @@ const About = () => {
                 <div>
                     <div class="row">
                         <div class="column">
-                            <div class="card">
+                            <div class="card" style={style}>
                                 <div class="container">
                                     <h2>Aditya Kumar</h2>
                                     {/* <p class="title">CEO & Founder</p> */}
@@ -161,7 +168,7 @@ const About = () => {
                         </div>
 
                         <div class="column">
-                            <div class="card">
+                            <div class="card" style={style}>
                                 <div class="container">
                                     <h2>Siddharth Kalra</h2>
                                     {/* <p class="title">Art Director</p>
@@ -172,7 +179,7 @@ const About = () => {
                         </div>
 
                         <div class="column">
-                            <div class="card">
+                            <div class="card" style={style}>
                                 <div class="container">
                                     <h2>Paras Sikarwar</h2>
                                     <p>sparas21@iitk.ac.in</p>
@@ -185,7 +192,7 @@ const About = () => {
                 <div>
                     <div class="row">
                         <div class="column">
-                            <div class="card">
+                            <div class="card" style={style}>
                                 <div class="container">
                                     <h2>Apoorva Gupta</h2>
                                     {/* <p class="title">CEO & Founder</p> */}
@@ -196,7 +203,7 @@ const About = () => {
                         </div>
 
                         <div class="column">
-                            <div class="card">
+                            <div class="card" style={style}>
                                 <div class="container">
                                     <h2>Varun Tokas</h2>
                                     {/* <p class="title">Art Director</p>
@@ -207,7 +214,7 @@ const About = () => {
                         </div>
 
                         <div class="column">
-                            <div class="card">
+                            <div class="card" style={style}>
                                 <div class="container">
                                     <h2>Krish Sharma</h2>
                                     <p>krish21@iitk.ac.in</p>
@@ -219,7 +226,7 @@ const About = () => {
                 <div>
                     <div class="row">
                         <div class="column">
-                            <div class="card">
+                            <div class="card" style={style}>
                                 <div class="container">
                                     <h2>Aman Arya</h2>
                                     {/* <p class="title">CEO & Founder</p> */}
@@ -230,7 +237,7 @@ const About = () => {
                         </div>
 
                         <div class="column">
-                            <div class="card">
+                            <div class="card" style={style}>
                                 <div class="container">
                                     <h2>Kruthi Akkinepally</h2>
                                     {/* <p class="title">Art Director</p>
@@ -242,6 +249,7 @@ const About = () => {
                     </div>
                 </div>
             </div>
+        </div>
         </>
     );
 };

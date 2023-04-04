@@ -78,7 +78,7 @@ body{
   
 
   .navbarcolour{
-    background: linear-gradient(90deg, #353537, #090909);
+    background: #001e3c !important;
   }
 
 
@@ -235,3 +235,21 @@ body{
 
 }
   
+
+/*
+.MuiDataGrid-row:hover {
+    background-color: red !important;
+  }
+
+
+  /* Remove selected row styles */
+
+  
+  .data-grid-row.Mui-selected {
+    background-color: #001e3c !important;
+  }
+  
+  .data-grid-row2.Mui-selected {
+    background-color: #75c8ff !important;
+  }
+ 

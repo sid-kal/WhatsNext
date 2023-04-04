@@ -15,7 +15,7 @@ const Superadmin = () => {
         const json = await response.json();
         setreq(json);
     };
-
+    
     return (
         <div class="container">
             <div style={{ textAlign: "center" }}>

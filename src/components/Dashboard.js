@@ -4,7 +4,8 @@ import Eventitem from "./Eventitem";
 import AddEvent from "./AddEvent";
 import Myeventitem from "./Myeventitem";
 
-const Dashboard = () => {
+const Dashboard = ({theme}) => {
+    console.log(localStorage.getItem("token"));
     const [user, setUser] = useState({ name: "", email: "" });
     const [likedevents, setlikedevent] = useState([]);
     useEffect(() => {
@@ -87,8 +88,17 @@ const Dashboard = () => {
     const onChange = (e) => {
         setEvent({ ...event, [e.target.name]: e.target.value });
     };
+
+    const style={
+    color: theme?"white":""
+
+};
+
     return (
+        <div style={style}>
+
         <div class="container">
+        
             {!localStorage.getItem("token") ? (
                 <div>
                     You are not authorised to access the page. Login/Signup and
@@ -113,8 +123,8 @@ const Dashboard = () => {
                             aria-labelledby="exampleModalLabel"
                             aria-hidden="true"
                         >
-                            <div className="modal-dialog">
-                                <div className="modal-content">
+                            <div className="modal-dialog"  style={{background: theme?"#001e3c":""}}>
+                                <div className="modal-content" style={{background: theme?"#001e3c":""}}>
                                     <div className="modal-header">
                                         <h5
                                             className="modal-title"
@@ -279,6 +289,7 @@ const Dashboard = () => {
                                         key={event._id}
                                         updateEvent={updateEvent}
                                         event={event}
+                                        theme={theme}
                                     />
                                 );
                             })}
@@ -287,12 +298,13 @@ const Dashboard = () => {
                         {likedevents.length !== 0 &&
                             likedevents?.map((event) => {
                                 return (
-                                    <Eventitem key={event._id} event={event} />
+                                    <Eventitem  key={event._id} event={event} theme={theme}/>
                                 );
                             })}
                     </div>
                 </div>
             )}
+        </div>
         </div>
     );
 };
