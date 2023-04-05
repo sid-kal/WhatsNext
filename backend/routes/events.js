@@ -4,6 +4,7 @@ const fetchuser = require('../middleware/fetchuser');
 const Event = require('../models/Event');
 const { body, validationResult } = require('express-validator');
 const User = require('../models/User');
+const nodemailer = require("nodemailer");
 
 // ROUTE 1: Get All the Notes using: GET "/api/events/getuser". Login required
 router.get('/fetchallevents', fetchuser, async (req, res) => {
@@ -144,6 +145,48 @@ router.delete('/deleteevent/:id', fetchuser, async (req, res) => {
     } catch (error) {
         console.error(error.message);
         res.status(500).send("Internal Server Error");
+    }
+})
+
+router.get('/fetchallusers', async (req, res) => {
+    try {
+        const users = await User.find();
+        res.json(users)
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Internal Server Error");
+    }
+})
+
+
+router.post('/sendnotification', async(req,res) => {
+    try{
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: 'talingupta0@gmail.com',
+              pass: 'vlswzmjbmrsqksew'
+            }
+          })
+          transporter.sendMail({
+            from: 'talingupta0@gmail.com',
+            to: req.body.email,
+            subject: 'Event added',
+            text: `A new event has been added. ${req.body.event.title}`,
+            html: `A new event has been added.<strong>${req.body.event.title}</strong></p>`,
+            function(error, info){
+              if (error) {
+                 console.log(error);
+              }  else {
+                 console.log('Email sent: ' + info.response);
+              }
+             }
+          });
+          res.json({msg:"sent"})
+    }
+    catch(error) {
+        console.error(error.message)
+        res.status(500).send("Internal Server Error")    
     }
 })
 module.exports = router

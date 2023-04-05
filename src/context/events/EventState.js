@@ -42,6 +42,23 @@ const EventState = (props) => {
       var confirmed = window.confirm(`${json.warning} ${json.clash.map((cl) => cl.title)}`);
       if(confirmed){
         setEvents(events.concat(json.savedEvent));
+        const allusers = await fetch(`${host}/api/events/fetchallusers`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const usersjson = await allusers.json();
+        console.log(usersjson.length);
+        for(let i=0;i<usersjson.length;i++){
+           const res = await fetch(`${host}/api/events/sendnotification`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body:JSON.stringify({email: usersjson[i].email, event:json.savedEvent})
+          });
+      }
       }
     }
     // console.log(Array.isArray(events));
