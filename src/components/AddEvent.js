@@ -21,6 +21,16 @@ const AddEvent = () => {
         e.preventDefault();
         let tmp = document.getElementById("reqsp");
         let tmp2 = tmp.checked;
+        const now = new Date();
+        // console.log(typeof(now))
+        // console.log(typeof((event.startTime)))
+        const sttime = new Date(event.startTime);
+        const endtime = new Date(event.endTime);
+
+        if(sttime <= now || endtime <= now){
+            alert("Events in back date cannot be scheduled")
+            return;
+        }
         if (event.startTime >= event.endTime) {
             alert("Please enter valid start time and end time.");
         } else {

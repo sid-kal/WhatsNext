@@ -22,14 +22,22 @@ router.post('/addevent', fetchuser, [
     body('title', 'Enter a valid title').isLength({ min: 3 }),
     body('description', 'Description must be atleast 5 characters').isLength({ min: 5 }),], async (req, res) => {
         try {
+            console.log("fesee")
             const { title, description, tag, startTime, endTime, reqsp,image} = req.body;
             const like = 0;
             let success = false;
+            // let backdate = false;
+            // const now = new Date();
+            // if(event.endTime <= now){
+            //     return res.json({backdate});
+            // }
+            // backdate = true;
             // If there are errors, return Bad request and the errors
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
                 return res.status(400).json({ errors: errors.array()});
             }
+            
             // let temp = await Event.find();
             // let clashtmp=[];
             // clashtmp.push(req.body.startTime);
@@ -79,10 +87,12 @@ router.post('/addevent', fetchuser, [
             let clash = clashtmp.filter((item, 
                 index) => clashtmp.indexOf(item) === index);
             const userfound = await User.findById(req.user.id);
+            console.log("teure")
             const event = new Event({
                 title, description, tag, startTime,endTime,reqsp,like,image:image, user: req.user.id,organiser:userfound.name
             })
             const savedEvent = await event.save()
+            console.log("erjuhru")
             if(clash.length !== 0){
                     warning = `Event Clashes with the following events:\n`;
             }
@@ -136,7 +146,7 @@ router.delete('/deleteevent/:id', fetchuser, async (req, res) => {
             }
     
             event = await Event.findByIdAndDelete(req.params.id)
-            res.json({ "Success": "Event has been deleted", event:event });
+            return res.json({ "Success": "Event has been deleted", event:event });
         }
 
         // Allow deletion only if user owns this Note

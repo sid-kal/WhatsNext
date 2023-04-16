@@ -74,7 +74,7 @@ const Myeventitem = (props) => {
                                 )}
                             </div>
                             <div className="card-text">
-                                {event.reqsp && event.isspecial && (
+                                { event.isspecial && (
                                     <p>Approved as special.</p>
                                 )}
                             </div>

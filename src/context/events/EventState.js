@@ -36,7 +36,11 @@ const EventState = (props) => {
     });
 
     const json = await response.json();
-    // console.log(json.savedEvent);
+    if(json.backdate === false){
+      alert("Events in back date cannot be scheduled");
+      return;
+    }
+    console.log(json.savedEvent);
     // const finalevents = events.concat(event);
     if(!(json.success)){
       var confirmed = window.confirm(`${json.warning} ${json.clash.map((cl) => cl.title)}`);
