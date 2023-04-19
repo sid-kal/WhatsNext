@@ -5,7 +5,7 @@ import AddEvent from "./AddEvent";
 import Myeventitem from "./Myeventitem";
 
 const Dashboard = ({theme}) => {
-    console.log(localStorage.getItem("token"));
+    // console.log(localStorage.getItem("token"));
     const [user, setUser] = useState({ name: "", email: "" });
     const [likedevents, setlikedevent] = useState([]);
     useEffect(() => {

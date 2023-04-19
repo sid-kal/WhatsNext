@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import eventContext from "../context/events/eventContext";
-import DateTimePicker from "react-datetime-picker";
 
 const AddEvent = () => {
     const context = useContext(eventContext);

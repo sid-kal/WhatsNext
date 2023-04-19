@@ -5,11 +5,7 @@ import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faTrashAlt,
-    faEdit,
-    faCheck,
-    faTimes,
-    faHeart,
-    faCircleInfo
+    faEdit
 } from "@fortawesome/free-solid-svg-icons";
 
 const Myeventitem = (props) => {
