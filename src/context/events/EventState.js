@@ -1,6 +1,5 @@
 import EventContext from "./eventContext";
 import { useState } from "react";
-import Clashbox from "../../components/Clashbox";
 
 const EventState = (props) => {
   const host = "http://localhost:5000"
