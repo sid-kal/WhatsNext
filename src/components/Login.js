@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import logo from "./logo1.png";
 import svg from "./logo2.png";
 import Typewriter from "typewriter-effect";
@@ -8,7 +8,15 @@ import "./login.css";
 const Login = ({props, theme}) => {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
     let history = useHistory();
+    function click() {
+        // toggle the type attribute
+        const togglePassword = document.querySelector("#togglePassword");
+        const passwordV = document.querySelector("#password");
+        const type = passwordV.getAttribute("type") === "password" ? "text" : "password";
+        togglePassword.className === 'fa fa-eye viewpass mr-4 text-muted' ? document.getElementById("togglePassword").className = 'fa fa-eye-slash viewpass mr-4 text-muted' : document.getElementById("togglePassword").className = 'fa fa-eye viewpass mr-4 text-muted';
+        passwordV.setAttribute("type", type);
 
+    }
     const handleSubmit = async (e) => {
         e.preventDefault();
         const response = await fetch("http://localhost:5000/api/auth/login", {
@@ -104,7 +112,20 @@ const Login = ({props, theme}) => {
                                             name="password"
                                             id="password"
                                             placeholder="Password"
-                                        />
+                                        /><br/>
+                                        <Link style={{color:"black"}} to="/forget">Forgot Password?</Link>
+                                        <span
+                                    className="fa fa-eye viewpass mr-4 text-muted"
+                                    onClick={click}
+                                    id="togglePassword"
+                                    style={{
+                                        position: "absolute",
+                                        top: "56%",
+                                        right: "10px",
+                                        transform: "translateY(-50%)",
+                                        cursor: "pointer",
+                                    }}
+                                ></span>
                                     </div>
 
                                     <button className="button login__submit">

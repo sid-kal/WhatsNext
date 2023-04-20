@@ -27,6 +27,10 @@ const UserSchema = new Schema({
         type: [mongoose.Schema.Types.ObjectId],
         ref: 'event',
     },
+    wantnotification:{
+        type: Boolean,
+        default:false
+    }
   });
   const User = mongoose.model('users', UserSchema);
   module.exports = User;

@@ -142,6 +142,7 @@ const Superadmin_eventitem = (props) => {
                         </div>
                         <p className="card-text">{event.description}</p>
                         <p className="card-text">Likes: {event.like}</p>
+                        <p className="card-text">Location: {event.venue}</p>
                         <button
                             style={{ marginRight: "1em" }}
                             class="btn btn-primary"

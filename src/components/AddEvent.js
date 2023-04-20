@@ -14,6 +14,7 @@ const AddEvent = () => {
         reqsp: false,
         like: 0,
         image: "",
+        venue:""
     });
 
     const handleClick = (e) => {
@@ -40,7 +41,8 @@ const AddEvent = () => {
                 event.startTime,
                 event.endTime,
                 tmp2,
-                event.image
+                event.image,
+                event.venue
             );
             setEvent({
                 title: "",
@@ -51,6 +53,7 @@ const AddEvent = () => {
                 reqsp: false,
                 like: 0,
                 image: "",
+                venue:""
             });
         }
     };
@@ -79,20 +82,6 @@ const AddEvent = () => {
                     />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="tag" className="form-label">
-                        Tag
-                    </label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="tag"
-                        name="tag"
-                        value={event.tag}
-                        onChange={onChange}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
                     <label htmlFor="description" className="form-label">
                         Description
                     </label>
@@ -107,6 +96,21 @@ const AddEvent = () => {
                         required
                     />
                 </div>
+                <div className="mb-3">
+                    <label htmlFor="tag" className="form-label">
+                        Tag
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="tag"
+                        name="tag"
+                        value={event.tag}
+                        onChange={onChange}
+                        required
+                    />
+                </div>
+              
 
                 <div className="mb-3">
                     <label htmlFor="startTime" className="form-label">
@@ -163,6 +167,19 @@ const AddEvent = () => {
                         className="form-control"
                         name="image"
                         value={event.image}
+                        onChange={onChange}
+                    />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="venue" className="form-label">
+                        Location of the event
+                    </label>
+                    <input
+                        type="text"
+                        id="venue"
+                        className="form-control"
+                        name="venue"
+                        value={event.venue}
                         onChange={onChange}
                     />
                 </div>

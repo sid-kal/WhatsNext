@@ -17,6 +17,7 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import Superadmin from './components/Superadmin';
 import Dashboard from './components/Dashboard';
+import Forget from './components/Forget';
 import {useState,useEffect} from 'react';
 
 
@@ -57,6 +58,9 @@ function App() {
               </Route>
               <Route exact path="/dashboard">
                 <Dashboard theme={theme}/>
+              </Route>
+              <Route exact path="/forget">
+                <Forget theme={theme}/>
               </Route>
               <Route exact path="/signup">
                 <Signup theme={theme}/>

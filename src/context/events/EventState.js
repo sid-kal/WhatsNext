@@ -23,7 +23,7 @@ const EventState = (props) => {
   }
 
   // Add a Event
-  const addEvent = async (title, description, tag, startTime, endTime, reqsp, image) => {
+  const addEvent = async (title, description, tag, startTime, endTime, reqsp, image, venue) => {
     // TODO: API Call
     // API Call 
     const response = await fetch(`${host}/api/events/addevent`, {
@@ -32,7 +32,7 @@ const EventState = (props) => {
         'Content-Type': 'application/json',
         "auth-token":localStorage.getItem("token")
       },
-      body: JSON.stringify({title, description, tag, startTime, endTime, reqsp, image})
+      body: JSON.stringify({title, description, tag, startTime, endTime, reqsp, image,venue})
     });
   
     const json = await response.json();
@@ -59,7 +59,7 @@ const EventState = (props) => {
       confirmation.classList.add('confirmation');
       confirmation.innerHTML = `
         <div class="confirmation-message">
-          Event clashes with the following events: 
+        Event clashes with the following events: 
         </div>
         <div class="confirmation-table">
           <table>
@@ -122,7 +122,7 @@ const EventState = (props) => {
             'Content-Type': 'application/json',
             "auth-token":localStorage.getItem("token")
           },
-          body: JSON.stringify({title, description, tag, startTime, endTime, reqsp, image})
+          body: JSON.stringify({title, description, tag, startTime, endTime, reqsp, image,venue})
         });
         const json = await response.json();
         setEvents(events.concat(json.savedEvent));
@@ -133,7 +133,7 @@ const EventState = (props) => {
           },
         });
         const usersjson = await allusers.json();
-        console.log(usersjson.length);
+        console.log(usersjson);
         for (let i = 0; i < usersjson.length; i++) {
           const res = await fetch(`${host}/api/events/sendnotification`, {
             method: 'POST',
@@ -156,7 +156,7 @@ const EventState = (props) => {
           'Content-Type': 'application/json',
           "auth-token":localStorage.getItem("token")
         },
-        body: JSON.stringify({title, description, tag, startTime, endTime, reqsp, image})
+        body: JSON.stringify({title, description, tag, startTime, endTime, reqsp, image,venue})
       });
       const json = await response.json();
       setEvents(events.concat(json.savedEvent));

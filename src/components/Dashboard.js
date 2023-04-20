@@ -58,6 +58,8 @@ const Dashboard = ({theme}) => {
         estartTime: Date.now,
         eendTime: Date.now,
         elike: 0,
+        eimage:"",
+        evenue:""
     });
 
     const updateEvent = (currentEvent) => {

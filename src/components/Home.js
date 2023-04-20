@@ -75,7 +75,7 @@ const Home = ({theme}) => {
             const json = await res.json();
             setEvents(json.events);
             // console.log(json.len);
-            console.log(json.events);
+            // console.log(json.events);
         };
         autorun();
     }, [gridkey]);
@@ -343,6 +343,7 @@ const Home = ({theme}) => {
                                     <a href={popupData.image}>{popupData.image}</a>
                                 </div>
                                 <div><strong>Organiser: </strong> {popupData.organiser}</div>
+                                <div><strong>Location: </strong> {popupData.venue}</div>
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>

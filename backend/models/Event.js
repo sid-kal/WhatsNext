@@ -45,6 +45,10 @@ const EventSchema = new Schema({
     image:{
         type: String,
         default: ""
+    },
+    venue:{
+        type:String,
+        default: "-"
     }
   });
 

@@ -6,9 +6,8 @@ import svg from "./logo2.png";
 import Typewriter from "typewriter-effect";
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 
-const Signup = ({theme}) => {
+const Forget = ({theme}) => {
     const [credentials, setCredentials] = useState({
-        name: "",
         email: "",
         password: "",
         cpassword: "",
@@ -17,25 +16,37 @@ const Signup = ({theme}) => {
     const [generatedOTP, setGeneratedOTP] = useState("");
     const [showOTP, setShowOTP] = useState(false);
     const [disableGenerateOTP, setDisableGenerateOTP] = useState(false);
+    const [inputpassword, setinputpassword] = useState(false);
     let history = useHistory();
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const { name, email, password } = credentials;
+        const {email } = credentials;
+        const res = await fetch("http://localhost:5000/api/auth/getuserbyemail",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email }),
+        });
+        const resjson = await res.json();
+        if(!(resjson.success)){
+            alert("No user found with this email. Please enter a valid email");
+            return;
+        }
         const response = await fetch(
-            "http://localhost:5000/api/auth/generateotp",
+            "http://localhost:5000/api/auth/generateotpforrecovery",
             {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ name, email, password }),
+                body: JSON.stringify({ email }),
             }
         );
         const json = await response.json();
         //console.log(json);
         if (json.success) {
-            if (json.already_exists) alert("User already exists");
-            else {
                 setGeneratedOTP(json.otp);
                 alert("OTP generated successfully and sent to your email!");
                 setShowOTP(true);
@@ -43,7 +54,7 @@ const Signup = ({theme}) => {
                 setTimeout(() => {
                     setDisableGenerateOTP(false);
                 }, 30000);
-            }
+               
         } else {
             alert("Invalid credentials");
         }
@@ -54,33 +65,60 @@ const Signup = ({theme}) => {
         const enteredOtp = credentials.otp; // doubt
         if (parseInt(enteredOtp) === parseInt(generatedOTP)) {
             // OTPs match, create user
-            var notify = window.confirm("OTP Verified and account creaated Successfully!\nEnable email notifications about upcoming events?");
-            const { name, email, password } = credentials;
-            fetch("http://localhost:5000/api/auth/createuser", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ name, email, password, notify }),
-            })
-                .then((response) => response.json())
-                .then((json) => {
-                    console.log(json);
-                    if (json.success) {
-                        // Save the auth token and redirect
-                        localStorage.setItem("token", json.authtoken);
-                        history.push("/");
-                    } else {
-                        alert("Invalid credentials");
-                    }
-                })
-                .catch((error) => console.error(error));
+            setGeneratedOTP("");
+            setinputpassword(true);
+            // var notify = window.confirm("OTP Verified and account creaated Successfully!\nEnable email notifications about upcoming events?");
+            // const { name, email, password } = credentials;
+            // fetch("http://localhost:5000/api/auth/createuser", {
+            //     method: "POST",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            //     body: JSON.stringify({ name, email, password, notify }),
+            // })
+            //     .then((response) => response.json())
+            //     .then((json) => {
+            //         console.log(json);
+            //         if (json.success) {
+            //             // Save the auth token and redirect
+            //             localStorage.setItem("token", json.authtoken);
+            //             history.push("/");
+            //         } else {
+            //             alert("Invalid credentials");
+            //         }
+            //     })
+            //     .catch((error) => console.error(error));
         } else {
             // OTPs don't match
             alert("Incorrect OTP, please try again.");
         }
     };
-
+    const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
+    const handlechangepass= () => {
+        // event.preventDefault();
+        const {email, password} = credentials;
+        console.log(password);
+        fetch("http://localhost:5000/api/auth/changepass", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.errors) {
+              setError(data.errors[0].msg);
+              setSuccess(false);
+            } else {
+              setSuccess(true);
+              history.replace("/login");
+              setError(null);
+            }
+          })
+          .catch((error) => console.error(error));
+      };
     const onchange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
     };
@@ -130,22 +168,8 @@ const Signup = ({theme}) => {
                 <div class="hero-img">
                     <div>
                         <form>
-                            <div className="mb-3">
-                                <label htmlFor="name" className="form-label">
-                                    Name
-                                </label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="name"
-                                    name="name"
-                                    onChange={onchange}
-                                    aria-describedby="emailHelp"
-                                ></input>
-                                <div id="emailHelp" className="form-text">
-                                    Minimum 3 characters 
-                                </div>
-                            </div>
+                            
+                            
                             <div className="mb-3">
                                 <label htmlFor="email" className="form-label">
                                     Email address
@@ -163,16 +187,15 @@ const Signup = ({theme}) => {
                                     else.
                                 </div>
                             </div>
-                            
-                            <div className="mb-3" style={{ position: "relative" }}>
+                            {false && <div className="mb-3" style={{ position: "relative" }}>
                                 <label htmlFor="Password" className="form-label">
                                     Enter Password
                                 </label>
                                 <input
                                     type="password"
                                     className="form-control"
-                                    id="Password"
-                                    name="password"
+                                    id="Paassword"
+                                    name="paassword"
                                     onChange={onchange}
                                     style={{ paddingRight: "40px" }} // add padding to make space for the icon
                                 />
@@ -192,7 +215,7 @@ const Signup = ({theme}) => {
                                  <div id="emailHelp" className="form-text">
                                     Minimum 5 characters 
                                 </div>
-                            </div>
+                            </div>}
 
                             <button
                                 type="submit"
@@ -202,7 +225,7 @@ const Signup = ({theme}) => {
                             >
                                 {disableGenerateOTP
                                     ? "Wait for 30s before generating new otp"
-                                    : "Generate OTP for my email"}
+                                    : "Verify email"}
                             </button>
 
                             {showOTP && (
@@ -237,6 +260,44 @@ const Signup = ({theme}) => {
                                     Verify Otp
                                 </button>
                             )}
+                            {inputpassword && <div className="mb-3" style={{ position: "relative" }}>
+                                <label htmlFor="Password" className="form-label">
+                                    OTP Verified! Enter new Password
+                                </label>
+                                <input
+                                    type="password"
+                                    className="form-control"
+                                    id="Password"
+                                    name="password"
+                                    onChange={onchange}
+                                    style={{ paddingRight: "40px" }} // add padding to make space for the icon
+                                />
+                               
+                                <span
+                                    className="fa fa-eye viewpass mr-4 text-muted"
+                                    onClick={click}
+                                    id="togglePassword"
+                                    style={{
+                                        position: "absolute",
+                                        top: "56%",
+                                        right: "10px",
+                                        transform: "translateY(-50%)",
+                                        cursor: "pointer",
+                                    }}
+                                ></span>
+                                 <div id="emailHelp" className="form-text">
+                                    Minimum 5 characters 
+                                </div>
+                            </div>}
+                            {inputpassword && (
+                                <button
+                                    type="button"
+                                    className="btn btn-primary"
+                                    onClick={handlechangepass}
+                                >
+                                    Update Password
+                                </button>
+                            )}
                         </form>
                     </div>
                 </div>
@@ -268,4 +329,5 @@ const Signup = ({theme}) => {
     );
 };
 
-export default Signup;
+export default Forget;
+

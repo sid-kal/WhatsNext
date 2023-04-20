@@ -6,7 +6,7 @@ const { body, validationResult } = require('express-validator');
 const User = require('../models/User');
 const nodemailer = require("nodemailer");
 
-// ROUTE 1: Get All the Notes using: GET "/api/events/getuser". Login required
+// ROUTE 1: Get All the Events using: GET "/api/events/getuser". Login required
 router.get('/fetchallevents', fetchuser, async (req, res) => {
     try {
         const events = await Event.find({ user: req.user.id });
@@ -22,9 +22,6 @@ router.post('/addevent', fetchuser, [
     body('title', 'Enter a valid title').isLength({ min: 3 }),
     body('description', 'Description must be atleast 5 characters').isLength({ min: 5 }),], async (req, res) => {
         try {
-            // console.log("fesee")
-            // const { title, description, tag, startTime, endTime, reqsp,image} = req.body;
-            // const like = 0;
             let success = false;
             // If there are errors, return Bad request and the errors
             const errors = validationResult(req);
@@ -38,10 +35,6 @@ router.post('/addevent', fetchuser, [
             let clash5 = await Event.find({ startTime: { $eq: req.body.startTime }, endTime: { $ne: req.body.endTime } });
             let clash6 = await Event.find({ startTime: { $ne: req.body.startTime }, endTime: { $eq: req.body.endTime } });
             let clash7 = await Event.find({ startTime: { $eq: req.body.startTime }, endTime: { $eq: req.body.endTime } });
-            // console.log(clash);
-            // let clash = [...new Set([...clash1, ...clash2, ...clash3, ...clash4])];
-            //let clashtmp = clash1.concat(clash2.concat(clash3.concat(clash4.concat(clash5.concat(clash6.concat(clash7))))));
-
             let clashtmp = clash2.concat(clash4.concat(clash5.concat(clash6.concat(clash7))));
 
             // let clashtmp = clash5.concat(clash6.concat(clash7.concat(clash4)));
@@ -71,13 +64,13 @@ router.post('/addevent', fetchuser, [
 router.post('/addeventfinally', fetchuser, async (req, res) => {
     try {
         // console.log("fesee")
-        const { title, description, tag, startTime, endTime, reqsp, image } = req.body;
+        const { title, description, tag, startTime, endTime, reqsp, image, venue } = req.body;
         const like = 0;
         
         const userfound = await User.findById(req.user.id);
         // // console.log("teure")
         const event = new Event({
-            title, description, tag, startTime, endTime, reqsp, like, image: image, user: req.user.id, organiser: userfound.name
+            title, description, tag, startTime, endTime, reqsp, like, image: image, user: req.user.id, organiser: userfound.name, venue:venue
         })
         const savedEvent = await event.save();
         // console.log("erjuhru")
@@ -144,7 +137,7 @@ router.delete('/deleteevent/:id', fetchuser, async (req, res) => {
 
 router.get('/fetchallusers', async (req, res) => {
     try {
-        const users = await User.find();
+        const users = await User.find({wantnotification: true});
         res.json(users)
     } catch (error) {
         console.error(error.message);
@@ -174,7 +167,8 @@ router.post('/sendnotification', async (req, res) => {
                      <li><strong>Start Time:</strong> ${new Date(req.body.event.startTime)}</li>
                      <li><strong>End Time:</strong> ${new Date(req.body.event.endTime)}</li>
                    </ul>
-                   <p>Thank you for using our service.</p>`,
+                   <p>Thank you for using our service.</p>
+                   <p>Team WhatsNext</p>`,
             function(error, info) {
                 if (error) {
                     console.log(error);

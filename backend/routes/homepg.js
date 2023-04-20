@@ -7,7 +7,7 @@ router.get('/allevents', async (req, res) => { // not user specific
     try {
         const now = new Date();
         // console.log(now.toLocaleTimeString())
-        console.log(now)
+        // console.log(now)
         //const currentTime = now.toLocaleTimeString();
         let event = {};
         

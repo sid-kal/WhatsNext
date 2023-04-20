@@ -30,6 +30,7 @@ const Eventitem = (props) => {
                     </div>
                     <hr />
                     <p className="card-text mb-4">{event.description}</p>
+                    <p className="card-text-mb-4"><strong>Location: </strong>{event.venue}</p>
                     <p className="text-muted">
                         {moment(event.startTime).format("MMM Do YYYY, h:mm a")}{" "}
                         - {moment(event.endTime).format("MMM Do YYYY, h:mm a")}

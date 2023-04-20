@@ -59,6 +59,9 @@ const Myeventitem = (props) => {
                             }}
                         >
                             <div className="card-text me-auto">
+                                Location : {event.venue}
+                            </div>
+                            <div className="card-text me-auto">
                                 Likes : {event.like}
                             </div>
                             {/* <div className="card-text">
