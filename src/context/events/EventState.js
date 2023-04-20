@@ -1,9 +1,64 @@
 import EventContext from "./eventContext";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 const EventState = (props) => {
-  let history = useHistory();
+
+  function showConfirmationDialog() {
+    // Create a container element for the dialog
+    const container = document.createElement("div");
+    container.classList.add("confirmation-dialog");
+  
+    // Create a message element for the dialog
+    const message = document.createElement("p");
+    message.textContent = "Event scheduled successfully! Want to book Lecture Hall for your event?";
+    container.appendChild(message);
+  
+    // Create a link element for the dialog
+    const link = document.createElement("a");
+    link.textContent = "Event scheduled successfully! Want to book Lecture Hall for your event?";
+    link.href = "/lhc";
+    container.appendChild(link);
+  
+    // Create buttons for the dialog
+    const confirmButton = document.createElement("button");
+    confirmButton.textContent = "Yes";
+    confirmButton.addEventListener("click", () => {
+      // If the user clicks "Yes", redirect to "/lhc"
+      window.location.href = "/lhc";
+    });
+    container.appendChild(confirmButton);
+  
+    const cancelButton = document.createElement("button");
+    cancelButton.textContent = "No";
+    cancelButton.addEventListener("click", () => {
+      // If the user clicks "No", remove the dialog
+      container.remove();
+    });
+    container.appendChild(cancelButton);
+  
+    // Add the dialog to the page
+    document.body.appendChild(container);
+    container.style.position = "fixed";
+    container.style.top = "0";
+    container.style.left = "50%";
+    container.style.transform = "translateX(-50%)";
+    container.style.backgroundColor = "#fff";
+    container.style.border = "1px solid #ccc";
+    container.style.padding = "20px";
+    container.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
+    message.style.marginBottom = "20px";
+    link.style.display = "block";
+    link.style.marginBottom = "20px";
+    confirmButton.style.marginRight = "10px";
+    cancelButton.style.backgroundColor = "#fff";
+    cancelButton.style.color = "#333";
+    cancelButton.style.border = "1px solid #ccc";
+    cancelButton.style.padding = "5px 10px";
+  }
+  
+  // let history = useHistory();
   const host = "http://localhost:5000"
   // const eventsInitial = [];
   const [events, setEvents] = useState([{id: "", etitle: "", edescription: "", etag: "", estartTime:Date.now, eendTime:Date.now, ereqsp:false,elike:0,eimage:""}]);
@@ -25,7 +80,7 @@ const EventState = (props) => {
   }
 
   // Add a Event
-  const addEvent = async (title, description, tag, startTime, endTime, reqsp, image, venue) => {
+  const AaddEvent = async (title, description, tag, startTime, endTime, reqsp, image, venue) => {
     // TODO: API Call
     // API Call 
     const response = await fetch(`${host}/api/events/addevent`, {
@@ -45,6 +100,7 @@ const EventState = (props) => {
   
     // console.log(json.event);
     let confirmed = false;
+
     // Custom confirm box
     if(!(json.success)){
       const options = {
@@ -147,10 +203,7 @@ const EventState = (props) => {
             body: JSON.stringify({email: usersjson[i].email, event: json.savedEvent})
           });
         }
-        let pay = window.confirm("Event scheduled successfully! Want to book Lecture Hall for your event?");
-        if(pay){
-          history.push("/lhc");
-        }
+        showConfirmationDialog();
 
       });
       cancelButton.addEventListener('click', () => {
@@ -186,10 +239,7 @@ const EventState = (props) => {
           body: JSON.stringify({email: usersjson[i].email, event: json.savedEvent})
         });
       }
-      let pay = window.confirm("Event scheduled successfully! Want to book Lecture Hall for your event?");
-      if(pay){
-        history.push("/lhc");
-      }
+      showConfirmationDialog();
     } 
   }
   
@@ -242,7 +292,7 @@ const EventState = (props) => {
   }
 
   return (
-    <EventContext.Provider value={{ events, addEvent, deleteEvent, editEvent, getEvents }}>
+    <EventContext.Provider value={{ events, AaddEvent, deleteEvent, editEvent, getEvents }}>
       {props.children}
     </EventContext.Provider>
   )

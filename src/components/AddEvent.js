@@ -3,7 +3,7 @@ import eventContext from "../context/events/eventContext";
 
 const AddEvent = () => {
     const context = useContext(eventContext);
-    const { addEvent } = context;
+    const { AaddEvent } = context;
 
     const [event, setEvent] = useState({
         title: "",
@@ -34,7 +34,7 @@ const AddEvent = () => {
         if (event.startTime >= event.endTime) {
             alert("Please enter valid start time and end time.");
         } else {
-            addEvent(
+            AaddEvent(
                 event.title,
                 event.description,
                 event.tag,

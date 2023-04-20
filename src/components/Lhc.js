@@ -6,8 +6,6 @@ import { useHistory } from "react-router-dom";
 function Lhc() {
   let history = useHistory();
   const params = useParams();
-//   const courseId = params.id; // replace with the actual course ID
-//                     console.log(courseId)
     function loadScript(src) {
         return new Promise((resolve) => {
             const script = document.createElement("script");
@@ -65,28 +63,7 @@ function Lhc() {
                     alert("Payment successful");
                     history.push("/dashboard");
                     
-                    // try {
-                    //   const response = await fetch(
-                    //     `http://localhost:5000/api/auth/add`,
-                    //     {
-                    //       method:'POST',
-                    //       headers: {
-                    //         'Content-Type': 'application/json',
-                    //         "auth-token": localStorage.getItem("token"),
-                    //       },
-                    //       body:JSON.stringify({id:courseId})
-                    //     }
-                    //   );
-                    //   const json = await response.json();
-                    //     alert(json.msg);
-                    //     // console.log(json.msg)
-                    //     if(json.success){
-                    //       history.replace(`/details/${courseId}`);
-                    //     }
-                    // } catch (error) {
-                    //   console.error(error);
-                    //   alert("Error adding course to user's list");
-                    // }
+                    
                   } else {
                     alert("Payment failed");
                   }
@@ -111,29 +88,9 @@ function Lhc() {
         const paymentObject = new window.Razorpay(options);
         paymentObject.open();
     }
-    // const [paid, setpaid] = useState(false);
-    // useEffect(() => {
-    //   const checkpaid = async() => {
-    //     let response = await fetch(`http://localhost:5000/api/auth/check/${courseId}`, {
-    //       method: 'GET',
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         "auth-token": localStorage.getItem('token')
-    //       }
-    //     });
-    //     let json = await response.json()
-    //     setpaid(json.success);
-    //   }
-    //   checkpaid();
-    // }, [])
     return (
       <div className="App">
       {!(localStorage.getItem('token')) ? <h2>You are not authorized to access the page. Kindly Login/Signup and try again.</h2> : <div>
-        {/* {paid ? <><h2>You have already paid for the course. You can proceed to view the course by clicking on the below link.</h2> <Link to={`details/${courseId}`}>View Course</Link></> :
-            <header className="App-header">
-                
-                <p>Buy Course Now!</p>
-            </header>} */}
             <button className="App-link" onClick={displayRazorpay}>
                 Pay ₹{500}
             </button>
