@@ -19,6 +19,7 @@
     "express-validator": "^6.15.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.10.4",
+    "razorpay": "^2.8.6",
     "react-router-dom": "^6.9.0"
   },
   "devDependencies": {

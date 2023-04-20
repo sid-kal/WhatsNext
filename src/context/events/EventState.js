@@ -1,7 +1,9 @@
 import EventContext from "./eventContext";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const EventState = (props) => {
+  let history = useHistory();
   const host = "http://localhost:5000"
   // const eventsInitial = [];
   const [events, setEvents] = useState([{id: "", etitle: "", edescription: "", etag: "", estartTime:Date.now, eendTime:Date.now, ereqsp:false,elike:0,eimage:""}]);
@@ -59,9 +61,9 @@ const EventState = (props) => {
       confirmation.classList.add('confirmation');
       confirmation.innerHTML = `
         <div class="confirmation-message">
-        Event clashes with the following events: 
         </div>
         <div class="confirmation-table">
+        Event clashes with the following events: 
           <table>
             <thead>
               <tr>
@@ -69,6 +71,7 @@ const EventState = (props) => {
                 <th>Organiser</th>
                 <th>Start Time</th>
                 <th>End Time</th>
+                <th>Location</th>
               </tr>
             </thead>
             <tbody>
@@ -78,6 +81,7 @@ const EventState = (props) => {
                   <td>${cl.organiser}</td>
                   <td>${(new Date(cl.startTime)).toLocaleString('en-us' , options)}</td>
                   <td>${(new Date(cl.endTime)).toLocaleString('en-us' , options)}</td>
+                  <td>${cl.venue}</td>
                 </tr>
               `).join('')}
             </tbody>
@@ -143,6 +147,11 @@ const EventState = (props) => {
             body: JSON.stringify({email: usersjson[i].email, event: json.savedEvent})
           });
         }
+        let pay = window.confirm("Event scheduled successfully! Want to book Lecture Hall for your event?");
+        if(pay){
+          history.push("/lhc");
+        }
+
       });
       cancelButton.addEventListener('click', () => {
         confirmation.remove();
@@ -176,6 +185,10 @@ const EventState = (props) => {
           },
           body: JSON.stringify({email: usersjson[i].email, event: json.savedEvent})
         });
+      }
+      let pay = window.confirm("Event scheduled successfully! Want to book Lecture Hall for your event?");
+      if(pay){
+        history.push("/lhc");
       }
     } 
   }

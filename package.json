@@ -29,6 +29,7 @@
     "nodemailer": "^6.9.1",
     "os": "^0.1.2",
     "otp-generator": "^4.0.1",
+    "razorpay": "^2.8.6",
     "react": "^17.0.2",
     "react-datetime-picker": "^4.2.0",
     "react-dom": "^17.0.2",
