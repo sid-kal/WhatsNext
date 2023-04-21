@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-function Lhc() {
+function Lhc({theme}) {
   let history = useHistory();
   const params = useParams();
     function loadScript(src) {
@@ -89,8 +89,9 @@ function Lhc() {
         paymentObject.open();
     }
     return (
-      <div className="App">
+      <div className="App" style={{color: theme? "white":""}}>
       {!(localStorage.getItem('token')) ? <h2>You are not authorized to access the page. Kindly Login/Signup and try again.</h2> : <div>
+            <center>You need to pay ₹500 to book a lecture hall. </center>
             <button className="App-link" onClick={displayRazorpay}>
                 Pay ₹{500}
             </button>
