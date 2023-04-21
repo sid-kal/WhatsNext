@@ -91,7 +91,8 @@ function Lhc({theme}) {
     return (
       <div className="App" style={{color: theme? "white":""}}>
       {!(localStorage.getItem('token')) ? <h2>You are not authorized to access the page. Kindly Login/Signup and try again.</h2> : <div>
-            <center>You need to pay ₹500 to book a lecture hall. </center>
+            <h1> <center> LHC Payment Portal</center></h1>
+            <center>You need to pay ₹500 to book a lecture hall. Please ensure that LHC you are booking is free in this interval</center>
             <button className="App-link" onClick={displayRazorpay}>
                 Pay ₹{500}
             </button>
