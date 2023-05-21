@@ -13,6 +13,7 @@ Open the 'backend' folder in terminal and run the following commands:
 ### `npm i express`
 ### `npm i mongoose`
 ### `npm i -D nodemon`
+### `npm i -D razorpay`
 
 Also install all the following dependencies listed in package.json file
 ### `npm i bcrypt`
