@@ -7,7 +7,7 @@ import moment from "moment";
 export default function Carousel({events, special, theme}) {
   const images = [logo1, logo2, light];
 
-    const style={backgroundColor: "#001e3c"};
+    const style={backgroundColor: theme?"#001e3c":"#75c8ff", color: theme?"white":"black"};
   return (
     <div
       id="carouselExampleAutoplaying"
